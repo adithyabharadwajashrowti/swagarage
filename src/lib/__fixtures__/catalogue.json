@@ -1,0 +1,5635 @@
+{
+"collections": [
+{
+"slug": "employee-welcome-kits",
+"name": "Employee Welcome Kits"
+},
+{
+"slug": "diwali-festive",
+"name": "Diwali & Festive"
+},
+{
+"slug": "premium-client-gifts",
+"name": "Premium Client Gifts"
+},
+{
+"slug": "eco-friendly-gifts",
+"name": "Eco-Friendly Gifts"
+},
+{
+"slug": "travel",
+"name": "Travel"
+},
+{
+"slug": "under-500",
+"name": "Under \u20b9500"
+}
+],
+"products": [
+{
+"id": "1e6eb114-b559-537a-a524-da554e0013e5",
+"sku": "eco-02",
+"slug": "plantable-table-calendar-eco-02",
+"name": "Plantable Table Calendar",
+"brand": null,
+"category_id": 5,
+"subcategory": "Desk & Home",
+"description": null,
+"features": [
+"Plantable seed-paper calendar pages",
+"Wooden stand with rear support"
+],
+"specs": {
+"Size": "5 x 7 in, 13 seed-paper sheets",
+"Stand": "6 x 9 in wooden plate"
+},
+"colours": [],
+"image_path": "seed/eco-02.jpg",
+"mrp": null,
+"sell_price": 450,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "Subject to order date.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 5,
+"slug": "eco-friendly",
+"name": "Eco-Friendly"
+},
+"collection_slugs": [
+"diwali-festive",
+"eco-friendly-gifts",
+"under-500"
+]
+},
+{
+"id": "be35eb75-fef3-5eca-8ce0-2a2eefd8ae65",
+"sku": "eco-03",
+"slug": "tic-tac-tote-eco-03",
+"name": "Tic-Tac Tote",
+"brand": null,
+"category_id": 5,
+"subcategory": "Desk & Home",
+"description": null,
+"features": [
+"Cotton pouch doubles as game board",
+"10 coloured game pieces"
+],
+"specs": {
+"Size": "5 x 7 in",
+"Material": "Cotton pouch"
+},
+"colours": [],
+"image_path": "seed/eco-03.jpg",
+"mrp": null,
+"sell_price": 225,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "Subject to order date.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 5,
+"slug": "eco-friendly",
+"name": "Eco-Friendly"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"under-500"
+]
+},
+{
+"id": "0426fcce-c370-5fd6-a3b8-8fed1a4c11aa",
+"sku": "eco-04",
+"slug": "magnetic-cork-planter-eco-04",
+"name": "Magnetic Cork Planter",
+"brand": null,
+"category_id": 5,
+"subcategory": "Desk & Home",
+"description": null,
+"features": [
+"Magnetic cork planter with glass test tube",
+"Plant not included (Golden Pothos +\u20b950 + GST)"
+],
+"specs": {
+"Holder": "2 x 2 x 3 in cork, magnetic",
+"Tube": "1 in dia x 4 in glass"
+},
+"colours": [],
+"image_path": "seed/eco-04.jpg",
+"mrp": null,
+"sell_price": 225,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "Subject to order date.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 5,
+"slug": "eco-friendly",
+"name": "Eco-Friendly"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"under-500"
+]
+},
+{
+"id": "a3cf714d-a8b7-547e-9f66-f52f846fb5ae",
+"sku": "eco-05",
+"slug": "cable-mate-eco-05",
+"name": "Cable Mate",
+"brand": null,
+"category_id": 5,
+"subcategory": "Desk & Tech",
+"description": null,
+"features": [
+"Square bamboo case with multi charging cables"
+],
+"specs": {
+"Dimensions": "7.8 x 7.8 x 1.6 cm",
+"Material": "Bamboo case, wheat-straw cables",
+"Cable": "C to C, 60W"
+},
+"colours": [],
+"image_path": "seed/eco-05.jpg",
+"mrp": null,
+"sell_price": 325,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "Subject to order date.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 5,
+"slug": "eco-friendly",
+"name": "Eco-Friendly"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"employee-welcome-kits",
+"under-500"
+]
+},
+{
+"id": "ea2b8b32-077d-53c1-b965-53a11c71b78e",
+"sku": "eco-06",
+"slug": "anti-skid-mouse-pad-eco-06",
+"name": "Anti-Skid Mouse Pad",
+"brand": null,
+"category_id": 5,
+"subcategory": "Desk & Tech",
+"description": null,
+"features": [
+"Anti-skid mouse pad with built-in USB hub",
+"Phone holder and pen holder"
+],
+"specs": {
+"Dimensions": "20 x 24 x 1.8 cm",
+"Material": "Bamboo + soft cork",
+"Ports": "In: Type-C; Out: Type-C + 2 USB"
+},
+"colours": [],
+"image_path": "seed/eco-06.jpg",
+"mrp": null,
+"sell_price": 475,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "Subject to order date.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 5,
+"slug": "eco-friendly",
+"name": "Eco-Friendly"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"employee-welcome-kits",
+"under-500"
+]
+},
+{
+"id": "8e4093f4-9a5d-5eb6-bcff-aef6375fa3cc",
+"sku": "eco-07",
+"slug": "eco-cork-mug-eco-07",
+"name": "Eco Cork Mug",
+"brand": null,
+"category_id": 5,
+"subcategory": "Drinkware",
+"description": null,
+"features": [
+"Food-grade material",
+"Spill-proof"
+],
+"specs": {
+"Capacity": "450 ml",
+"Wall": "Single wall",
+"Grip": "Natural cork"
+},
+"colours": [],
+"image_path": "seed/eco-07.jpg",
+"mrp": null,
+"sell_price": 245,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "Subject to order date.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 5,
+"slug": "eco-friendly",
+"name": "Eco-Friendly"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"employee-welcome-kits",
+"under-500"
+]
+},
+{
+"id": "a59606b1-a279-5bd0-a1cd-62897dbbfdf8",
+"sku": "eco-08",
+"slug": "executive-bag-eco-08",
+"name": "Executive Bag",
+"brand": null,
+"category_id": 5,
+"subcategory": "Bags",
+"description": null,
+"features": [
+"Eco executive shoulder bag"
+],
+"specs": {
+"Dimensions": "27 x 38 x 8 cm",
+"Material": "Jute blend with cotton",
+"Weight": "300 g"
+},
+"colours": [],
+"image_path": "seed/eco-08.jpg",
+"mrp": null,
+"sell_price": 395,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "Subject to order date.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 5,
+"slug": "eco-friendly",
+"name": "Eco-Friendly"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"under-500"
+]
+},
+{
+"id": "b196d8cd-445f-5def-b8d2-7318c76b4ca5",
+"sku": "bh-02",
+"slug": "fitbit-charge-6-bh-02",
+"name": "Fitbit Charge 6",
+"brand": "Fitbit",
+"category_id": 2,
+"subcategory": "Smart Wearables",
+"description": null,
+"features": [
+"Branding not possible on this product"
+],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-02.jpg",
+"mrp": null,
+"sell_price": 14995,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": false,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive",
+"premium-client-gifts"
+]
+},
+{
+"id": "b901cb77-6035-5bbb-b038-3115736a7de3",
+"sku": "bh-03",
+"slug": "fitbit-inspire-3-bh-03",
+"name": "Fitbit Inspire 3",
+"brand": "Fitbit",
+"category_id": 2,
+"subcategory": "Smart Wearables",
+"description": null,
+"features": [
+"Branding not possible on this product"
+],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-03.jpg",
+"mrp": null,
+"sell_price": 8995,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": false,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive",
+"premium-client-gifts"
+]
+},
+{
+"id": "e8d01963-9a17-5c80-a257-23cdb0a500b2",
+"sku": "bh-04",
+"slug": "swiss-military-backpack-i-bh-04",
+"name": "Swiss Military Backpack I",
+"brand": "Swiss Military",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-04.jpg",
+"mrp": null,
+"sell_price": 1575,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "054eb99c-9a68-5a79-a04e-e774f35e6a89",
+"sku": "bh-05",
+"slug": "puma-backpack-bh-05",
+"name": "Puma Backpack",
+"brand": "Puma",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-05.jpg",
+"mrp": null,
+"sell_price": 1750,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "6b448655-148f-5a75-880f-e2638a609e45",
+"sku": "bh-06",
+"slug": "lavie-sport-backpack-bh-06",
+"name": "Lavie Sport Backpack",
+"brand": "Lavie",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-06.jpg",
+"mrp": null,
+"sell_price": 2000,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "574795d5-1dad-5a11-9b3b-39e9cf5f378c",
+"sku": "bh-07",
+"slug": "gods-anti-theft-backpack-bh-07",
+"name": "Gods Anti-Theft Backpack",
+"brand": "Gods",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-07.jpg",
+"mrp": null,
+"sell_price": 2425,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "9bae4c25-f8d8-5e74-9264-5977adc1c74f",
+"sku": "bh-08",
+"slug": "wenger-urban-one-roll-top-backpack-bh-08",
+"name": "Wenger Urban One Roll-Top Backpack",
+"brand": "Wenger",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-08.jpg",
+"mrp": null,
+"sell_price": 2675,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "011dfc5e-e3b8-5b28-93d0-7398cf457338",
+"sku": "bh-09",
+"slug": "j-j-odyssey-backpack-bh-09",
+"name": "J&J Odyssey Backpack",
+"brand": "J&J",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-09.jpg",
+"mrp": null,
+"sell_price": 2775,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "ed6a3a9c-35cc-5410-815c-f96931f76608",
+"sku": "bh-10",
+"slug": "swiss-military-backpack-ii-bh-10",
+"name": "Swiss Military Backpack II",
+"brand": "Swiss Military",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-10.jpg",
+"mrp": null,
+"sell_price": 2895,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "0dbe98b0-9d1e-52ee-8056-d3f0236447b4",
+"sku": "bh-11",
+"slug": "jack-and-jones-austin-hoodie-bh-11",
+"name": "Jack and Jones Austin Hoodie",
+"brand": "Jack & Jones",
+"category_id": 4,
+"subcategory": "Hoodies & Jackets",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-11.jpg",
+"mrp": null,
+"sell_price": 1725,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 4,
+"slug": "apparel",
+"name": "Apparel"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "4eb1a164-c39f-5ab5-9be9-9eb2562282b0",
+"sku": "bh-12",
+"slug": "swiss-military-full-zipper-jacket-bh-12",
+"name": "Swiss Military Full Zipper Jacket",
+"brand": "Swiss Military",
+"category_id": 4,
+"subcategory": "Hoodies & Jackets",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-12.jpg",
+"mrp": null,
+"sell_price": 1575,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 4,
+"slug": "apparel",
+"name": "Apparel"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "789eed48-4d96-5c5d-b65d-f0052fe88599",
+"sku": "bh-13",
+"slug": "reebok-hoodie-bh-13",
+"name": "Reebok Hoodie",
+"brand": "Reebok",
+"category_id": 4,
+"subcategory": "Hoodies & Jackets",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-13.jpg",
+"mrp": null,
+"sell_price": 1795,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 4,
+"slug": "apparel",
+"name": "Apparel"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "cedf8dd5-6aee-5345-8562-6ccc2a234c4b",
+"sku": "bh-14",
+"slug": "rare-rabbit-hoodie-bh-14",
+"name": "Rare Rabbit Hoodie",
+"brand": "Rare Rabbit",
+"category_id": 4,
+"subcategory": "Hoodies & Jackets",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-14.jpg",
+"mrp": null,
+"sell_price": 1945,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 4,
+"slug": "apparel",
+"name": "Apparel"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "b7269dd8-553d-5c92-b204-9a9e2d535b58",
+"sku": "bh-15",
+"slug": "adidas-hoodie-bh-15",
+"name": "Adidas Hoodie",
+"brand": "Adidas",
+"category_id": 4,
+"subcategory": "Hoodies & Jackets",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-15.jpg",
+"mrp": null,
+"sell_price": 2650,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 4,
+"slug": "apparel",
+"name": "Apparel"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "aba121d2-9096-544e-bb76-f8d3e964b70d",
+"sku": "bh-16",
+"slug": "arrow-shirt-bh-16",
+"name": "Arrow Shirt",
+"brand": "Arrow",
+"category_id": 4,
+"subcategory": "Shirts",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-16.jpg",
+"mrp": null,
+"sell_price": 1295,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 4,
+"slug": "apparel",
+"name": "Apparel"
+},
+"collection_slugs": []
+},
+{
+"id": "9f3285e8-36cc-5ccf-b003-6e84a7c3f0f5",
+"sku": "bh-17",
+"slug": "uspa-shirt-bh-17",
+"name": "USPA Shirt",
+"brand": "U.S. Polo Assn.",
+"category_id": 4,
+"subcategory": "Shirts",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-17.jpg",
+"mrp": null,
+"sell_price": 1575,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 4,
+"slug": "apparel",
+"name": "Apparel"
+},
+"collection_slugs": []
+},
+{
+"id": "81f985ec-49bc-5e8b-9dee-6b80be060081",
+"sku": "bh-18",
+"slug": "rare-rabbit-shirt-bh-18",
+"name": "Rare Rabbit Shirt",
+"brand": "Rare Rabbit",
+"category_id": 4,
+"subcategory": "Shirts",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-18.jpg",
+"mrp": null,
+"sell_price": 1225,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 4,
+"slug": "apparel",
+"name": "Apparel"
+},
+"collection_slugs": []
+},
+{
+"id": "85392d6c-8671-55b8-8a67-b9cdef3a97ad",
+"sku": "bh-19",
+"slug": "van-heusen-shirt-bh-19",
+"name": "Van Heusen Shirt",
+"brand": "Van Heusen",
+"category_id": 4,
+"subcategory": "Shirts",
+"description": null,
+"features": [],
+"specs": {},
+"colours": [],
+"image_path": "seed/bh-19.jpg",
+"mrp": null,
+"sell_price": 1375,
+"price_basis": "gst_extra",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": "4 to 5 working days.",
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 4,
+"slug": "apparel",
+"name": "Apparel"
+},
+"collection_slugs": []
+},
+{
+"id": "3a1c8c02-4b87-5aef-8fc3-20c9f81dcb26",
+"sku": "obl-04",
+"slug": "oblique-klix-pro-obl-04",
+"name": "Oblique Klix Pro",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Wallets & Folios",
+"description": null,
+"features": [
+"Minimalist 3 fold RFID blocking wallet",
+"Protects the credit cards from unwanted transactions",
+"Card ejecting trigger at the bottom",
+"Fits in 8-10 cards",
+"Separate slot to keep the currency intact"
+],
+"specs": {
+"Dimensions": "H 10.5 cm x L 7 cm",
+"Material": "Premium Faux Leather",
+"Weight": "95 g",
+"Laptop fit": "Up to 8 in"
+},
+"colours": [
+"Tan",
+"Black"
+],
+"image_path": "seed/obl-04.jpg",
+"mrp": 1095,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts"
+]
+},
+{
+"id": "7cb90f80-2528-51d3-a6d8-9699c7140d9c",
+"sku": "obl-05",
+"slug": "oblique-tripp-obl-05",
+"name": "Oblique Tripp",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Wallets & Folios",
+"description": null,
+"features": [
+"Must have passport case for today's minimalist traveler",
+"Organizes your passport, currency and cards",
+"Separate slots to keep the everything intact"
+],
+"specs": {
+"Dimensions": "H 14 cm x L 11 cm",
+"Material": "Premium Faux Leather",
+"Weight": "65 g"
+},
+"colours": [
+"Tan",
+"Black",
+"Navy"
+],
+"image_path": "seed/obl-05.jpg",
+"mrp": 350,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts",
+"travel",
+"under-500"
+]
+},
+{
+"id": "26a8400f-5982-5160-a078-9a258d0d19a5",
+"sku": "obl-06",
+"slug": "oblique-trotter-obl-06",
+"name": "Oblique Trotter",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Wallets & Folios",
+"description": null,
+"features": [
+"Sleek and spacious passport pouch",
+"Slots and sleeves to store the passport, boarding pass"
+],
+"specs": {
+"Dimensions": "H 18 cm x L 12 cm x W 2 cm",
+"Material": "Premium Faux Leather",
+"Weight": "110 g"
+},
+"colours": [
+"Tan",
+"Black"
+],
+"image_path": "seed/obl-06.jpg",
+"mrp": 1195,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts",
+"travel"
+]
+},
+{
+"id": "f9b051e9-c786-5160-8c3c-0e19820d2b1c",
+"sku": "obl-07",
+"slug": "oblique-trotter-neo-obl-07",
+"name": "Oblique Trotter Neo",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Wallets & Folios",
+"description": null,
+"features": [
+"Sleek and spacious passport pouch"
+],
+"specs": {
+"Dimensions": "H 18 cm x L 12 cm x W 2 cm",
+"Material": "Premium Faux Leather",
+"Weight": "136 g"
+},
+"colours": [
+"Tan",
+"Black"
+],
+"image_path": "seed/obl-07.jpg",
+"mrp": 1050,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts",
+"travel"
+]
+},
+{
+"id": "303097de-d65d-5f7b-bed9-f0da7e24de9a",
+"sku": "obl-08",
+"slug": "oblique-slikk-obl-08",
+"name": "Oblique Slikk",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Wallets & Folios",
+"description": null,
+"features": [
+"Sleek and travel-friendly everyday work folio",
+"Notebook to pen down all important tasks",
+"Multiple pockets to keep the cards, currency, wires, keys",
+"Zipper to keep the essentials secure"
+],
+"specs": {
+"Dimensions": "H 23 cm x L 18 cm x W 2 cm",
+"Material": "Premium Suede Faux Leather",
+"Weight": "420 g"
+},
+"colours": [
+"Navy"
+],
+"image_path": "seed/obl-08.jpg",
+"mrp": 1895,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts"
+]
+},
+{
+"id": "1a5d1f75-eb39-50d0-94f6-405f2c113064",
+"sku": "obl-10",
+"slug": "oblique-ally-canvas-obl-10",
+"name": "Oblique Ally Canvas",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Tech & Travel Pouches",
+"description": null,
+"features": [
+"Contemporary design tech pouch",
+"Functional to keep all your tech accessories in place",
+"Save from cluttering of tangled wires",
+"Carry it in your bag for everyday convenience"
+],
+"specs": {
+"Dimensions": "H 17 cm x L 22 cm x W 5.5 cm",
+"Material": "12 oz Cotton Canvas with Faux Leather",
+"Weight": "210 g"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-10.jpg",
+"mrp": 1795,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"employee-welcome-kits"
+]
+},
+{
+"id": "e9281f08-d1cc-56b6-b11d-a40f66cfc82e",
+"sku": "obl-11",
+"slug": "oblique-ally-pu-obl-11",
+"name": "Oblique Ally PU",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Tech & Travel Pouches",
+"description": null,
+"features": [
+"Contemporary design tech pouch",
+"Functional to keep all your tech accessories in place",
+"Save from cluttering of tangled wires",
+"Carry it in your bag for everyday convenience",
+"Pen loop for easy access"
+],
+"specs": {
+"Dimensions": "H 17 cm x L 22 cm x W 5.5 cm",
+"Material": "Premium Faux Leather",
+"Weight": "220 g"
+},
+"colours": [
+"Black",
+"Tan"
+],
+"image_path": "seed/obl-11.jpg",
+"mrp": 1850,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "7495e141-f127-5f8c-868f-ccfdf049f1fe",
+"sku": "obl-12",
+"slug": "oblique-sally-obl-12",
+"name": "Oblique Sally",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Tech & Travel Pouches",
+"description": null,
+"features": [
+"Contemporary design soft tech pouch",
+"Functional to keep all your tech accessories in place",
+"Save from cluttering of tangled wires",
+"Carry it in your bag for everyday convenience",
+"Pen loop for easy access"
+],
+"specs": {
+"Dimensions": "H 17 cm x L 22 cm x W 5.5 cm",
+"Material": "Premium Faux Leather",
+"Weight": "194 g"
+},
+"colours": [
+"Black",
+"Tan"
+],
+"image_path": "seed/obl-12.jpg",
+"mrp": 1450,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "774a63ab-9847-5857-9262-023cebc91d4d",
+"sku": "obl-13",
+"slug": "oblique-siri-obl-13",
+"name": "Oblique Siri",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Tech & Travel Pouches",
+"description": null,
+"features": [
+"Smart storage structured tech organiser",
+"Multiple compartments to keep all your tech accessories",
+"Save from cluttering of tangled wires",
+"Carry it in your bag for everyday convenience",
+"Durable and water resistant material"
+],
+"specs": {
+"Dimensions": "H 18 cm x L 26 cm x W 8 cm",
+"Material": "Coated Polyester with Faux Leather",
+"Weight": "250 g"
+},
+"colours": [
+"Black",
+"Navy",
+"Green"
+],
+"image_path": "seed/obl-13.jpg",
+"mrp": 1795,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "0f6a4741-538a-5891-8359-66c1ea2ab731",
+"sku": "obl-14",
+"slug": "oblique-jasper-obl-14",
+"name": "Oblique Jasper",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Tech & Travel Pouches",
+"description": null,
+"features": [
+"Contemporary design useful tech pouch",
+"Multiple compartments to keep all your tech accessories",
+"Save from cluttering of tangled wires",
+"Carry it in your bag for everyday convenience",
+"Durable and water resistant material"
+],
+"specs": {
+"Dimensions": "H 20 cm x L 14 cm x W 6 cm",
+"Material": "Polyester with Faux Leather",
+"Weight": "161 g"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-14.jpg",
+"mrp": 1499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "46f4f104-df0b-5f77-bee7-f56bace6336b",
+"sku": "obl-15",
+"slug": "oblique-pawn-obl-15",
+"name": "Oblique Pawn",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Tech & Travel Pouches",
+"description": null,
+"features": [
+"Multi Utility pouch for your tech gadgets or toiletries",
+"Keeps all products in place with pockets inside",
+"Compact yet spacious to carry all your essentials",
+"Water resistant"
+],
+"specs": {
+"Dimensions": "H 15 cm x L 27 cm x W 6 cm",
+"Material": "Polyester",
+"Weight": "56 g"
+},
+"colours": [
+"Dark Green",
+"Light Olive",
+"Black"
+],
+"image_path": "seed/obl-15.jpg",
+"mrp": 450,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"under-500"
+]
+},
+{
+"id": "b7f4ba07-956f-58e2-8f7f-4147527601f6",
+"sku": "obl-16",
+"slug": "oblique-gemini-obl-16",
+"name": "Oblique Gemini",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Tech & Travel Pouches",
+"description": null,
+"features": [
+"Contemporary design multi utility pouch",
+"Multiple compartments for your tech gadgets and toiletries",
+"Save from cluttering of tangled wires",
+"Carry it in your bag for everyday convenience"
+],
+"specs": {
+"Dimensions": "H 11.5 cm x L 23 cm x W 11.5 cm",
+"Material": "Faux Leather",
+"Weight": "235 g"
+},
+"colours": [
+"Black",
+"Olive"
+],
+"image_path": "seed/obl-16.jpg",
+"mrp": 1150,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "8103afb3-5cf1-5b81-a3f9-4594eb77d593",
+"sku": "obl-17",
+"slug": "oblique-musk-obl-17",
+"name": "Oblique Musk",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Tech & Travel Pouches",
+"description": null,
+"features": [
+"travel kit to carry all your daily essentials",
+"Easy to store all your personal care products",
+"Multiple pockets to keep all the products in place",
+"Comes with an S hook to hang the bag",
+"Water resistant material"
+],
+"specs": {
+"Dimensions": "H 22 cm x L 23 cm x W 6 cm",
+"Material": "1690D Polyester with Faux Leather",
+"Weight": "222 g"
+},
+"colours": [
+"Navy/Brown"
+],
+"image_path": "seed/obl-17.jpg",
+"mrp": 1590,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "cc6b63b5-5b1e-5cc9-b636-d81c1bc115d9",
+"sku": "obl-18",
+"slug": "oblique-duo-pouch-obl-18",
+"name": "Oblique Duo Pouch",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Tech & Travel Pouches",
+"description": null,
+"features": [
+"Compact and smart pouch for the charger",
+"Slim design fits perfectly in your bag",
+"Front slip in pocket to put cards and keys",
+"Dual side material gives a smart vibe"
+],
+"specs": {
+"Dimensions": "H 12 cm x L 15.5 cm x W 3.5 cm",
+"Material": "Double Side Premium Faux Leather",
+"Weight": "123 g"
+},
+"colours": [
+"Mustard/Navy"
+],
+"image_path": "seed/obl-18.jpg",
+"mrp": 695,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "750d2439-c8ab-54bb-ba07-092adb71a822",
+"sku": "obl-19",
+"slug": "oblique-giza-obl-19",
+"name": "Oblique Giza",
+"brand": "Oblique",
+"category_id": 6,
+"subcategory": "Desk Accessories",
+"description": null,
+"features": [
+"Foldable mobile stand",
+"Can hold a Phone or a Tab",
+"Place the phone in vertical or horizontal position",
+"Unbutton and flatten to carry anywhere effortlessly"
+],
+"specs": {
+"Dimensions": "Open 16 x 15 cm; folded 8 x 13 x 7 cm",
+"Material": "Premium Faux Leather"
+},
+"colours": [
+"Black",
+"Tan"
+],
+"image_path": "seed/obl-19.jpg",
+"mrp": 395,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 6,
+"slug": "desk-office",
+"name": "Desk & Office"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"under-500"
+]
+},
+{
+"id": "0eddf194-d76f-5b7c-b569-4586ebbc8fca",
+"sku": "obl-20",
+"slug": "oblique-deskmat-obl-20",
+"name": "Oblique Deskmat",
+"brand": "Oblique",
+"category_id": 6,
+"subcategory": "Desk Accessories",
+"description": null,
+"features": [
+"Premium Desk Mat, designed to provide comfort and style",
+"Protects your desk from spills and scratches",
+"Keeps your workspace organized and clutter-free",
+"Unbutton and flatten on your desk",
+"Dual side material to match your colour theme"
+],
+"specs": {
+"Dimensions": "B 40 cm x L 80 cm",
+"Material": "Double Side Premium Faux Leather",
+"Weight": "435 g"
+},
+"colours": [
+"Mustard/Navy",
+"Tan/Black"
+],
+"image_path": "seed/obl-20.jpg",
+"mrp": 1050,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 6,
+"slug": "desk-office",
+"name": "Desk & Office"
+},
+"collection_slugs": [
+"diwali-festive",
+"employee-welcome-kits"
+]
+},
+{
+"id": "3431ba15-3f78-50d7-ad89-a10651e16491",
+"sku": "obl-21",
+"slug": "oblique-duo-penstand-obl-21",
+"name": "Oblique Duo Penstand",
+"brand": "Oblique",
+"category_id": 6,
+"subcategory": "Desk Accessories",
+"description": null,
+"features": [
+"Pen Stand, designed to add professionalism to your workspace",
+"Keeps your pens, pencils and essentials tidy and within reach",
+"Opens easily and flattens to carry in your bag comfortably",
+"Dual side material to match your colour theme"
+],
+"specs": {
+"Dimensions": "H 10.5 cm x L 8 cm x W 8 cm",
+"Material": "Double Side Premium Faux Leather",
+"Weight": "79 g"
+},
+"colours": [
+"Mustard/Navy"
+],
+"image_path": "seed/obl-21.jpg",
+"mrp": 550,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 6,
+"slug": "desk-office",
+"name": "Desk & Office"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "cee5b0e3-d1f6-5aea-ba0d-24efe13d9c85",
+"sku": "obl-22",
+"slug": "oblique-duo-card-holder-obl-22",
+"name": "Oblique Duo Card Holder",
+"brand": "Oblique",
+"category_id": 6,
+"subcategory": "Desk Accessories",
+"description": null,
+"features": [
+"Compact and sleek card holder for easy access",
+"Slim design fits perfectly in your pocket or bag",
+"Ample space for multiple cards-credit cards, ID, visiting cards",
+"Dual side material gives a smart vibe"
+],
+"specs": {
+"Dimensions": "H 7 cm x L 11 cm x W 1.5 cm",
+"Material": "Double Side Premium Faux Leather",
+"Weight": "43 g"
+},
+"colours": [
+"Mustard/Navy"
+],
+"image_path": "seed/obl-22.jpg",
+"mrp": 495,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 6,
+"slug": "desk-office",
+"name": "Desk & Office"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"under-500"
+]
+},
+{
+"id": "526fa83a-0c7d-5230-9e55-c9022f20adf8",
+"sku": "obl-23",
+"slug": "oblique-flyt-obl-23",
+"name": "Oblique Flyt",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Tech & Travel Pouches",
+"description": null,
+"features": [
+"Perfect luggage tag for everyday travel",
+"Attach it to your luggage, handbag or laptop bag",
+"Helps to identify and return the bag if lost",
+"Flap on top with a button keeps the information not"
+],
+"specs": {
+"Dimensions": "H 11 cm x L 7 cm",
+"Material": "Faux Leather",
+"Weight": "34 g"
+},
+"colours": [
+"Navy",
+"Tan",
+"Black"
+],
+"image_path": "seed/obl-23.jpg",
+"mrp": 299,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"travel",
+"under-500"
+]
+},
+{
+"id": "39d9d6ed-5376-5756-a4fb-b8825606bbb2",
+"sku": "obl-24",
+"slug": "oblique-dory-obl-24",
+"name": "Oblique Dory",
+"brand": "Oblique",
+"category_id": 3,
+"subcategory": "Lunch Bags",
+"description": null,
+"features": [
+"Durable and easy to clean lunch bag",
+"Zipper closure on top",
+"Handle with press lock to open and access easily",
+"Insulating aluminium foil coating inside"
+],
+"specs": {
+"Dimensions": "H 22 cm x L 26 cm x W 16 cm",
+"Material": "Coated Polyester",
+"Weight": "259 g"
+},
+"colours": [
+"Blue"
+],
+"image_path": "seed/obl-24.jpg",
+"mrp": 1050,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 3,
+"slug": "travel-accessories",
+"name": "Travel & Accessories"
+},
+"collection_slugs": []
+},
+{
+"id": "5b54e52e-efb7-5b7a-a184-12df977b7297",
+"sku": "obl-26",
+"slug": "oblique-kross-obl-26",
+"name": "Oblique Kross",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Sling Bags",
+"description": null,
+"features": [
+"Compact crossbody sling to hold your basic essentials",
+"Front zipper pocket for easy access of small products",
+"Pockets inside to keep all the products in place",
+"Adjustable strap for individual comfort",
+"Water resistant coating on the Canvas material"
+],
+"specs": {
+"Dimensions": "H 28 cm x L 20 cm x W 5.5 cm",
+"Material": "12 Oz Canvas with Faux Leather",
+"Weight": "282 g"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-26.jpg",
+"mrp": 1795,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "609ab5b8-4829-53ba-b1e1-92c8adb4f364",
+"sku": "obl-27",
+"slug": "oblique-turista-obl-27",
+"name": "Oblique Turista",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Sling Bags",
+"description": null,
+"features": [
+"Compact crossbody sling to hold your basic essentials",
+"Front zipper pocket for easy access of small products",
+"Pocket inside to keep the smaller products in place",
+"Adjustable strap for individual comfort",
+"Water resistant material"
+],
+"specs": {
+"Dimensions": "H 22 cm x L 22 cm x W 5 cm",
+"Material": "1680D Polyester with Faux Leather",
+"Weight": "351 g"
+},
+"colours": [
+"Navy/Brown"
+],
+"image_path": "seed/obl-27.jpg",
+"mrp": 1995,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "c478291e-0154-5c94-97eb-b48a87701a79",
+"sku": "obl-28",
+"slug": "oblique-columbus-obl-28",
+"name": "Oblique Columbus",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Sling Bags",
+"description": null,
+"features": [
+"Super slim crossbody sling which is close to your body",
+"Front zipper pockets for easy access of small products",
+"Side zip secret pocket to keep the important stuff",
+"Adjustable strap for individual comfort",
+"Water resistant material"
+],
+"specs": {
+"Dimensions": "H 37 cm x L 24 cm",
+"Material": "Coated Polyester",
+"Weight": "238 g"
+},
+"colours": [
+"Black",
+"Navy",
+"Green"
+],
+"image_path": "seed/obl-28.jpg",
+"mrp": 1450,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "8963ce66-e7a1-5ec0-a029-5fe9e1f2492a",
+"sku": "obl-29",
+"slug": "oblique-explorer-obl-29",
+"name": "Oblique Explorer",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Sling Bags",
+"description": null,
+"features": [
+"A modern silhouette, small sling bag",
+"Front zipper pocket for easy access of small products",
+"Adjustable and removable strap for individual comfort",
+"Zipper closure for safety"
+],
+"specs": {
+"Dimensions": "H 14 cm x L 23 cm x W 6 cm",
+"Material": "Knitted Melange with Faux Leather",
+"Weight": "250 g"
+},
+"colours": [
+"Beige",
+"Blue"
+],
+"image_path": "seed/obl-29.jpg",
+"mrp": 1495,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "9b45cf17-8a9d-5c63-8ef0-fed67d1f1591",
+"sku": "obl-30",
+"slug": "oblique-krescent-obl-30",
+"name": "Oblique Krescent",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Sling Bags",
+"description": null,
+"features": [
+"Minimalist look sling bag perfect for casual outings",
+"Adjustable handle for your convenience",
+"Spacious to carry all your essentials",
+"Water resistant"
+],
+"specs": {
+"Dimensions": "H 16 cm x L 31 cm",
+"Material": "Polyester W 10cm",
+"Weight": "133 g"
+},
+"colours": [
+"Dark Green",
+"Light Olive",
+"Black"
+],
+"image_path": "seed/obl-30.jpg",
+"mrp": 895,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "a8a5c798-9904-5f17-8b8b-65736ee7a771",
+"sku": "obl-31",
+"slug": "oblique-gulliver-obl-31",
+"name": "Oblique Gulliver",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Sling Bags",
+"description": null,
+"features": [
+"Minimalistic yet smart sling bag",
+"Adjustable handle for personal preference",
+"Hang it on left shoulder or right",
+"Internal pockets inside to fit in small accessories"
+],
+"specs": {
+"Dimensions": "H 15 cm x L 29 cm x W 6 cm",
+"Material": "Coated Polyester",
+"Weight": "250 g"
+},
+"colours": [
+"Blue"
+],
+"image_path": "seed/obl-31.jpg",
+"mrp": 1775,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "c3687f63-6d20-5722-b5f4-3c28f6da6377",
+"sku": "obl-32",
+"slug": "oblique-traveller-obl-32",
+"name": "Oblique Traveller",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Sling Bags",
+"description": null,
+"features": [
+"Versatile sling bag suitable for daily use or travel",
+"Organize belongings with small compartments and pockets",
+"Separate elastic inside for a bottle or an umbrella",
+"Front pocket for easy access"
+],
+"specs": {
+"Dimensions": "H 28 cm x L 22 cm x W 8 cm",
+"Material": "12 Oz Cotton Canvas with Premium PU",
+"Weight": "257 g"
+},
+"colours": [
+"Charcoal/Tan"
+],
+"image_path": "seed/obl-32.jpg",
+"mrp": 1895,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"travel"
+]
+},
+{
+"id": "3961c7a7-a80b-5553-ad86-16b004dbbcb6",
+"sku": "obl-33",
+"slug": "oblique-lima-obl-33",
+"name": "Oblique Lima",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Sling Bags",
+"description": null,
+"features": [
+"Minimalistic yet smart sling bag",
+"Adjustable handle for personal preference",
+"Front pocket with flap and magnet button",
+"Internal pockets inside to fit in small accessories"
+],
+"specs": {
+"Dimensions": "H 23.5 cm x L 19 cm x W 5 cm",
+"Material": "Premium Faux Leather",
+"Weight": "340 g"
+},
+"colours": [
+"Tan"
+],
+"image_path": "seed/obl-33.jpg",
+"mrp": 1975,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "15af21c3-8322-5acb-9589-a4511d5e5024",
+"sku": "obl-34",
+"slug": "oblique-amigo-obl-34",
+"name": "Oblique Amigo",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Sling Bags",
+"description": null,
+"features": [
+"Small but super spacious sling bag for casual outings",
+"Adjustable handle for your convenience",
+"Spacious to carry all your essentials",
+"Water resistant"
+],
+"specs": {
+"Dimensions": "H 21 cm x L 13 cm x W 7 cm",
+"Material": "Polyester",
+"Weight": "227 g"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-34.jpg",
+"mrp": 1975,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "d553d17a-367d-5faf-9a6f-0a15b7f4f4dc",
+"sku": "obl-35",
+"slug": "oblique-expedia-obl-35",
+"name": "Oblique Expedia",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Sling Bags",
+"description": null,
+"features": [
+"Contemporary, stylish and soft sling bag",
+"Back slip pocket for easy access",
+"Adjustable handle for personal comfort",
+"Flap and zipper closure for extra safety"
+],
+"specs": {
+"Dimensions": "H 15 cm x L 23 cm x W 6.5 cm",
+"Material": "PU Coated Premium Polyester",
+"Weight": "247 g"
+},
+"colours": [
+"Blue"
+],
+"image_path": "seed/obl-35.jpg",
+"mrp": 2695,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "2189c44b-4e80-5903-a76a-53b771c03ba8",
+"sku": "obl-36",
+"slug": "oblique-monaco-obl-36",
+"name": "Oblique Monaco",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Sling Bags",
+"description": null,
+"features": [
+"Minimalistic yet fanny pack",
+"Adjustable strap for personal preference",
+"Front zipper for easy and quick access"
+],
+"specs": {
+"Dimensions": "H 13 cm x L 25 cm x W 4 cm",
+"Material": "Recycled Polyester",
+"Weight": "141 g"
+},
+"colours": [
+"Grey"
+],
+"image_path": "seed/obl-36.jpg",
+"mrp": 725,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"travel"
+]
+},
+{
+"id": "b3f93203-1c33-5590-9358-11cca5f2a74d",
+"sku": "obl-38",
+"slug": "oblique-lapido-obl-38",
+"name": "Oblique Lapido",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Sleeves",
+"description": null,
+"features": [
+"Simple and sturdy envelope laptop sleeve",
+"Cushioned firmly with foam",
+"Soft cotton lining to protect the laptop from scratches",
+"Carry it directly or slide in your big bag",
+"Fits 14\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 28 cm x L 38 cm",
+"Material": "12 Oz Canvas with Faux Leather",
+"Weight": "360 g",
+"Laptop fit": "Up to 14 in"
+},
+"colours": [
+"Navy/Tan",
+"Black"
+],
+"image_path": "seed/obl-38.jpg",
+"mrp": 1595,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "84c9c157-623e-5331-b3f6-c252df2fafef",
+"sku": "obl-39",
+"slug": "oblique-skittles-obl-39",
+"name": "Oblique Skittles",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Sleeves",
+"description": null,
+"features": [
+"Smart and sturdy laptop sleeve with a small handle",
+"Cushioned firmly with foam",
+"Soft lining to protect the laptop from scratches",
+"Front pocket to keep the charger and other accessories",
+"Fits 15.6\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 27 cm x L 38 cm x W 2.5 cm",
+"Material": "12 Oz Canvas with Faux Leather",
+"Weight": "260 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Navy/Olive",
+"Beige/Brown"
+],
+"image_path": "seed/obl-39.jpg",
+"mrp": 1795,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "28d94542-d571-5123-bcb2-9e114cda5cc6",
+"sku": "obl-40",
+"slug": "oblique-transformer-obl-40",
+"name": "Oblique Transformer",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Sleeves",
+"description": null,
+"features": [
+"Sleek and functional laptop sleeve cum desk mat",
+"Padded firmly for Laptop safety",
+"Soft lining to protect the laptop from scratches",
+"Front slip-in pocket for the extra sheets or the phone",
+"Fits 14\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 27 cm x L 37 cm",
+"Material": "Premium Faux Leather",
+"Weight": "434 g",
+"Laptop fit": "Up to 14 in"
+},
+"colours": [
+"Tan",
+"Black"
+],
+"image_path": "seed/obl-40.jpg",
+"mrp": 2150,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "b174c9a2-07b3-5397-ac80-6cff971b40d1",
+"sku": "obl-41",
+"slug": "oblique-mars-obl-41",
+"name": "Oblique Mars",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Sleeves",
+"description": null,
+"features": [
+"Sleek and smart laptop sleeve with comfortable handle",
+"Padded firmly for Laptop safety",
+"Soft velvet lining to protect the laptop from scratches",
+"Front zip pocket for the charger or the phone",
+"Fits 15.6\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 28 cm x L 38 cm x W 3 cm",
+"Material": "Coated Polyester",
+"Weight": "263 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Olive",
+"Black",
+"Navy"
+],
+"image_path": "seed/obl-41.jpg",
+"mrp": 1750,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "58712f86-07e2-5733-add9-8e7f5bef7a65",
+"sku": "obl-42",
+"slug": "oblique-twix-obl-42",
+"name": "Oblique Twix",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Sleeves",
+"description": null,
+"features": [
+"Slim and lightweight laptop sleeve with a flap",
+"Snugly fits and protects the laptop from scratches",
+"Button closure for safety",
+"Fits 14\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 27 cm x L 38 cm",
+"Material": "Faux Leather",
+"Weight": "300 g",
+"Laptop fit": "Up to 14 in"
+},
+"colours": [
+"Grey/Black"
+],
+"image_path": "seed/obl-42.jpg",
+"mrp": 995,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "e775c743-c6dc-50b0-b549-e85d2068af21",
+"sku": "obl-43",
+"slug": "oblique-ferrero-obl-43",
+"name": "Oblique Ferrero",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Sleeves",
+"description": null,
+"features": [
+"Simple and sturdy envelope laptop sleeve",
+"Soft lining to protect the laptop from scratches",
+"Front zip pocket to carry the charger",
+"Fits 14\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 27 cm x L 36 cm",
+"Material": "Faux Leather",
+"Weight": "336 g",
+"Laptop fit": "Up to 14 in"
+},
+"colours": [
+"Navy/Grey",
+"Black/Grey"
+],
+"image_path": "seed/obl-43.jpg",
+"mrp": 1795,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "c59a1bb3-70a4-5962-b0cc-7f1028e110b3",
+"sku": "obl-44",
+"slug": "oblique-kinder-obl-44",
+"name": "Oblique Kinder",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Sleeves",
+"description": null,
+"features": [
+"Earthy and smart laptop sleeve",
+"Thick padding to protect your laptop",
+"Front pocket for easy access",
+"Fits in 16\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 28 cm x L 39 cm x W 2 cm",
+"Material": "12 Oz Cotton Canvas with Premium PU",
+"Weight": "263 g",
+"Laptop fit": "Up to 16 in"
+},
+"colours": [
+"Olive/Tan"
+],
+"image_path": "seed/obl-44.jpg",
+"mrp": 1850,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"employee-welcome-kits"
+]
+},
+{
+"id": "8c600e6c-4b4e-59a4-8406-b6d151e10d06",
+"sku": "obl-45",
+"slug": "oblique-ritter-obl-45",
+"name": "Oblique Ritter",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Sleeves",
+"description": null,
+"features": [
+"Sleek and smart laptop sleeve",
+"Thick padding to protect your laptop",
+"Front pocket for easy access",
+"Flap closure with magnetic buttons for safety",
+"Fits in 15.6\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 27 cm x L 38 cm",
+"Material": "Premium Faux Leather",
+"Weight": "506 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Tan"
+],
+"image_path": "seed/obl-45.jpg",
+"mrp": 1995,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "99d94f07-bb8d-5916-bda0-67667265154e",
+"sku": "obl-46",
+"slug": "oblique-diamond-obl-46",
+"name": "Oblique Diamond",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Sleeves",
+"description": null,
+"features": [
+"Lightweight super slim laptop sleeve",
+"Quilt look material enhances the bag appeal",
+"Quick access back zipper pocket",
+"Fits in 16\u201d laptop"
+],
+"specs": {
+"Dimensions": "H 29 cm x W 2 cm",
+"Material": "Polyester made from Recycled Pet Bottles",
+"Weight": "233 g",
+"Laptop fit": "Up to 16 in"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-46.jpg",
+"mrp": 1565,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"employee-welcome-kits"
+]
+},
+{
+"id": "6599f518-7765-5067-a9d3-7241852d1c08",
+"sku": "obl-47",
+"slug": "oblique-rio-obl-47",
+"name": "Oblique Rio",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Sleeves",
+"description": null,
+"features": [
+"Slim and basic laptop sleeve with handles",
+"Thick material to keep the laptop protected",
+"Zipper closure for safety",
+"Fits 16\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 27 cm x L 38 cm x W 2 cm",
+"Material": "Premium Faux Leather",
+"Weight": "400 g",
+"Laptop fit": "Up to 16 in"
+},
+"colours": [
+"Tan",
+"Navy",
+"Black"
+],
+"image_path": "seed/obl-47.jpg",
+"mrp": 1250,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "e04e556e-3e26-537b-92c0-814012fb7b83",
+"sku": "obl-49",
+"slug": "oblique-oliver-obl-49",
+"name": "Oblique Oliver",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Messenger Bags",
+"description": null,
+"features": [
+"Compact yet functional laptop messenger bag",
+"Detachable and adjustable long handle with shoulder pad",
+"Zipper pockets both sides for easy access",
+"Multiple pockets inside to fit in all accessories",
+"Fits in 15\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 30 cm x L 40 cm x W 6 cm",
+"Material": "12 Oz Canvas with Premium Faux Leather",
+"Weight": "820 g",
+"Laptop fit": "Up to 15 in"
+},
+"colours": [
+"Black/Charcoal",
+"Navy/Olive"
+],
+"image_path": "seed/obl-49.jpg",
+"mrp": 3950,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"premium-client-gifts"
+]
+},
+{
+"id": "c474550a-9bc2-5cf5-b3fc-1a31593ee685",
+"sku": "obl-50",
+"slug": "oblique-rush-obl-50",
+"name": "Oblique Rush",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Messenger Bags",
+"description": null,
+"features": [
+"Compact yet functional laptop messenger bag",
+"Detachable and adjustable long handle with shoulder pad",
+"Front zipper pocket to carry your charger",
+"Multiple pockets inside to fit in all accessories",
+"Fits in 15\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 30 cm x L 40 cm x W 6 cm",
+"Material": "12 Oz Canvas with Premium Faux Leather",
+"Weight": "820 g",
+"Laptop fit": "Up to 15 in"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-50.jpg",
+"mrp": 3600,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"premium-client-gifts"
+]
+},
+{
+"id": "173b0546-acce-56b2-b7a4-78b382421e00",
+"sku": "obl-51",
+"slug": "oblique-rush-oxford-obl-51",
+"name": "Oblique Rush Oxford",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Messenger Bags",
+"description": null,
+"features": [
+"Compact Eco friendly laptop messenger bag",
+"Detachable and adjustable long handle with shoulder pad",
+"Front zipper pocket to carry your charger",
+"Multiple pockets inside to fit in all accessories",
+"Fits in 13\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 26 cm x L 35 cm x W 3.5 cm",
+"Material": "Oxford Jute with Premium Faux Leather",
+"Weight": "600 g",
+"Laptop fit": "Up to 13 in"
+},
+"colours": [
+"Off-white/Tan"
+],
+"image_path": "seed/obl-51.jpg",
+"mrp": 3225,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"premium-client-gifts"
+]
+},
+{
+"id": "8fa5db33-05c9-5c18-94e8-bbdda3164011",
+"sku": "obl-52",
+"slug": "oblique-rio-pro-obl-52",
+"name": "Oblique Rio Pro",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Messenger Bags",
+"description": null,
+"features": [
+"Slim yet spacious laptop messenger bag",
+"Detachable and adjustable long handle with shoulder pad",
+"Front slip in pocket for quick access",
+"Fits in 15.6\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 29 cm x L 39 cm x W 3 cm",
+"Material": "Premium Faux Leather",
+"Weight": "573 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Tan",
+"Black"
+],
+"image_path": "seed/obl-52.jpg",
+"mrp": 2150,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"premium-client-gifts"
+]
+},
+{
+"id": "47c77b8e-8d3f-53e0-8fb6-b31636c3dba9",
+"sku": "obl-53",
+"slug": "oblique-stallion-obl-53",
+"name": "Oblique Stallion",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Messenger Bags",
+"description": null,
+"features": [
+"Sophisticated laptop messenger bag for professionals",
+"Broad bag with multiple pockets inside to fit in all essentials",
+"Detachable and adjustable long handle with shoulder pad",
+"Front zipper pleated pocket for quick access",
+"Fits in 15.6\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 28 cm x L 38 cm x W 7 cm",
+"Material": "Coated Polyester with Faux Leather",
+"Weight": "586 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Navy",
+"Black"
+],
+"image_path": "seed/obl-53.jpg",
+"mrp": 3250,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"premium-client-gifts"
+]
+},
+{
+"id": "9072dd52-0b3b-594f-80b0-017b9356f05b",
+"sku": "obl-55",
+"slug": "oblique-hawk-obl-55",
+"name": "Oblique Hawk",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Messenger Bags",
+"description": null,
+"features": [
+"Dynamic laptop messenger bag for modern professional",
+"Seamlessly transitions from a crossbody to a messenger bag",
+"Detachable and adjustable long handle with shoulder pad",
+"Front zipper pleated pockets for quick access",
+"Fits in 14\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 26 cm x L 36 cm x W 6 cm",
+"Material": "Premium Faux Leather",
+"Weight": "850 g"
+},
+"colours": [
+"Navy",
+"Tan"
+],
+"image_path": "seed/obl-55.jpg",
+"mrp": 4650,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"premium-client-gifts"
+]
+},
+{
+"id": "76320995-c5f4-5d75-ae1f-a788bc6b56d9",
+"sku": "obl-56",
+"slug": "oblique-knight-obl-56",
+"name": "Oblique Knight",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Messenger Bags",
+"description": null,
+"features": [
+"Light weight messenger bag which is a timeless style",
+"Detachable and adjustable long handle",
+"Quick access external zipper pocket",
+"Fits in 15.6\u201d laptop",
+"Water resistant material"
+],
+"specs": {
+"Dimensions": "H 29 cm x L 39 cm x W 12 cm",
+"Material": "Polyester",
+"Weight": "359 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-56.jpg",
+"mrp": 2495,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"premium-client-gifts"
+]
+},
+{
+"id": "4055eb2c-3453-515f-8fc3-41cc5c7086ce",
+"sku": "obl-57",
+"slug": "oblique-cairo-obl-57",
+"name": "Oblique Cairo",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Messenger Bags",
+"description": null,
+"features": [
+"Stylish and sophisticated laptop messenger bag",
+"Detachable and adjustable long handle with shoulder pad",
+"Front and back zipper pocket for easy access",
+"Multiple pockets inside to fit in all accessories",
+"Fits in 15\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 28 cm x L 37 cm x W 6 cm",
+"Material": "Polyester with Premium Faux Leather",
+"Weight": "650 g",
+"Laptop fit": "Up to 15 in"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-57.jpg",
+"mrp": 3225,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"premium-client-gifts"
+]
+},
+{
+"id": "08f60b34-638f-5168-8964-8418ffbcd6ac",
+"sku": "obl-58",
+"slug": "oblique-smith-obl-58",
+"name": "Oblique Smith",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Messenger Bags",
+"description": null,
+"features": [
+"Earthy and stylish laptop messenger bag",
+"Detachable and adjustable long handle for personal comfort",
+"Front pocket for easy access",
+"Multiple pockets inside to fit in all accessories",
+"Fits in 15.6\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 29 cm x L 38 cm x W 7 cm",
+"Material": "12 Oz Cotton Canvas with Premium PU",
+"Weight": "550 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Olive/Tan"
+],
+"image_path": "seed/obl-58.jpg",
+"mrp": 3950,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"premium-client-gifts"
+]
+},
+{
+"id": "f72ebbed-ae99-5fc7-8312-b925d017e215",
+"sku": "obl-59",
+"slug": "oblique-berlin-obl-59",
+"name": "Oblique Berlin",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Messenger Bags",
+"description": null,
+"features": [
+"Stylish and durable laptop messenger bag",
+"Detachable and adjustable long handle with shoulder pad",
+"Front pocket for quick access",
+"Multiple pockets inside to fit in all accessories",
+"Fits in 15\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 27 cm x L 39 cm x W 4 cm",
+"Material": "Premium PU",
+"Weight": "741 g",
+"Laptop fit": "Up to 15 in"
+},
+"colours": [
+"Green",
+"Black"
+],
+"image_path": "seed/obl-59.jpg",
+"mrp": 2850,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"premium-client-gifts"
+]
+},
+{
+"id": "6ed92774-e985-5f7f-8bb0-51123fd0550a",
+"sku": "obl-60",
+"slug": "oblique-azure-obl-60",
+"name": "Oblique Azure",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Messenger Bags",
+"description": null,
+"features": [
+"Durable and stylish laptop messenger bag",
+"Double closure for extra safety",
+"Back and front zipper pocket for easy access",
+"Multiple pockets inside to fit in all accessories",
+"Fits in 15.6\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 27 cm x L 37 cm x W 9 cm",
+"Material": "Coated Polyester",
+"Weight": "607 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Blue"
+],
+"image_path": "seed/obl-60.jpg",
+"mrp": 3400,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"premium-client-gifts"
+]
+},
+{
+"id": "7547cb54-5144-53b7-85d0-e35e79da2257",
+"sku": "obl-61",
+"slug": "oblique-bento-obl-61",
+"name": "Oblique Bento",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Messenger Bags",
+"description": null,
+"features": [
+"Enhance your work style with this messenger bag",
+"Detachable and adjustable handles for personal comfort",
+"Zipper pocket behind for easy access",
+"Spacious inner and pockets inside to carry all your essentials",
+"Fits in 16\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 28 cm x L 40 cm x W 10 cm",
+"Material": "Premium Polyester",
+"Weight": "649 g",
+"Laptop fit": "Up to 16 in"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-61.jpg",
+"mrp": 3750,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"premium-client-gifts"
+]
+},
+{
+"id": "5de42896-2699-5a17-bd14-d3b84da3f566",
+"sku": "obl-62",
+"slug": "oblique-cooper-obl-62",
+"name": "Oblique Cooper",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Messenger Bags",
+"description": null,
+"features": [
+"Super slim yet spacious laptop messenger bag",
+"Short soft rubber handle for hand carrying",
+"Zipper pockets in the front for easy access",
+"Detachable and adjustable long handle",
+"Fits in 16\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 29 cm x L 40 cm x W 2 cm",
+"Material": "Premium 372 Polyester",
+"Weight": "372 g",
+"Laptop fit": "Up to 16 in"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-62.jpg",
+"mrp": 3150,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"premium-client-gifts"
+]
+},
+{
+"id": "37ba4944-4ae7-5af8-a65f-bb88ebfb072b",
+"sku": "obl-64",
+"slug": "oblique-phoenix-obl-64",
+"name": "Oblique Phoenix",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [
+"Aesthetically designed laptop backpack",
+"Front big zipper pocket with multiple pockets inside",
+"Padded handles for extra comfort on the shoulder",
+"Secret slide in pocket behind for your phone",
+"Fits in 15.6\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 45 cm x L 34 cm x W 12 cm",
+"Material": "Premium Faux Leather",
+"Weight": "940 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Tan",
+"Black"
+],
+"image_path": "seed/obl-64.jpg",
+"mrp": 5350,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts"
+]
+},
+{
+"id": "1191e0e2-c655-5e81-bc79-24814cf4461d",
+"sku": "obl-65",
+"slug": "oblique-raven-obl-65",
+"name": "Oblique Raven",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [
+"Enhance your mobility with this anti theft backpack",
+"Spacious inner to carry it as an overnighter",
+"Padded handles for extra comfort on the shoulder",
+"Zipper pockets behind for easy access",
+"Multiple pockets inside to carry all your essentials"
+],
+"specs": {
+"Dimensions": "H 48 cm x L 34 cm x W 18 cm",
+"Material": "Polyester with Faux Leather",
+"Weight": "495 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Black",
+"Green/Black",
+"Navy/Black",
+"Grey/Black"
+],
+"image_path": "seed/obl-65.jpg",
+"mrp": 3950,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "daadf131-3229-5915-8240-91ea84c91bcb",
+"sku": "obl-66",
+"slug": "oblique-texas-obl-66",
+"name": "Oblique Texas",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [
+"Minimally designed rectangular shaped laptop backpack",
+"Padded shoulder handle for extra comfort",
+"Quick access big front zipper pocket",
+"PU short handle for the perfect grip",
+"Fits in 15.6\u201d laptop"
+],
+"specs": {
+"Dimensions": "H 44 cm x L 30 cm x W 15 cm",
+"Material": "12 Oz Canvas 494 with Faux Leather",
+"Weight": "494 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Dark Olive"
+],
+"image_path": "seed/obl-66.jpg",
+"mrp": 1999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "c003fa67-6f9d-5783-aac9-38904438f368",
+"sku": "obl-67",
+"slug": "oblique-falcon-obl-67",
+"name": "Oblique Falcon",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [
+"2 way convertible Laptop backpack cum crossbody",
+"Adjustable and detachable handle for smooth transition",
+"Front zipper pockets for easy access",
+"Multiple pockets inside to carry all your essentials",
+"Fits in 15.6\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 43 cm x L 29 cm x W 8 cm",
+"Material": "Polyester",
+"Weight": "760 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Black",
+"Navy"
+],
+"image_path": "seed/obl-67.jpg",
+"mrp": 4495,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts"
+]
+},
+{
+"id": "cfee9465-51e5-5646-85c1-054c0e960e05",
+"sku": "obl-68",
+"slug": "oblique-flamingo-obl-68",
+"name": "Oblique Flamingo",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [
+"Premium and stylish Laptop backpack",
+"Double compartment creating ample of space",
+"Front zipper pockets for easy access",
+"Multiple pockets inside to carry all your essentials",
+"Fits in 14\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 40 cm x L 29 cm x W 13 cm",
+"Material": "Premium Faux Leather",
+"Weight": "1147 g",
+"Laptop fit": "Up to 14 in"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-68.jpg",
+"mrp": 5750,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts"
+]
+},
+{
+"id": "0da1f136-2e0d-5406-bda9-11c0c1f6d48d",
+"sku": "obl-69",
+"slug": "oblique-rook-obl-69",
+"name": "Oblique Rook",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [
+"Minimalist look Backpack",
+"Padded comfortable handles",
+"Quick access external pockets",
+"Fits in 15\u201d laptop"
+],
+"specs": {
+"Dimensions": "H 44 cm x L 30 cm x W 13 cm",
+"Material": "Polyester",
+"Weight": "311 g",
+"Laptop fit": "Up to 15 in"
+},
+"colours": [
+"Dark Green",
+"Black"
+],
+"image_path": "seed/obl-69.jpg",
+"mrp": 1450,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "41f8d164-e9a0-5ce0-b31b-6a5f10791602",
+"sku": "obl-70",
+"slug": "oblique-bishop-obl-70",
+"name": "Oblique Bishop",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [
+"Lightweight upright design totepack for everyday",
+"Use it like a Backpack or a Tote Bag",
+"Padded back handles for extra comfort on the shoulder",
+"Quick access big front pocket",
+"Fits in 15.6\u201d laptop"
+],
+"specs": {
+"Dimensions": "H 38 cm x L 31 cm x W 17 cm",
+"Material": "Polyester",
+"Weight": "435 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-70.jpg",
+"mrp": 2850,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "662df69f-4dc7-5404-b46c-629be9d64421",
+"sku": "obl-71",
+"slug": "oblique-clover-obl-71",
+"name": "Oblique Clover",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [
+"Lightweight super smart backpack for everyday",
+"Quilt look material enhances the bag appeal",
+"Padded back handles for extra comfort on the shoulder",
+"Quick access double zipper front pockets",
+"Fits in 15.6\u201d laptop"
+],
+"specs": {
+"Dimensions": "H 44 cm x L 31 cm x W 12 cm",
+"Material": "Polyester made from Recycled Pet Bottles",
+"Weight": "477 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-71.jpg",
+"mrp": 3750,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"employee-welcome-kits"
+]
+},
+{
+"id": "b3cc59b2-d71a-560b-939d-7f37e871cb26",
+"sku": "obl-72",
+"slug": "oblique-panther-obl-72",
+"name": "Oblique Panther",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [
+"Enhance your mobility with this spacious backpack",
+"Padded handles for extra comfort on the shoulder",
+"Zipper pockets in the front and behind for easy access",
+"Multiple pockets inside to carry all your essentials",
+"Fits in 16\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 46 cm x L 33 cm x W 13 cm",
+"Material": "Premium Polyester",
+"Weight": "798 g",
+"Laptop fit": "Up to 16 in"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-72.jpg",
+"mrp": 6600,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts"
+]
+},
+{
+"id": "c0f9aae3-ca11-5e13-93e0-5147c5888590",
+"sku": "obl-73",
+"slug": "oblique-avenger-obl-73",
+"name": "Oblique Avenger",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [
+"Versatile Design: backpack cum duffle for effortless travel",
+"Padded handles for extra comfort on the shoulder",
+"Various compartments for clothes, accessories, and essentials",
+"Multiple pockets inside to carry all your essentials",
+"Dual handles for comfort carrying"
+],
+"specs": {
+"Dimensions": "H 51 cm x L 32 cm x W 15 cm",
+"Material": "Premium Polyester",
+"Weight": "1078 g",
+"Laptop fit": "Up to 16 in"
+},
+"colours": [
+"Black/Blue"
+],
+"image_path": "seed/obl-73.jpg",
+"mrp": 8250,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts"
+]
+},
+{
+"id": "94fdec6a-2dbf-51e7-8a9f-8b44d29487b7",
+"sku": "obl-74",
+"slug": "oblique-krypton-obl-74",
+"name": "Oblique Krypton",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [
+"Stylish, spacious and luxurious backpack",
+"Padded handles for extra comfort on the shoulder",
+"Zipper pockets in the front for easy access",
+"Multiple pockets inside to carry all your essentials",
+"Fits in 15.6\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 42 cm x L 30 cm x W 12 cm",
+"Material": "Premium PU Coated Polyester",
+"Weight": "775 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Olive"
+],
+"image_path": "seed/obl-74.jpg",
+"mrp": 5750,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts"
+]
+},
+{
+"id": "63b51818-2eff-5210-8753-6db41bcfd565",
+"sku": "obl-75",
+"slug": "oblique-zen-obl-75",
+"name": "Oblique Zen",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Laptop Backpacks",
+"description": null,
+"features": [
+"Stylish and spacious backpack suitable for travel and work",
+"Padded handles for extra comfort on the shoulder",
+"Side zipper pocket for easy access",
+"Multiple pockets inside to carry all your essentials",
+"Fits in 16\u201d Laptop"
+],
+"specs": {
+"Dimensions": "H 44 cm x L 29 cm x W 11 cm",
+"Material": "Premium Polyester",
+"Weight": "794 g",
+"Laptop fit": "Up to 16 in"
+},
+"colours": [
+"Black/Grey"
+],
+"image_path": "seed/obl-75.jpg",
+"mrp": 5250,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts"
+]
+},
+{
+"id": "fc046541-b1f9-5c49-8e7a-4bb102e978e5",
+"sku": "obl-77",
+"slug": "oblique-goofy-obl-77",
+"name": "Oblique Goofy",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Duffle & Travel",
+"description": null,
+"features": [
+"Spacious duffle bag for everyday gym or a short travel",
+"Side zipper pocket to keep your shoes separate",
+"Adjustable long handle along with short handles for ease",
+"Top zipper for keeping everything secured"
+],
+"specs": {
+"Dimensions": "H 25 cm x L 50 cm x W 25 cm",
+"Material": "12 Oz Canvas",
+"Weight": "440 g"
+},
+"colours": [
+"Navy",
+"Brown"
+],
+"image_path": "seed/obl-77.jpg",
+"mrp": 1450,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "8b8f864e-fd46-5388-84a9-c6d1ec8c3dcf",
+"sku": "obl-78",
+"slug": "oblique-mickey-obl-78",
+"name": "Oblique Mickey",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Duffle & Travel",
+"description": null,
+"features": [
+"Spacious duffle bag for everyday gym or a short travel",
+"Drawstring pouch inside to keep your shoes separate",
+"Adjustable long handle along with short handles for ease",
+"Top zipper for keeping everything secured"
+],
+"specs": {
+"Dimensions": "H 25 cm x L 45 cm x W 25 cm",
+"Material": "Knitted Melange Fabric",
+"Weight": "370 g"
+},
+"colours": [
+"Blue",
+"Beige"
+],
+"image_path": "seed/obl-78.jpg",
+"mrp": 1975,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "a5733e05-69a9-57e2-b5fa-83d8dc7154ce",
+"sku": "obl-79",
+"slug": "oblique-flash-duffle-obl-79",
+"name": "Oblique Flash Duffle",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Duffle & Travel",
+"description": null,
+"features": [
+"Detachable and adjustable long handle",
+"Quick access external zipper pocket",
+"Fits in 15.6\u201d laptop"
+],
+"specs": {
+"Dimensions": "H 26 cm x L 55 cm x W 15 cm",
+"Material": "12 Oz Canvas with Premium Faux Leather",
+"Weight": "880 g",
+"Laptop fit": "Up to 15.6 in"
+},
+"colours": [
+"Charcoal/Tan"
+],
+"image_path": "seed/obl-79.jpg",
+"mrp": 4650,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"premium-client-gifts",
+"travel"
+]
+},
+{
+"id": "f2b369b2-92f8-5d12-a08f-027dad3d6a59",
+"sku": "obl-80",
+"slug": "oblique-buzz-obl-80",
+"name": "Oblique Buzz",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Duffle & Travel",
+"description": null,
+"features": [
+"Stylish and semi formal duffle bag is a perfect overnighter",
+"Detachable and adjustable long handle"
+],
+"specs": {
+"Dimensions": "H 29 cm x L 46 cm x W 22 cm",
+"Material": "Premium Faux Leather",
+"Weight": "943 g"
+},
+"colours": [
+"Dark Olive",
+"Black"
+],
+"image_path": "seed/obl-80.jpg",
+"mrp": 2875,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "a0b65ddc-8a28-5cf2-91c4-3acf8dc9156c",
+"sku": "obl-81",
+"slug": "oblique-pluto-obl-81",
+"name": "Oblique Pluto",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Duffle & Travel",
+"description": null,
+"features": [
+"Spacious duffle bag for everyday gym or a short travel",
+"Adjustable long handle along with short handles for ease",
+"Top zipper for keeping everything secured"
+],
+"specs": {
+"Dimensions": "H 32 cm x L 42 cm x W 16 cm",
+"Material": "Faux Leather",
+"Weight": "650 g"
+},
+"colours": [
+"Tan",
+"Black"
+],
+"image_path": "seed/obl-81.jpg",
+"mrp": 1995,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "b5cf240b-1817-5431-83dc-ac519597dbf7",
+"sku": "obl-82",
+"slug": "oblique-mystique-obl-82",
+"name": "Oblique Mystique",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Duffle & Travel",
+"description": null,
+"features": [
+"Durable and stylish duffle bag for your travel or gym",
+"Detachable and adjustable long handle for personal comfort",
+"Back zipper pocket for easy access",
+"Shoe pouch inside to keep your shoes separate from clothes"
+],
+"specs": {
+"Dimensions": "H 34 cm x L 43 cm x W 23 cm",
+"Material": "Coated Polyester",
+"Weight": "830 g"
+},
+"colours": [
+"Blue"
+],
+"image_path": "seed/obl-82.jpg",
+"mrp": 3950,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"travel"
+]
+},
+{
+"id": "eaf4a93b-ce3b-57fd-b860-fe7bcf044c09",
+"sku": "obl-83",
+"slug": "oblique-spades-obl-83",
+"name": "Oblique Spades",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Duffle & Travel",
+"description": null,
+"features": [
+"Lightweight super smart duffle for travel or gym",
+"Quilt look material enhances the bag appeal",
+"Detachable and adjustable handles for personal comfort",
+"Quick access back zipper pocket",
+"Laptop compartment inside that fits in 15.6\u201d laptop"
+],
+"specs": {
+"Dimensions": "H 26 cm x W 24 cm",
+"Material": "Polyester made from Recycled Pet Bottles",
+"Weight": "569 g"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/obl-83.jpg",
+"mrp": 3550,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"eco-friendly-gifts",
+"travel"
+]
+},
+{
+"id": "d0d4ae32-309a-5871-99e0-8fcfd33e59e7",
+"sku": "obl-84",
+"slug": "oblique-roadster-obl-84",
+"name": "Oblique Roadster",
+"brand": "Oblique",
+"category_id": 1,
+"subcategory": "Luggage",
+"description": null,
+"features": [
+"Made from durable high-quality, scratch-resistant abs",
+"360\u00b0 Spinner Wheels for smooth and effortless mobility in all directions",
+"Adjustable and sturdy handle for comfortable maneuvering",
+"Good quality lock for security and peace of mind",
+"Cabin-Frendly size that is compliant with most airlines cabin bagpage size"
+],
+"specs": {
+"Dimensions": "H 48 cm x L 36 cm x W 22 cm",
+"Material": "High quality ABS"
+},
+"colours": [
+"Blue",
+"Black"
+],
+"image_path": "seed/obl-84.jpg",
+"mrp": 5500,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 1,
+"slug": "bags-backpacks",
+"name": "Bags & Backpacks"
+},
+"collection_slugs": [
+"premium-client-gifts",
+"travel"
+]
+},
+{
+"id": "bfaf54fe-b6d1-50be-ad75-ad3dd6e65e83",
+"sku": "tor-05",
+"slug": "toreto-altis-tor-05",
+"name": "Toreto Altis",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Home & Desk",
+"description": null,
+"features": [
+"Smart audio clock: LED display, 30W wireless speaker, RGB ambient light, desktop stand, 7200 mAh, BT 6"
+],
+"specs": {
+"Model": "TOR-454",
+"Warranty": "1 year"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-05.jpg",
+"mrp": 12999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 1056,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive",
+"premium-client-gifts"
+]
+},
+{
+"id": "af5bbc48-c614-56c0-bb6a-923f23a4fa95",
+"sku": "tor-06",
+"slug": "toreto-node-tor-06",
+"name": "Toreto Node",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Smart Wearables",
+"description": null,
+"features": [
+"Audio smart glasses: open-ear speakers, touch control, mic for calls, BT 5.3"
+],
+"specs": {
+"Model": "TOR SG-600",
+"Warranty": "6 months"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-06.jpg",
+"mrp": 2999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 1322,
+"under_production": true,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive",
+"premium-client-gifts"
+]
+},
+{
+"id": "24cf390b-0d67-5a3f-bb26-265ae604c702",
+"sku": "tor-07",
+"slug": "toreto-risemate-tor-07",
+"name": "Toreto Risemate",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Home & Desk",
+"description": null,
+"features": [
+"Alarm clock with built-in Bluetooth speaker, RGB display, Type-C charging"
+],
+"specs": {
+"Model": "TOR-328N",
+"Warranty": "1 year"
+},
+"colours": [],
+"image_path": "seed/tor-07.jpg",
+"mrp": 2999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 4346,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive"
+]
+},
+{
+"id": "31b41dec-46c9-58bc-903c-7b562018003b",
+"sku": "tor-08",
+"slug": "toreto-audiodock-tor-08",
+"name": "Toreto Audiodock+",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Speakers",
+"description": null,
+"features": [
+"Wireless charging speaker with LED clock; Type-C, TF card, USB, AUX"
+],
+"specs": {
+"Model": "TOR-377",
+"Warranty": "1 year"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-08.jpg",
+"mrp": 5999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 3779,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive",
+"premium-client-gifts"
+]
+},
+{
+"id": "30dfca9b-9c18-55de-ba01-e45bf04fae9a",
+"sku": "tor-09",
+"slug": "toreto-everglow-tor-09",
+"name": "Toreto Everglow",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Home & Desk",
+"description": null,
+"features": [
+"Dimmable lamp with solar charging and detachable torch, 8000 h LED life"
+],
+"specs": {
+"Model": "TOR-1701",
+"Warranty": "1 year"
+},
+"colours": [
+"Off White"
+],
+"image_path": "seed/tor-09.jpg",
+"mrp": 2599,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 1737,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive",
+"eco-friendly-gifts"
+]
+},
+{
+"id": "ef12c9b8-831c-56b8-9356-3e4b9c1b607c",
+"sku": "tor-10",
+"slug": "toreto-brightbass-tor-10",
+"name": "Toreto Brightbass",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Speakers",
+"description": null,
+"features": [
+"Bluetooth speaker with wireless phone charging"
+],
+"specs": {
+"Model": "TOR-476",
+"Warranty": "1 year"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-10.jpg",
+"mrp": 4099,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 166,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive",
+"premium-client-gifts"
+]
+},
+{
+"id": "70bd461b-9675-5e46-8cba-1d7f23ae23f5",
+"sku": "tor-11",
+"slug": "toreto-snapcool-tor-11",
+"name": "Toreto Snapcool",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Home & Desk",
+"description": null,
+"features": [
+"Rechargeable clip-on fan, 1200 mAh, 360\u00b0 adjustable"
+],
+"specs": {
+"Model": "TOR-1754",
+"Warranty": "1 year"
+},
+"colours": [
+"White"
+],
+"image_path": "seed/tor-11.jpg",
+"mrp": 1499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 655,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive"
+]
+},
+{
+"id": "cab0c0a2-ad5f-58ea-a19e-11703a730094",
+"sku": "tor-12",
+"slug": "toreto-sync-tor-12",
+"name": "Toreto Sync",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Power & Charging",
+"description": null,
+"features": [
+"3-in-1 wireless charging stand, 15W"
+],
+"specs": {
+"Model": "TOR-1504",
+"Warranty": "1 year"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-12.jpg",
+"mrp": 3499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 5,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "2a71f782-b5a7-570e-b2cf-56ae7bf1c47b",
+"sku": "tor-13",
+"slug": "toreto-sydney-tor-13",
+"name": "Toreto Sydney",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Home & Desk",
+"description": null,
+"features": [
+"Rechargeable study lamp with phone holder, 3 light modes, 1200 mAh, touch control"
+],
+"specs": {
+"Model": "TOR-1706",
+"Warranty": "1 year"
+},
+"colours": [
+"White"
+],
+"image_path": "seed/tor-13.jpg",
+"mrp": 1199,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 493,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive"
+]
+},
+{
+"id": "f90b69b8-b7c4-5ddd-9e43-1dba7c4bcbac",
+"sku": "tor-14",
+"slug": "toreto-aero-cloud-tor-14",
+"name": "Toreto Aero Cloud",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Headphones & Earbuds",
+"description": null,
+"features": [
+"Foldable wireless headphones, up to 40 h playtime, Type-C"
+],
+"specs": {
+"Model": "TOR-225N",
+"Warranty": "1 year"
+},
+"colours": [
+"Black",
+"White"
+],
+"image_path": "seed/tor-14.jpg",
+"mrp": 2999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 662,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "7d4c4b4b-d869-5ae4-822d-10881453e8df",
+"sku": "tor-15",
+"slug": "toreto-k-tel-kettle-tor-15",
+"name": "Toreto K-tel Kettle",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Home & Desk",
+"description": null,
+"features": [
+"Cordless stainless steel electric kettle with auto shut-off"
+],
+"specs": {
+"Model": "TOR-21",
+"Warranty": "6 months"
+},
+"colours": [
+"Silver Black"
+],
+"image_path": "seed/tor-15.jpg",
+"mrp": 2499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 1797,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive"
+]
+},
+{
+"id": "5a650d23-c160-5c14-9c11-18c4d5440a49",
+"sku": "tor-17",
+"slug": "toreto-power-link-tor-17",
+"name": "Toreto Power Link",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Power & Charging",
+"description": null,
+"features": [
+"Portable power bank with USB to Type-C cable"
+],
+"specs": {
+"Model": "TOR-1116",
+"Warranty": "6 months"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-17.jpg",
+"mrp": 1499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 973,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "0728f7b6-25d6-54a4-a8ab-99daf314e734",
+"sku": "tor-18",
+"slug": "toreto-power-glide-10-tor-18",
+"name": "Toreto Power Glide 10",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Power & Charging",
+"description": null,
+"features": [
+"10,000 mAh multi-protocol power bank, 22.5W"
+],
+"specs": {
+"Model": "TOR-1111",
+"Warranty": "1 year"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-18.jpg",
+"mrp": 2499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 873,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "64c74501-4c68-516f-aa7d-471996eb9871",
+"sku": "tor-19",
+"slug": "toreto-eon-lite-tor-19",
+"name": "Toreto Eon Lite+",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Power & Charging",
+"description": null,
+"features": [
+"Slim MagSafe power bank, 16W wireless + 20W Type-C, with magnetic ring"
+],
+"specs": {
+"Model": "TOR-79N",
+"Warranty": "1 year"
+},
+"colours": [
+"Golden",
+"Black",
+"Blue",
+"Grey"
+],
+"image_path": "seed/tor-19.jpg",
+"mrp": 3999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 144,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "83bd64c3-2a73-54ea-93fc-a72a2708a792",
+"sku": "tor-20",
+"slug": "toreto-eon-ultra-tor-20",
+"name": "Toreto Eon Ultra",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Power & Charging",
+"description": null,
+"features": [
+"10,000 mAh MagSafe power bank, 15W wireless + 20W wired"
+],
+"specs": {
+"Model": "TOR-98",
+"Warranty": "1 year"
+},
+"colours": [],
+"image_path": "seed/tor-20.jpg",
+"mrp": 4999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts"
+]
+},
+{
+"id": "9c269c3e-199a-5c1a-8bd8-103f9e43a6f9",
+"sku": "tor-21",
+"slug": "toreto-eon-magflex-tor-21",
+"name": "Toreto Eon MagFlex",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Power & Charging",
+"description": null,
+"features": [
+"Magnetic power bank with built-in stand, 15W wireless, 22.5W USB, digital display"
+],
+"specs": {
+"Model": "TOR-1108",
+"Warranty": "1 year"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-21.jpg",
+"mrp": 4999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 2956,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits",
+"premium-client-gifts"
+]
+},
+{
+"id": "1f89639d-5e73-5c54-9517-fc45f28845c6",
+"sku": "tor-22",
+"slug": "toreto-magzio-tor-22",
+"name": "Toreto Magzio",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Power & Charging",
+"description": null,
+"features": [
+"10,000 mAh MagSafe power bank, 15W wireless, 20W fast charging"
+],
+"specs": {
+"Model": "TOR-1109",
+"Warranty": "1 year"
+},
+"colours": [
+"Black",
+"Blue-Lavender",
+"Mocha"
+],
+"image_path": "seed/tor-22.jpg",
+"mrp": 3999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 427,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "90e342de-7159-5c71-a1f1-633b8dd9226e",
+"sku": "tor-24",
+"slug": "toreto-eclipz-tor-24",
+"name": "Toreto Eclipz",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Smart Wearables",
+"description": null,
+"features": [
+"Calling smartwatch, 2.1\" HD curved display, fitness tracking"
+],
+"specs": {
+"Model": "TORW-04",
+"Warranty": "1 year"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-24.jpg",
+"mrp": 4499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 58,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive",
+"premium-client-gifts"
+]
+},
+{
+"id": "9417b90a-319b-52f1-befc-7ebd7cf9014c",
+"sku": "tor-25",
+"slug": "toreto-eclipz-era-tor-25",
+"name": "Toreto Eclipz Era",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Smart Wearables",
+"description": null,
+"features": [
+"Bluetooth calling smartwatch, magnetic charging; iOS 12+ and Android 9+"
+],
+"specs": {
+"Model": "TORW-31",
+"Warranty": "6 months"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-25.jpg",
+"mrp": 3499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 978,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive",
+"premium-client-gifts"
+]
+},
+{
+"id": "03998bc4-6105-5dac-ac6c-bd7f886dbf71",
+"sku": "tor-27",
+"slug": "toreto-wave-mini-tor-27",
+"name": "Toreto Wave Mini",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Speakers",
+"description": null,
+"features": [
+"Pocket speaker, 4 h playtime, TWS, BT 5.4, selfie remote"
+],
+"specs": {
+"Model": "TOR-371",
+"Warranty": "6 months"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-27.jpg",
+"mrp": 2499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 0,
+"under_production": true,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive"
+]
+},
+{
+"id": "a49eff7d-cfad-5767-afbd-453138a53102",
+"sku": "tor-28",
+"slug": "toreto-magno-beat-tor-28",
+"name": "Toreto Magno Beat",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Speakers",
+"description": null,
+"features": [
+"Magnetic Bluetooth speaker, BT 5.3, 4 h playtime"
+],
+"specs": {
+"Model": "TOR-467",
+"Warranty": "1 year"
+},
+"colours": [
+"Black",
+"Blue",
+"Green",
+"Lavender"
+],
+"image_path": "seed/tor-28.jpg",
+"mrp": 2499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 322,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive"
+]
+},
+{
+"id": "4aada1ef-2980-50d9-a282-cfca5f342144",
+"sku": "tor-29",
+"slug": "toreto-fidget-pop-tor-29",
+"name": "Toreto Fidget Pop",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Speakers",
+"description": null,
+"features": [
+"Spinner speaker with 360\u00b0 rotation, BT 5.1, 3 h playtime"
+],
+"specs": {
+"Model": "TOR-475",
+"Warranty": "1 year"
+},
+"colours": [
+"Pink",
+"Black",
+"Beige"
+],
+"image_path": "seed/tor-29.jpg",
+"mrp": 2499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 1001,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive"
+]
+},
+{
+"id": "56e6657d-6a86-567d-9abd-7b911547c7e4",
+"sku": "tor-30",
+"slug": "toreto-buzz-tor-30",
+"name": "Toreto Buzz",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Speakers",
+"description": null,
+"features": [
+"Portable speaker, 1800 mAh, TWS, selfie remote, 6 colours"
+],
+"specs": {
+"Model": "TOR-463",
+"Warranty": "6 months"
+},
+"colours": [
+"Black",
+"Blue",
+"Green",
+"Pink",
+"Purple",
+"Red"
+],
+"image_path": "seed/tor-30.jpg",
+"mrp": 2999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 79,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive"
+]
+},
+{
+"id": "b2f0e00e-1392-50e3-9fcd-2801257d0786",
+"sku": "tor-31",
+"slug": "toreto-jolly-tor-31",
+"name": "Toreto Jolly+",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Speakers",
+"description": null,
+"features": [
+"Compact Bluetooth speaker with ToGo mode"
+],
+"specs": {
+"Model": "TOR-465",
+"Warranty": "1 year"
+},
+"colours": [
+"Black",
+"Off-White",
+"Mix"
+],
+"image_path": "seed/tor-31.jpg",
+"mrp": 1599,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 1711,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive"
+]
+},
+{
+"id": "7705f715-0d4e-583b-a43f-b607eef90882",
+"sku": "tor-32",
+"slug": "toreto-soundbolt-tor-32",
+"name": "Toreto Soundbolt",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Speakers",
+"description": null,
+"features": [
+"10W speaker, BT 6.0, TWS, 1800 mAh, up to 5 h playtime"
+],
+"specs": {
+"Model": "TOR-1323",
+"Warranty": "1 year"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-32.jpg",
+"mrp": 1599,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 1221,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive"
+]
+},
+{
+"id": "56913bb7-795b-500b-a5ba-d175efc7bb43",
+"sku": "tor-33",
+"slug": "toreto-solar-beatz-tor-33",
+"name": "Toreto Solar Beatz",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Speakers",
+"description": null,
+"features": [
+"Solar-powered speaker with torch, BT 5.3, TF/AUX/USB, 3 h playtime"
+],
+"specs": {
+"Model": "TOR-457",
+"Warranty": "1 year"
+},
+"colours": [],
+"image_path": "seed/tor-33.jpg",
+"mrp": 2999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive",
+"eco-friendly-gifts"
+]
+},
+{
+"id": "c81194ad-428c-5e99-91ec-c50d6899b916",
+"sku": "tor-34",
+"slug": "toreto-retro-mate-tor-34",
+"name": "Toreto Retro Mate",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Speakers",
+"description": null,
+"features": [
+"10W retro speaker with phone stand and digital clock"
+],
+"specs": {
+"Model": "TOR-476N",
+"Warranty": "1 year"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-34.jpg",
+"mrp": 2999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 21,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive"
+]
+},
+{
+"id": "29c5d8e3-b26c-52ee-8473-d424f0a295ff",
+"sku": "tor-35",
+"slug": "toreto-twin-magno-tor-35",
+"name": "Toreto Twin Magno",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Speakers",
+"description": null,
+"features": [
+"Snap-together twin speakers, TWS, BT 5.3, up to 6 h"
+],
+"specs": {
+"Model": "TOR-327",
+"Warranty": "1 year"
+},
+"colours": [
+"Black",
+"Grey"
+],
+"image_path": "seed/tor-35.jpg",
+"mrp": 3499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 1604,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive"
+]
+},
+{
+"id": "dba692f4-4f47-5a02-b1d5-a78d62304603",
+"sku": "tor-36",
+"slug": "toreto-retro-mini-tor-36",
+"name": "Toreto Retro Mini",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Speakers",
+"description": null,
+"features": [
+"Retro karaoke speaker with dual wireless mics; USB, TF, AUX, FM"
+],
+"specs": {
+"Model": "TOR-376N",
+"Warranty": "1 year"
+},
+"colours": [
+"Gold & White"
+],
+"image_path": "seed/tor-36.jpg",
+"mrp": 5999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 100,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"diwali-festive",
+"premium-client-gifts"
+]
+},
+{
+"id": "6846a6a2-adab-589a-973a-7ed5ddaa26c1",
+"sku": "tor-38",
+"slug": "toreto-air-tune-tor-38",
+"name": "Toreto Air Tune",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Headphones & Earbuds",
+"description": null,
+"features": [
+"True wireless earbuds, 20 h playtime, voice assistant"
+],
+"specs": {
+"Model": "TOR-1417",
+"Warranty": "1 year"
+},
+"colours": [
+"Grey",
+"White",
+"Black",
+"Blue",
+"Green"
+],
+"image_path": "seed/tor-38.jpg",
+"mrp": 2499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 2289,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "bdf653d8-a5d6-52a2-969e-d5d2fd8d84e2",
+"sku": "tor-39",
+"slug": "toreto-air-nexa-tor-39",
+"name": "Toreto Air Nexa",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Headphones & Earbuds",
+"description": null,
+"features": [
+"True wireless earbuds, 30 h with case, BT 5.3"
+],
+"specs": {
+"Model": "TOR-1423",
+"Warranty": "1 year"
+},
+"colours": [
+"White+Blue",
+"Black+Yellow"
+],
+"image_path": "seed/tor-39.jpg",
+"mrp": 2499,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 1496,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "0977f839-8bb7-56da-961e-aabfc1e8d53a",
+"sku": "tor-41",
+"slug": "toreto-tunz-pro-tor-41",
+"name": "Toreto Tunz Pro",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Headphones & Earbuds",
+"description": null,
+"features": [
+"Wired earphones, 3.5 mm, in-line mic, magnetic earbuds"
+],
+"specs": {
+"Model": "TOR-1214",
+"Warranty": "6 months"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-41.jpg",
+"mrp": 799,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 2000,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "b3ba9c8a-954d-5981-8774-9163ac085390",
+"sku": "tor-42",
+"slug": "toreto-tunz-pro-c-tor-42",
+"name": "Toreto Tunz Pro C",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Headphones & Earbuds",
+"description": null,
+"features": [
+"Type-C wired earphones, 13 mm driver, in-line mic"
+],
+"specs": {
+"Model": "TOR-1215",
+"Warranty": "6 months"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-42.jpg",
+"mrp": 999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 0,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "985b0319-87f3-5500-9d98-e948c2989866",
+"sku": "tor-44",
+"slug": "toreto-dura-trio-tor-44",
+"name": "Toreto Dura Trio",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Cables",
+"description": null,
+"features": [
+"3-in-1 braided cable, 1.5 m, 10,000+ bend tested"
+],
+"specs": {
+"Model": "TOR-924",
+"Warranty": "6 months"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-44.jpg",
+"mrp": 799,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 770,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "69a298e7-ab86-5c28-8a66-a418084cbf2c",
+"sku": "tor-45",
+"slug": "toreto-dura-trio-tor-45",
+"name": "Toreto Dura Trio+",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Cables",
+"description": null,
+"features": [
+"3-in-1 braided cable kit, 20W, 1.5 m"
+],
+"specs": {
+"Model": "TOR-924N",
+"Warranty": "1 year"
+},
+"colours": [
+"Black"
+],
+"image_path": "seed/tor-45.jpg",
+"mrp": 999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": 2000,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+},
+{
+"id": "55652a78-fbfa-534c-967b-9cff1af35258",
+"sku": "tor-46",
+"slug": "toreto-tuff-cord-3-tor-46",
+"name": "Toreto Tuff Cord 3",
+"brand": "Toreto",
+"category_id": 2,
+"subcategory": "Cables",
+"description": null,
+"features": [
+"4-in-1 60W charge and sync cable, nylon braided, 1 m"
+],
+"specs": {
+"Model": "TOR-949",
+"Warranty": "1 year"
+},
+"colours": [],
+"image_path": "seed/tor-46.jpg",
+"mrp": 999,
+"sell_price": null,
+"price_basis": "mrp",
+"moq": 25,
+"branding_possible": true,
+"delivery_note": null,
+"ready_stock": null,
+"under_production": false,
+"status": "live",
+"updated_at": "",
+"category": {
+"id": 2,
+"slug": "gadgets-tech",
+"name": "Gadgets & Tech"
+},
+"collection_slugs": [
+"employee-welcome-kits"
+]
+}
+]
+}

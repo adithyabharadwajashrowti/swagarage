@@ -1,0 +1,64 @@
+# Builds the site and publishes it to GitHub Pages on every push to main.
+# One-time setup (repo Settings):
+#   Pages > Build and deployment > Source: GitHub Actions
+#   Secrets and variables > Actions > Variables:
+#     VITE_SUPABASE_URL       https://<ref>.supabase.co
+#     VITE_SUPABASE_ANON_KEY  sb_publishable_... (the PUBLIC key only)
+#     VITE_TURNSTILE_SITE_KEY (optional)
+#     VITE_WHATSAPP_NUMBER    (optional) e.g. 9876543210 — shows "Enquire on WhatsApp" buttons
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci || npm install
+      - name: Check config
+        run: |
+          if [ -z "${{ vars.VITE_SUPABASE_URL }}" ] || [ -z "${{ vars.VITE_SUPABASE_ANON_KEY }}" ]; then
+            echo "::error::Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY under Settings > Secrets and variables > Actions > Variables"; exit 1
+          fi
+          case "${{ vars.VITE_SUPABASE_ANON_KEY }}" in sb_secret_*) echo "::error::That is the SECRET key. Use the publishable key."; exit 1;; esac
+      - name: Build
+        run: npx vite build
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+          VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY }}
+          VITE_WHATSAPP_NUMBER: ${{ vars.VITE_WHATSAPP_NUMBER }}
+      # GitHub Pages has no rewrites: serve the app for every path so links
+      # like /swagarage/shop work when opened or refreshed directly.
+      - run: cp dist/index.html dist/404.html && touch dist/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
