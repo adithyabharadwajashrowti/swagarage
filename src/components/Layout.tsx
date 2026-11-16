@@ -2,6 +2,9 @@ import { useState, type ReactNode } from 'react';
 import { asset, Link, navigate, useLocation } from '../lib/router';
 import { useAuth } from '../lib/auth';
 import { useCart } from '../lib/cart';
+import { whatsappLink } from '../lib/whatsapp';
+
+const CONTACT = whatsappLink('Hi Swagarage, I would like to know more about corporate gifts.');
 
 export function Layout({ children }: { children: ReactNode }) {
   const { session, isStaff, signOut } = useAuth();
@@ -77,6 +80,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <div>
               <h2>Ordering</h2>
               <p>MOQ from 25 units<br />GST applicable on all products<br />Packaging &amp; shipping charged extra<br />50% advance, 50% on delivery</p>
+              {CONTACT && <p><a href={CONTACT} target="_blank" rel="noopener noreferrer">Talk to us on WhatsApp</a></p>}
             </div>
           </div>
           <div className="bot">© {new Date().getFullYear()} Swagarage · Build Your Swag!</div>

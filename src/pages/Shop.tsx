@@ -7,6 +7,7 @@ import { unitPrice } from '../lib/format';
 import { navigate, useLocation } from '../lib/router';
 import { smartSearch } from '../lib/search';
 import type { CatalogueProduct } from '../lib/types';
+import { inCategory } from '../lib/curated';
 
 const PRICES: { key: string; label: string; lo: number; hi: number }[] = [
   { key: 'u500', label: 'Under ₹500', lo: 0, hi: 500 },
@@ -44,7 +45,7 @@ export function Shop() {
   const view = useMemo(() => {
     const band = PRICES.find((x) => x.key === priceKey);
     const keep = (p: CatalogueProduct) => {
-      if (category && p.category.slug !== category) return false;
+      if (category && !inCategory(p, category)) return false;
       if (collection && !p.collection_slugs.includes(collection)) return false;
       if (brand && (p.brand ?? 'Swagarage') !== brand) return false;
       if (band) {

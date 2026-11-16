@@ -3,6 +3,7 @@
 // leather, smartwatches) and no image repeats across cards.
 import type { CatalogueProduct, Collection } from './types';
 import { unitPrice } from './format';
+import { COLLECTION_COVER } from './curated';
 
 /** Words in collection descriptions → what to look for in product text. */
 const SYNONYMS: Record<string, RegExp> = {
@@ -60,6 +61,11 @@ export function collectionCovers(products: CatalogueProduct[], collections: Pick
       picks.push(p);
       used.add(p.id);
     };
+    // Hand-picked covers first (only if the product is still in this collection).
+    for (const sku of COLLECTION_COVER[c.slug] ?? []) {
+      const p = pool.find((x) => x.sku === sku);
+      if (p && picks.length < perCard && !picks.includes(p)) { picks.push(p); used.add(p.id); }
+    }
     for (const re of keywords(c.description)) {
       if (picks.length >= perCard) break;
       // Name/sub-category matches beat a word buried in the features.
