@@ -68,7 +68,7 @@ export function ProductCard({ p }: { p: CatalogueProduct }) {
         <div className="moq">Min. order {p.moq} units</div>
         {wa && (
           <a className="btn wa sm" href={wa} target="_blank" rel="noopener noreferrer">
-            Enquire on WhatsApp
+            <span className="long">Enquire on </span>WhatsApp
           </a>
         )}
       </div>

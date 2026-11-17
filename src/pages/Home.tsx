@@ -5,7 +5,7 @@ import { ProductImage, Spinner } from '../components/ui';
 import { useCatalogue } from '../lib/catalogue';
 import { collectionCovers } from '../lib/covers';
 import { Link } from '../lib/router';
-import { bySku, CATEGORY_COVER, HERO, inCategory } from '../lib/curated';
+import { bySku, CATEGORY_COVER, FEATURED, HERO, inCategory } from '../lib/curated';
 
 const COLLECTION_STYLE = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
 
@@ -13,18 +13,16 @@ export function Home() {
   const { products, categories, collections, loading, error } = useCatalogue();
 
   const featured = useMemo(() => {
-    // One well-known branded product per category, mid-range price, with a photo.
-    const BRANDS = ['Nasher Miles', 'Swiss Military', 'Puma', 'Noise', 'Borosil', 'Wenger', 'Raymond Home', 'Jack & Jones', 'Pepe Jeans', 'Sony', 'Lifelong', 'Oblique', 'Tommy Hilfiger', 'Lavie', 'Pebble'];
-    const CATS = ['bags-backpacks', 'gadgets-tech', 'apparel', 'drinkware', 'travel-accessories', 'home-kitchen', 'gift-sets', 'desk-office'];
-    const rank = (b: string | null) => { const i = b ? BRANDS.indexOf(b) : -1; return i < 0 ? 99 : i; };
-    const out: typeof products = [];
-    for (const slug of CATS) {
-      const pick = products
-        .filter((p) => p.category.slug === slug && p.image_path && p.sell_price !== null && p.sell_price >= 400 && p.sell_price <= 6000)
-        .sort((a, b) => rank(a.brand) - rank(b.brand) || Number((b.ready_stock ?? 0) > 0) - Number((a.ready_stock ?? 0) > 0) || (a.sell_price ?? 0) - (b.sell_price ?? 0))[0];
+    // Hand-picked first; then one branded product per category to fill any gap.
+    const bysku = bySku(products);
+    const out = FEATURED.map((sku) => bysku.get(sku)).filter((p): p is (typeof products)[number] => !!p);
+    for (const slug of ['bags-backpacks', 'gadgets-tech', 'apparel', 'drinkware', 'travel-accessories', 'home-kitchen', 'gift-sets', 'desk-office']) {
+      if (out.length >= 8) break;
+      if (out.some((p) => p.category.slug === slug)) continue;
+      const pick = products.find((p) => p.category.slug === slug && p.image_path && p.brand && p.sell_price !== null);
       if (pick) out.push(pick);
     }
-    return out;
+    return out.slice(0, 8);
   }, [products]);
 
   const skus = useMemo(() => bySku(products), [products]);
@@ -57,7 +55,7 @@ export function Home() {
             </div>
             {!loading && products.length > 0 && (
               <div className="facts">
-                <div><b>{products.length}</b>products</div>
+                <div><b>{products.length.toLocaleString('en-IN')}</b>products</div>
                 <div><b>25</b>minimum order</div>
                 <div><b>{brands}+</b>brands</div>
               </div>
@@ -90,7 +88,7 @@ export function Home() {
                     <Link key={c.id} to={`/shop?category=${c.slug}`} className="cat">
                       <div className="im">{rep ? <ProductImage path={rep.image_path} alt="" /> : <div className="noimg" />}</div>
                       <b>{c.name}</b>
-                      <small>{inCat.length} products</small>
+                      <small>{inCat.length.toLocaleString('en-IN')} products</small>
                     </Link>
                   );
                 })}
@@ -111,7 +109,7 @@ export function Home() {
                         {pics.map((p) => <ProductImage key={p.id} path={p.image_path} alt="" />)}
                       </div>
                       <h3>{c.name}</h3>
-                      <p>{c.description} · {count} products</p>
+                      <p>{c.description} · {count.toLocaleString('en-IN')} products</p>
                     </Link>
                   );
                 })}

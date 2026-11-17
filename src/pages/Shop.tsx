@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ProductCard } from '../components/ProductCard';
 import { Spinner } from '../components/ui';
 import { featuredOrder } from '../lib/assistant';
@@ -67,6 +67,11 @@ export function Shop() {
     return { exact, related, popular, understood: found.understood, corrected: found.corrected };
   }, [products, q, category, collection, priceKey, brand, sort]);
 
+  // Show the grid in pages so big categories stay fast on phones.
+  const PAGE = 48;
+  const [shown, setShown] = useState(PAGE);
+  useEffect(() => setShown(PAGE), [q, category, collection, priceKey, brand, sort]);
+
   if (loading) return <Spinner label="Loading catalogue…" />;
 
   const filtered = !!(category || collection || priceKey || brand);
@@ -75,6 +80,8 @@ export function Shop() {
     : collection
       ? collections.find((c) => c.slug === collection)?.name ?? 'All products'
       : 'Shop all products';
+
+  document.title = `${title} | Swagarage`;
 
   return (
     <div className="wrap shop2">
@@ -130,13 +137,19 @@ export function Shop() {
       {error && <p className="alert err">{error}</p>}
 
       <div className="chips">
-        <span className="note">{view.exact.length} {view.exact.length === 1 ? 'product' : 'products'}</span>
+        <span className="note">{view.exact.length.toLocaleString('en-IN')} {view.exact.length === 1 ? 'product' : 'products'}</span>
         {view.corrected && <span className="note">Showing results for “{view.corrected}”</span>}
         {view.understood.map((c) => <span key={c} className="chip">{c}</span>)}
         {(filtered || q) && <button className="btn ghost sm" onClick={() => navigate('/shop', { replace: true })}>Clear all</button>}
       </div>
 
-      {view.exact.length > 0 && <div className="grid">{view.exact.map((p) => <ProductCard key={p.id} p={p} />)}</div>}
+      {view.exact.length > 0 && <div className="grid">{view.exact.slice(0, shown).map((p) => <ProductCard key={p.id} p={p} />)}</div>}
+      {view.exact.length > shown && (
+        <div className="more">
+          <p className="note">Showing {shown.toLocaleString('en-IN')} of {view.exact.length.toLocaleString('en-IN')}</p>
+          <button className="btn sec" onClick={() => setShown((n) => n + PAGE * 2)}>Show more products</button>
+        </div>
+      )}
 
       {view.exact.length === 0 && (
         <div className="empty">

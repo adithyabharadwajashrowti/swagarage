@@ -17,6 +17,9 @@ export const CATEGORY_COVER: Record<string, string> = {
   'gift-sets': 'sg-gs-0062',
 };
 
+/** "Popular picks" on the home page, in order. */
+export const FEATURED = ['sg-gt-0246', 'sg-bg-0382', 'sg-ap-0068', 'sg-dw-0007', 'sg-ec-0051', 'sg-ta-0030', 'sg-do-0170', 'sg-gs-0062'];
+
 /** The four photos in the hero collage. */
 export const HERO = ['sg-bg-0287', 'sg-ec-0051', 'sg-gt-0246', 'sg-ta-0040'];
 

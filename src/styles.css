@@ -229,7 +229,7 @@ footer.site .bot{border-top:1px solid #333;margin-top:32px;padding-top:18px;font
 }
 
 /* ---- Shop (search bar, brand chips, buy row) ---- */
-.shop2{padding:28px 0 64px}
+.shop2{padding-top:28px;padding-bottom:64px}
 .shop-head h1{font-size:32px;font-weight:700;letter-spacing:-.01em}
 .shop-head p{color:var(--ink2);margin:6px 0 18px}
 .shop-bar{display:grid;grid-template-columns:minmax(220px,2.2fr) repeat(4,minmax(130px,1fr));gap:10px;margin-bottom:14px}
@@ -273,3 +273,16 @@ footer.site .bot{border-top:1px solid #333;margin-top:32px;padding-top:18px;font
 .addon{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px}
 .addon img,.addon .noimg{width:56px;height:56px;object-fit:contain;border-radius:8px}
 .addon .meta{display:flex;flex-direction:column;font-size:13px}
+
+/* ---- 16 Nov polish ---- */
+.more{display:flex;flex-direction:column;align-items:center;gap:10px;margin:28px 0 8px}
+.card .btn.wa{overflow:hidden;text-overflow:ellipsis}
+@media (max-width:640px){.card .btn.wa .long{display:none}.card .btn{font-size:14px;padding-left:10px;padding-right:10px}}
+@media (max-width:760px){
+ .collage{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:22px}
+ .collage .t{padding:6px;border-radius:12px;box-shadow:0 4px 14px rgba(28,28,28,.07)}
+ .collage .t:nth-child(2),.collage .t:nth-child(4){transform:none}
+ .hero .facts{margin-top:24px}
+ .chat{min-height:0}
+ .coll .pics img{width:78px;height:78px}
+}

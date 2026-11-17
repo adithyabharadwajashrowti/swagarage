@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductCard } from '../components/ProductCard';
 import { productEnquiry } from '../lib/whatsapp';
 import { ProductImage, Spinner } from '../components/ui';
@@ -15,6 +15,10 @@ export function ProductPage({ slug }: { slug: string }) {
   const p = products.find((x) => x.slug === slug);
   const existing = p ? cart.lines.find((l) => l.productId === p.id) : undefined;
   const [qtyInput, setQty] = useState<number | null>(null);
+  useEffect(() => {
+    document.title = p ? `${p.name} | Swagarage` : 'Swagarage: Build Your Swag';
+    return () => { document.title = 'Swagarage: Build Your Swag'; };
+  }, [p?.name]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) return <Spinner />;
   if (!p)
