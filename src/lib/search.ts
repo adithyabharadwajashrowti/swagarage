@@ -217,6 +217,8 @@ export function smartSearch(products: CatalogueProduct[], text: string): SearchR
 
   // Exact: the kind of product asked for, or every word found in its name/category/brand.
   let exact = scored.filter((s) => s.kindHit || s.strongAll || (tokens.length === 0 && !q.kinds.length));
+  // A kind was asked for and we have several: show that kind only (no look-alike words: "socks" is not "dock").
+  if (q.kinds.length && scored.filter((s) => s.kindHit).length >= 3) exact = exact.filter((s) => s.kindHit);
   // Nothing that strong: accept every word found anywhere (e.g. in the features), then the occasion's products.
   if (!exact.length) exact = scored.filter((s) => s.allMatched);
   if (!exact.length && q.collections.length) exact = scored.filter((s) => s.inOcc);

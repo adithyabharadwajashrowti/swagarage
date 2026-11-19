@@ -6,7 +6,7 @@ import type { CatalogueProduct } from './types';
 export const CATEGORY_COVER: Record<string, string> = {
   'bags-backpacks': 'sg-bg-0287',
   'gadgets-tech': 'sg-gt-0247',
-  'travel-accessories': 'sg-ta-0040',
+  'travel-accessories': 'sg-ta-0087',
   apparel: 'sg-ap-0057',
   'eco-friendly': 'sg-ec-0029',
   'desk-office': 'sg-do-0176',

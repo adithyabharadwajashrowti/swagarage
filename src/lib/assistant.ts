@@ -52,6 +52,13 @@ export interface ParsedRequest {
   nouns?: string[];
 }
 
+/** Focus words that describe the same product family (a "Polo T-Shirt" is not a combo of a polo and a t-shirt). */
+const FAMILY: Record<string, string> = { tshirt: 'tshirt', polo: 'tshirt', clock: 'clock', wallClock: 'clock', deskClock: 'clock', bottle: 'drink', mug: 'drink', tumbler: 'drink', powerbank: 'power', charger: 'power', backpack: 'bag', duffle: 'bag', trolley: 'bag' };
+/** When both are asked, the narrower one wins ("polo t-shirts" → polos; "wall clock" → wall clocks). */
+/** Where each focus word's products live: "bottle" means drinkware, not a bottle bag or a pen shaped like one. */
+const FOCUS_CAT: Record<string, string[]> = { bottle: ['drinkware'], mug: ['drinkware'], tumbler: ['drinkware'], tshirt: ['apparel'], polo: ['apparel'], hoodie: ['apparel'], jacket: ['apparel'], hamper: ['gift-sets', 'gift-boxes'] };
+const NARROWER: Record<string, string[]> = { polo: ['tshirt'], wallClock: ['clock'], deskClock: ['clock'] };
+
 /** Product words narrower than a kind: "bottle" should show bottles, not every drinkware item. */
 export const FOCUS: Record<string, { q: RegExp; name: RegExp }> = {
   bottle: { q: /\b(bottles?|flasks?|sippers?)\b/, name: /bottle|flask|sipper/ },
@@ -64,6 +71,20 @@ export const FOCUS: Record<string, { q: RegExp; name: RegExp }> = {
   watch: { q: /\b(smart ?watch(es)?|watch(es)?)\b/, name: /watch/ },
   lamp: { q: /\b(lamps?|lanterns?)\b/, name: /lamp|lantern/ },
   clock: { q: /\bclocks?\b/, name: /clock/ },
+  wallClock: { q: /\bwall clocks?\b/, name: /wall clock/ },
+  deskClock: { q: /\b(desk|table|alarm) clocks?\b/, name: /desk clock|table clock|alarm clock|digital clock/ },
+  mouse: { q: /\bmouse\b(?! ?pads?)|\bmice\b/, name: /\bmouse\b(?! ?pad)/ },
+  keyboard: { q: /\bkeyboards?\b/, name: /keyboard/ },
+  massager: { q: /\bmassagers?\b/, name: /massag/ },
+  scale: { q: /\b(weighing )?scales?\b/, name: /scale/ },
+  yogaMat: { q: /\byoga ?mats?\b/, name: /yoga/ },
+  medal: { q: /\bmedals?\b/, name: /medal/ },
+  calendar: { q: /\bcalendars?\b/, name: /calendar/ },
+  kettle: { q: /\bkettles?\b/, name: /kettle/ },
+  fryer: { q: /\bair ?fryers?\b/, name: /fryer/ },
+  fan: { q: /\bfans?\b/, name: /\bfan\b/ },
+  trimmer: { q: /\btrimmers?\b/, name: /trimmer/ },
+  tote: { q: /\btotes?\b|\bjute bags?\b/, name: /tote|jute bag|shopping bag|canvas bag/ },
   powerbank: { q: /\bpower ?banks?\b/, name: /power ?bank/ },
   charger: { q: /\b(wireless )?chargers?\b/, name: /charg/ },
   umbrella: { q: /\bumbrellas?\b/, name: /umbrella/ },
@@ -71,10 +92,11 @@ export const FOCUS: Record<string, { q: RegExp; name: RegExp }> = {
   wallet: { q: /\b(wallets?|card ?holders?)\b/, name: /wallet|card ?holder/ },
   hoodie: { q: /\b(hoodies?|sweat ?shirts?)\b/, name: /hoodie|hoody|sweatshirt/ },
   jacket: { q: /\b(jackets?|blazers?|bombers?|wind ?cheaters?)\b/, name: /jacket|blazer|bomber|windcheater/ },
-  hamper: { q: /\b(hampers?|gift ?sets?|combos?|gift ?kits?)\b/, name: /gift set|hamper|combo|\bkit\b/ },
+  hamper: { q: /\b(hampers?|gift ?sets?|combos?|gift ?kits?)\b/, name: /gift set|hamper|combo|gift kit|gift box|welcome kit|\btrunk\b|\d-piece/ },
   tshirt: { q: /\b(t-?shirts?|tees?|polos?)\b/, name: /t-?shirt|polo|\btee/ },
+  polo: { q: /\bpolos?\b/, name: /\bpolo\b/ },
   backpack: { q: /\bback ?packs?\b/, name: /back ?pack/ },
-  duffle: { q: /\bduff(le|el)s?\b/, name: /duff(le|el)/ },
+  duffle: { q: /\bduff(le|el)s?\b|\bgym bags?\b|\bweekenders?\b/, name: /duff(le|el)|gym bag|weekender/ },
   trolley: { q: /\b(trolleys?|luggage|suitcases?)\b/, name: /trolley|luggage|overnighter/ },
   trophy: { q: /\b(trophies|trophy|awards?|mementos?|plaques?)\b/, name: /trophy|award|memento|plaque/ },
 };
@@ -182,9 +204,10 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
     q: /\bnote ?books?\b|\bnote ?pads?\b|\bdiar(y|ies)\b|\bjournals?\b|\bplanners?\b|\borgani[sz]er diar|\ba5\b|\bb5\b|\bexecutive diar/,
     p: (h) => /notebook|notepad|diary|diaries|journal|planner/.test(h.core),
   },
+  calendar: { label: 'calendars', q: /\bcalendars?\b/, p: (h) => /calendar/.test(h.core) },
   stationery: {
     label: 'stationery & desk items',
-    q: /\bstationery\b|\bstationary\b|\bcalendars?\b|\bpen ?stands?\b|\bpen ?holders?\b|\bdesk calendars?\b|\btable calendars?\b/,
+    q: /\bstationery\b|\bstationary\b|\bpen ?stands?\b|\bpen ?holders?\b/,
     p: (h) => /\bpens?\b|pen ?stand|penstand|notebook|diary|journal|calendar|planner|stationery|card holder/.test(h.core),
   },
   desk: {
@@ -193,26 +216,57 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
     p: (h) => /desk|mouse ?pad|deskmat|pen ?stand|penstand|calendar|card holder|lamp|organi[sz]er|office/.test(h.core),
   },
   plant: { label: 'planters', q: /\bplants?\b|\bplanters?\b|\bsucculents?\b|\bseeds?\b/, p: (h) => /plant/.test(h.core) },
+  lamp: { label: 'lamps & lights', q: /\blamps?\b|\blights?\b|\blanterns?\b|\btorch(es)?\b/, p: (h) => /lamp|light|lantern|torch/.test(h.core) && h.p.category.slug !== 'gift-sets' },
+  clock: { label: 'clocks', q: /\bclocks?\b/, p: (h) => /clock/.test(h.core) },
+  fan: { label: 'fans', q: /\bfans?\b|\bcoolers?\b/, p: (h) => /\bfans?\b|cooler|snapcool/.test(h.core) },
+  appliance: {
+    label: 'kitchen & home appliances',
+    q: /\bkettles?\b|\bair ?fryers?\b|\btoasters?\b|\bmixers?\b|\bgrinders?\b|\bblenders?\b|\bjuicers?\b|\bappliances?\b|\begg boilers?\b|\binduction\b|\bcoffee makers?\b|\botg\b|\bgas stoves?\b|\bsandwich makers?\b|\birons?\b|\bvacuum cleaners?\b/,
+    p: (h) => h.p.subcategory === 'Kitchen & Home Appliances' || /kettle|fryer|toaster|mixer|grinder|blender|juicer|egg boiler|induction|coffee maker|\botg\b|stove|sandwich|\biron\b|vacuum cleaner/.test(h.core),
+  },
+  grooming: {
+    label: 'trimmers & personal care',
+    q: /\btrimmers?\b|\bgrooming\b|\bshavers?\b|\bhair ?dryers?\b|\bpersonal care\b/,
+    p: (h) => h.p.subcategory === 'Personal Care' || /trimmer|groom|shaver|hair dryer/.test(h.core),
+  },
+  fitness: {
+    label: 'fitness & wellness',
+    q: /\bfitness\b(?! (bands?|trackers?))|\bgym\b(?! bags?)|\byoga\b|\bdumbbells?\b|\btreadmills?\b|\bworkout\b|\bexercise\b|\bmassagers?\b|\bweighing scales?\b|\bwellness\b|\bprotein shakers?\b/,
+    p: (h) => !/luggage/.test(h.core) && (h.p.subcategory === 'Fitness & Wellness' || /yoga|dumbbell|treadmill|massag|weighing scale|fitness|protein shaker/.test(h.core)),
+  },
+  kitchen: {
+    label: 'kitchen & dining',
+    q: /\bkitchen\b|\bcooking\b|\bcookware\b|\bdining\b|\bserveware\b/,
+    p: (h) => ['Kitchen & Home Appliances', 'Kitchen & Dining', 'Cookware', 'Lunch Boxes & Containers'].includes(h.p.subcategory ?? '') || /kitchen|cookware|\bpan\b|kadai|tawa|dining|serving/.test(h.core),
+  },
   home: {
-    label: 'home & desk gadgets',
-    q: /\blamps?\b|\blights?\b|\bclocks?\b|\bkettles?\b|\bfans?\b|\bhome\b|\bkitchen\b|\bappliances?\b/,
-    p: (h) => /lamp|light|clock|kettle|\bfan\b|home|kitchen|appliance|cooler|snapcool/.test(h.core),
+    label: 'home & kitchen',
+    q: /\bhome\b|\bhousewarming\b/,
+    p: (h) => h.p.category.slug === 'home-kitchen' || /home|kitchen/.test(h.core),
+  },
+  socks: { label: 'socks', q: /\bsocks?\b/, p: (h) => /\bsocks?\b/.test(h.core) },
+  footwear: { label: 'shoes', q: /\bshoes?\b|\bsneakers?\b|\bfootwear\b|\bslippers?\b|\bflip ?flops?\b/, p: (h) => /shoe|sneaker|footwear|slipper|flip ?flop/.test(h.core) },
+  bottoms: {
+    label: 'track pants & shorts',
+    q: /\btrack ?pants?\b|\bjoggers?\b|\bshorts\b|\btrousers?\b|\bpants\b/,
+    p: (h) => h.p.category.slug === 'apparel' && /track pant|jogger|shorts|trouser|\bpants?\b|bottoms/.test(h.core),
   },
   tshirt: {
     label: 't-shirts & polos',
     q: /\bt-?shirts?\b|\btees?\b|\bpolos?\b|\bpolo t|\bround ?neck\b|\bcollar(ed)? t|\bdri-?fit\b|\bdry-?fit\b/,
-    p: (h) => /t-?shirt|\bpolo\b|\btee\b/.test(h.core),
+    p: (h) => h.p.category.slug === 'apparel' && /t-?shirt|\bpolo\b|\btee\b|crew neck|round neck/.test(h.core),
   },
   cap: { label: 'caps', q: /\bcaps?\b|\bbaseball caps?\b|\bhats?\b/, p: (h) => /\bcap\b|\bhat\b/.test(h.core) },
   keychain: { label: 'keychains', q: /\bkey ?chains?\b|\bkey ?rings?\b|\bkey ?tags?\b/, p: (h) => /key ?chain|key ?ring/.test(h.core) },
-  lanyard: { label: 'lanyards & ID card holders', q: /\blanyards?\b|\bid card|\bid holders?\b|\bbadge holders?\b|\bbadges?\b/, p: (h) => /lanyard|id card|badge/.test(h.core) },
+  lanyard: { label: 'lanyards & ID card holders', q: /\blanyards?\b|\bid cards?\b|\bid holders?\b|\bbadge holders?\b/, p: (h) => /lanyard|\bid card|badge holder/.test(h.core) },
+  badge: { label: 'name badges & pins', q: /\b(name )?badges?\b(?! holders?)|\blapel pins?\b|\bbadge pins?\b/, p: (h) => h.p.subcategory === 'Name Badges & Pins' || /badge|lapel pin/.test(h.core) },
   umbrella: { label: 'umbrellas', q: /\bumbrellas?\b/, p: (h) => /umbrella/.test(h.core) },
   coaster: { label: 'coasters', q: /\bcoasters?\b/, p: (h) => /coaster/.test(h.core) },
   frame: { label: 'photo frames', q: /\bphoto ?frames?\b|\bframes?\b/, p: (h) => /frame/.test(h.core) },
   trophy: {
     label: 'trophies, awards & mementos',
-    q: /\btroph(y|ies)\b|\bmementos?\b|\bmomentos?\b|\bplaques?\b|\bshields?\b|\baward (trophies|trophy|plaques?|mementos?)\b/,
-    p: (h) => /troph|award|memento|plaque/.test(h.core),
+    q: /\btroph(y|ies)\b|\bmementos?\b|\bmomentos?\b|\bplaques?\b|\bshields?\b|\bmedals?\b|\baward (trophies|trophy|plaques?|mementos?)\b/,
+    p: (h) => /troph|award|memento|plaque|medal/.test(h.core),
   },
   food: {
     label: 'sweets, dry fruits & gourmet hampers',
@@ -227,7 +281,7 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
     q: /\bkeyboards?\b|\bmouse\b(?! ?pads?)|\bmice\b|\bwebcams?\b|\blaptop stands?\b|\busb hubs?\b|\bdocking\b/,
     p: (h) => /keyboard|\bmouse\b(?! ?pad)|webcam|laptop stand|usb hub|dock/.test(h.core),
   },
-  phoneStand: { label: 'mobile stands', q: /\b(mobile|phone) (stands?|holders?)\b/, p: (h) => /mobile stand|phone stand|tab stand|mobile holder|phone holder/.test(h.full) },
+  phoneStand: { label: 'mobile stands', q: /\b(mobile|phone) (stands?|holders?)\b/, p: (h) => h.p.subcategory === 'Phone Stands' || /mobile stand|phone stand|tab stand|mobile holder|phone holder/.test(h.core) },
   tech: {
     label: 'tech & gadgets',
     q: /\btech\b|\bgadgets?\b|\belectronics?\b|\belectronic\b|\btechie\b|\bsmart gadgets?\b|\bconsumer durables?\b/,
@@ -240,7 +294,8 @@ export const RELATED: Record<string, string[]> = {
   pen: ['stationery', 'desk'], notebook: ['stationery', 'desk'], stationery: ['desk'], desk: ['stationery', 'home'],
   speaker: ['earbuds', 'tech'], earbuds: ['speaker', 'tech'], wearable: ['tech'], power: ['cable', 'tech'], cable: ['power', 'tech'],
   home: ['desk', 'tech'], tech: ['power', 'desk'], drinkware: ['home', 'desk'], plant: ['desk'],
-  hoodie: ['jacket', 'apparel'], jacket: ['hoodie', 'apparel'], shirt: ['apparel'], apparel: ['hoodie', 'jacket', 'shirt'],
+  hoodie: ['jacket', 'apparel'], jacket: ['hoodie', 'apparel'], socks: ['apparel'], footwear: ['apparel'], bottoms: ['apparel'], calendar: ['stationery', 'desk'],
+  lamp: ['home', 'desk'], clock: ['desk', 'home'], fan: ['home', 'tech'], appliance: ['kitchen', 'home'], kitchen: ['appliance', 'home'], grooming: ['tech', 'fitness'], fitness: ['home', 'wearable'], badge: ['lanyard'], shirt: ['apparel'], apparel: ['hoodie', 'jacket', 'shirt'],
   backpack: ['laptopBag', 'bag'], laptopBag: ['backpack', 'sleeve'], sleeve: ['laptopBag', 'pouch'], sling: ['bag'],
   duffle: ['bag'], pouch: ['wallet', 'sleeve'], lunch: ['bag'], tote: ['bag'], bag: ['pouch', 'wallet'], wallet: ['pouch'],
   tshirt: ['shirt', 'hoodie'], cap: ['apparel'], keychain: ['wallet', 'pouch'], lanyard: ['wallet', 'desk'], umbrella: ['bag'],
@@ -251,12 +306,15 @@ export const RELATED: Record<string, string[]> = {
 // Kinds that are a broader version of another; when both are asked we keep the specific one.
 const BROADER: Record<string, string[]> = {
   bag: ['backpack', 'laptopBag', 'sleeve', 'sling', 'duffle', 'pouch', 'lunch', 'tote'],
-  apparel: ['hoodie', 'jacket', 'shirt', 'tshirt', 'cap'],
+  apparel: ['hoodie', 'jacket', 'shirt', 'tshirt', 'cap', 'socks', 'footwear', 'bottoms'],
+  laptopBag: ['sleeve'],
+  home: ['lamp', 'clock', 'fan', 'appliance', 'kitchen'],
+  kitchen: ['appliance'],
   tech: ['speaker', 'earbuds', 'power', 'cable', 'wearable', 'usb', 'computer'],
   desk: ['stationery', 'pen', 'notebook', 'phoneStand', 'computer'],
   shirt: ['tshirt'],
   frame: ['phoneStand'],
-  stationery: ['pen', 'notebook'],
+  stationery: ['pen', 'notebook', 'calendar'],
 };
 
 // Strong head-count words: always a quantity, even after "over"/"above" ("over 100 employees").
@@ -667,7 +725,8 @@ export function parseRequest(text: string): ParsedRequest {
       !BRANDING.some(([re]) => re.test(` ${w} `)),
   );
 
-  const nouns = Object.entries(FOCUS).filter(([, f]) => f.q.test(t)).map(([k]) => k);
+  let nouns = Object.entries(FOCUS).filter(([, f]) => f.q.test(t)).map(([k]) => k);
+  for (const [narrow, broad] of Object.entries(NARROWER)) if (nouns.includes(narrow)) nouns = nouns.filter((n) => !broad.includes(n));
 
   return {
     minPrice, maxPrice, quantity, totalBudget, approx, collections, kinds, notKinds: [...negated], terms, stockOnly, prefer, ambiguous,
@@ -868,10 +927,13 @@ export function recommend(
   const focusOk = (p: CatalogueProduct) => {
     const n = p.name.toLowerCase();
     // A notebook-and-pen combo is not what "pens" means.
-    const combo = !wantSets && Object.entries(FOCUS).some(([k, f]) => k !== 'hamper' && !(q.nouns ?? []).includes(k) && f.name.test(n));
-    return !combo && focus.some((re) => re.test(n)) && !focus.some((re) => new RegExp(`(without (a |the )?|opener|holder|stand|optional)\\W*(?:${re.source})|(?:${re.source})\\W*(opener|holder|stand|optional|drive)`).test(n)) && (wantSets || !/gift set|\bset\b|combo|hamper/.test(n));
+    const fams = new Set((q.nouns ?? []).map((k) => FAMILY[k] ?? k));
+    const combo = !wantSets && Object.entries(FOCUS).some(([k, f]) => k !== 'hamper' && !(q.nouns ?? []).includes(k) && !fams.has(FAMILY[k] ?? k) && f.name.test(n));
+    const catOk = (q.nouns ?? []).some((k) => !FOCUS_CAT[k] || FOCUS_CAT[k]!.includes(p.category.slug) || (wantSets && p.category.slug === 'gift-sets'));
+    return !combo && catOk && focus.some((re) => re.test(n)) && !focus.some((re) => new RegExp(`(without (a |the )?|opener|holder|stand|optional)\\W*(?:${re.source})|(?:${re.source})\\W*(opener|holder|stand|optional|drive|bag|cover|sleeve|shape|pouch|lamp|seeds?)`).test(n)) && (wantSets || !/gift set|\bset\b|combo|hamper/.test(n));
   };
-  if (focus.length) {
+  // With two kinds asked ("laptop bag and bottle"), narrowing to one word would drop the other kind.
+  if (focus.length && q.kinds.length <= 1) {
     const focused = pool.filter(focusOk);
     if (focused.length >= Math.min(3, pool.length)) pool = focused;
   }

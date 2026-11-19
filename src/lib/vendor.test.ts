@@ -93,8 +93,8 @@ describe('product jargon', () => {
     ['trolley bag', 'Duffle & travel bags'], ['jute bag', 'Tote bags'], ['conference bag', 'Tote bags'], ['amenity kit', 'Pouches & organisers'],
     ['card holder', 'Wallets & card holders'], ['passport holder', 'Wallets & card holders'], ['cheque book holder', 'Wallets & card holders'],
     ['A5 diary', 'Notebooks & diaries'], ['dairy', 'Notebooks & diaries'], ['metal pen', 'Pens'], ['desk organiser', 'Desk & office items'],
-    ['table calendar', 'Stationery & desk items'], ['polo t-shirts', 'T-shirts & polos'], ['round neck tees', 'T-shirts & polos'],
-    ['hoody', 'Hoodies & jackets'], ['windcheater', 'Hoodies & jackets'], ['sweat shirt', 'Hoodies & jackets'], ['smart band', 'Smart watches & wearables'],
+    ['table calendar', 'Calendars'], ['polo t-shirts', 'T-shirts & polos'], ['round neck tees', 'T-shirts & polos'],
+    ['hoody', 'Hoodies & sweatshirts'], ['windcheater', 'Jackets'], ['sweat shirt', 'Hoodies & sweatshirts'], ['smart band', 'Smart watches & wearables'],
     ['keychain', 'Keychains'], ['lanyard', 'Lanyards & ID card holders'], ['umbrella', 'Umbrellas'], ['dry fruits', 'Sweets, dry fruits & gourmet hampers'],
     ['diyas', 'Candles & diyas'], ['pen drive', 'Pen drives'], ['trophy', 'Trophies, awards & mementos'], ['mobile stand', 'Mobile stands'],
   ];
@@ -256,4 +256,21 @@ describe('fuzz: 20,000 vendor-style messages parse exactly', () => {
       }
     }
   });
+});
+
+describe('one kind per request (19 Nov)', () => {
+  it('jackets are not hoodies', () => {
+    expect(parseRequest('show me jacket options').kinds).toEqual(['jacket']);
+    expect(parseRequest('hoodies').kinds).toEqual(['hoodie']);
+  });
+  it('new kinds', () => {
+    expect(parseRequest('socks').kinds).toEqual(['socks']);
+    expect(parseRequest('shoes').kinds).toEqual(['footwear']);
+    expect(parseRequest('track pants').kinds).toEqual(['bottoms']);
+    expect(parseRequest('trimmer').kinds).toEqual(['grooming']);
+    expect(parseRequest('air fryer').kinds).toEqual(['appliance']);
+    expect(parseRequest('medals').kinds).toEqual(['trophy']);
+    expect(parseRequest('calendars').kinds).toEqual(['calendar']);
+  });
+  it('polo narrows t-shirts', () => expect(parseRequest('polo t-shirts').nouns).toEqual(['polo']));
 });

@@ -26,6 +26,7 @@ export function Shop() {
   const collection = search.get('collection') ?? '';
   const priceKey = search.get('price') ?? '';
   const brand = search.get('brand') ?? '';
+  const type = search.get('type') ?? '';
   const sort = search.get('sort') ?? (q ? 'relevance' : 'featured');
 
   function set(key: string, value: string) {
@@ -36,16 +37,30 @@ export function Shop() {
     navigate(`/shop${s ? `?${s}` : ''}`, { replace: true });
   }
 
+  // Types (sub-categories) of the chosen category, e.g. Jackets / Hoodies & Sweatshirts / Polo T-Shirts.
+  const types = useMemo(() => {
+    if (!category) return [];
+    const m = new Map<string, number>();
+    for (const p of products) if (inCategory(p, category) && p.subcategory) m.set(p.subcategory, (m.get(p.subcategory) ?? 0) + 1);
+    return [...m.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  }, [products, category]);
+
+  // Brands of what's on screen (category and type), so the list stays short and relevant.
   const brands = useMemo(() => {
     const m = new Map<string, number>();
-    for (const p of products) m.set(p.brand ?? 'Swagarage', (m.get(p.brand ?? 'Swagarage') ?? 0) + 1);
+    for (const p of products) {
+      if (category && !inCategory(p, category)) continue;
+      if (type && p.subcategory !== type) continue;
+      m.set(p.brand ?? 'Swagarage', (m.get(p.brand ?? 'Swagarage') ?? 0) + 1);
+    }
     return [...m.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([b]) => b);
-  }, [products]);
+  }, [products, category, type]);
 
   const view = useMemo(() => {
     const band = PRICES.find((x) => x.key === priceKey);
     const keep = (p: CatalogueProduct) => {
       if (category && !inCategory(p, category)) return false;
+      if (category && type && p.subcategory !== type) return false;
       if (collection && !p.collection_slugs.includes(collection)) return false;
       if (brand && (p.brand ?? 'Swagarage') !== brand) return false;
       if (band) {
@@ -65,18 +80,18 @@ export function Shop() {
     // A search that finds nothing still shows something useful.
     const popular = q.trim() && !exact.length && !related.length ? featuredOrder(products.filter(keep)).slice(0, 8) : [];
     return { exact, related, popular, understood: found.understood, corrected: found.corrected };
-  }, [products, q, category, collection, priceKey, brand, sort]);
+  }, [products, q, category, type, collection, priceKey, brand, sort]);
 
   // Show the grid in pages so big categories stay fast on phones.
   const PAGE = 48;
   const [shown, setShown] = useState(PAGE);
-  useEffect(() => setShown(PAGE), [q, category, collection, priceKey, brand, sort]);
+  useEffect(() => setShown(PAGE), [q, category, type, collection, priceKey, brand, sort]);
 
   if (loading) return <Spinner label="Loading catalogue…" />;
 
-  const filtered = !!(category || collection || priceKey || brand);
+  const filtered = !!(category || type || collection || priceKey || brand);
   const title = category
-    ? categories.find((c) => c.slug === category)?.name ?? 'All products'
+    ? (type || categories.find((c) => c.slug === category)?.name) ?? 'All products'
     : collection
       ? collections.find((c) => c.slug === collection)?.name ?? 'All products'
       : 'Shop all products';
@@ -103,7 +118,20 @@ export function Shop() {
           onChange={(e) => set('q', e.target.value.trimStart())}
         />
         <label htmlFor="cat" className="sr-only">Category</label>
-        <select id="cat" className="input" value={category} onChange={(e) => set('category', e.target.value)}>
+        <select
+          id="cat"
+          className="input"
+          value={category}
+          onChange={(e) => {
+            const p = new URLSearchParams(search);
+            if (e.target.value) p.set('category', e.target.value);
+            else p.delete('category');
+            p.delete('type');
+            p.delete('brand');
+            const s = p.toString();
+            navigate(`/shop${s ? `?${s}` : ''}`, { replace: true });
+          }}
+        >
           <option value="">All categories</option>
           {categories.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
         </select>
@@ -126,6 +154,17 @@ export function Shop() {
           <option value="name">Name A–Z</option>
         </select>
       </div>
+
+      {types.length > 1 && (
+        <div className="brand-chips type-chips" role="group" aria-label="Types">
+          <button className={!type ? 'on' : ''} aria-pressed={!type} onClick={() => set('type', '')}>All types</button>
+          {types.map(([t, n]) => (
+            <button key={t} className={type === t ? 'on' : ''} aria-pressed={type === t} onClick={() => set('type', type === t ? '' : t)}>
+              {t} <small>{n}</small>
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="brand-chips" role="group" aria-label="Brands">
         <button className={!brand ? 'on' : ''} aria-pressed={!brand} onClick={() => set('brand', '')}>All</button>
