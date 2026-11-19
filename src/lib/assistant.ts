@@ -69,7 +69,8 @@ export const FOCUS: Record<string, { q: RegExp; name: RegExp }> = {
   umbrella: { q: /\bumbrellas?\b/, name: /umbrella/ },
   keychain: { q: /\bkey ?chains?\b/, name: /key ?chain/ },
   wallet: { q: /\b(wallets?|card ?holders?)\b/, name: /wallet|card ?holder/ },
-  hoodie: { q: /\b(hoodies?|sweat ?shirts?)\b/, name: /hoodie|sweatshirt/ },
+  hoodie: { q: /\b(hoodies?|sweat ?shirts?)\b/, name: /hoodie|hoody|sweatshirt/ },
+  jacket: { q: /\b(jackets?|blazers?|bombers?|wind ?cheaters?)\b/, name: /jacket|blazer|bomber|windcheater/ },
   hamper: { q: /\b(hampers?|gift ?sets?|combos?|gift ?kits?)\b/, name: /gift set|hamper|combo|\bkit\b/ },
   tshirt: { q: /\b(t-?shirts?|tees?|polos?)\b/, name: /t-?shirt|polo|\btee/ },
   backpack: { q: /\bback ?packs?\b/, name: /back ?pack/ },
@@ -160,9 +161,14 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
     p: (h) => /mug|bottle|flask|tumbler|sipper|\bcups?\b|drinkware/.test(h.core),
   },
   hoodie: {
-    label: 'hoodies & jackets',
-    q: /\bhoodies?\b|\bhoody\b|\bjackets?\b|\bsweat ?shirts?\b|\bwinter ?wear\b|\bwind ?cheaters?\b|\bbomber\b|\bzipper\b/,
-    p: (h) => /hoodie|jacket|sweatshirt/.test(h.core),
+    label: 'hoodies & sweatshirts',
+    q: /\bhoodies?\b|\bhoody\b|\bsweat ?shirts?\b/,
+    p: (h) => h.p.category.slug === 'apparel' && (/hoodie|hoody|sweatshirt/.test(h.p.name.toLowerCase()) || h.p.subcategory === 'Hoodies & Sweatshirts'),
+  },
+  jacket: {
+    label: 'jackets',
+    q: /\bjackets?\b|\bwinter ?wear\b|\bwind ?cheaters?\b|\bbombers?\b|\bblazers?\b|\bzipper\b|\btrack ?(tops?|suits?)\b/,
+    p: (h) => h.p.category.slug === 'apparel' && (/jacket|blazer|bomber|windcheater|track (top|suit)/.test(h.p.name.toLowerCase()) || h.p.subcategory === 'Jackets'),
   },
   shirt: { label: 'shirts', q: /(?:^|[^-a-z])shirts?\b/, p: (h) => /\bshirt/.test(h.core) && !/t-?shirt/.test(h.core) },
   apparel: {
@@ -234,10 +240,10 @@ export const RELATED: Record<string, string[]> = {
   pen: ['stationery', 'desk'], notebook: ['stationery', 'desk'], stationery: ['desk'], desk: ['stationery', 'home'],
   speaker: ['earbuds', 'tech'], earbuds: ['speaker', 'tech'], wearable: ['tech'], power: ['cable', 'tech'], cable: ['power', 'tech'],
   home: ['desk', 'tech'], tech: ['power', 'desk'], drinkware: ['home', 'desk'], plant: ['desk'],
-  hoodie: ['apparel'], shirt: ['apparel'], apparel: ['hoodie', 'shirt'],
+  hoodie: ['jacket', 'apparel'], jacket: ['hoodie', 'apparel'], shirt: ['apparel'], apparel: ['hoodie', 'jacket', 'shirt'],
   backpack: ['laptopBag', 'bag'], laptopBag: ['backpack', 'sleeve'], sleeve: ['laptopBag', 'pouch'], sling: ['bag'],
   duffle: ['bag'], pouch: ['wallet', 'sleeve'], lunch: ['bag'], tote: ['bag'], bag: ['pouch', 'wallet'], wallet: ['pouch'],
-  tshirt: ['hoodie', 'shirt'], cap: ['apparel'], keychain: ['wallet', 'pouch'], lanyard: ['wallet', 'desk'], umbrella: ['bag'],
+  tshirt: ['shirt', 'hoodie'], cap: ['apparel'], keychain: ['wallet', 'pouch'], lanyard: ['wallet', 'desk'], umbrella: ['bag'],
   coaster: ['drinkware', 'desk'], frame: ['desk', 'home'], trophy: ['desk', 'home'], food: ['drinkware', 'plant'], candle: ['home', 'plant'],
   fragrance: ['pouch', 'wallet'], usb: ['cable', 'power'], computer: ['desk', 'tech'], phoneStand: ['desk'],
 };
@@ -245,7 +251,7 @@ export const RELATED: Record<string, string[]> = {
 // Kinds that are a broader version of another; when both are asked we keep the specific one.
 const BROADER: Record<string, string[]> = {
   bag: ['backpack', 'laptopBag', 'sleeve', 'sling', 'duffle', 'pouch', 'lunch', 'tote'],
-  apparel: ['hoodie', 'shirt', 'tshirt', 'cap'],
+  apparel: ['hoodie', 'jacket', 'shirt', 'tshirt', 'cap'],
   tech: ['speaker', 'earbuds', 'power', 'cable', 'wearable', 'usb', 'computer'],
   desk: ['stationery', 'pen', 'notebook', 'phoneStand', 'computer'],
   shirt: ['tshirt'],

@@ -168,7 +168,13 @@ export function smartSearch(products: CatalogueProduct[], text: string): SearchR
   // Hard filters from the request.
   let pool = idx.filter((i) => inBudget(i.p, q));
   if (q.notKinds?.length) pool = pool.filter((i) => !q.notKinds!.some((k) => matchesKind(i.p, k)));
-  const brandHits = (q.brands ?? []).filter((b) => products.some((p) => brandMatches(p.brand, b)));
+  // Brands asked for: the known list plus any of our own catalogue brands named in the query ("hummel bags").
+  const flat = (t: string) => ` ${normalise(t).replace(/[^a-z0-9]+/g, ' ').trim()} `;
+  const nq = flat(query);
+  const catBrands = [...new Set(products.map((p) => p.brand).filter((b): b is string => !!b && b.length >= 3))]
+    .filter((b) => nq.includes(flat(b)))
+    .map((b) => b.toLowerCase());
+  const brandHits = [...new Set([...(q.brands ?? []), ...catBrands])].filter((b) => products.some((p) => brandMatches(p.brand, b)));
   if (brandHits.length) pool = pool.filter((i) => brandHits.some((b) => brandMatches(i.p.brand, b)));
   const brandWords = new Set(brandHits.flatMap((b) => b.split(' ')));
 
