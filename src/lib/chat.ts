@@ -121,6 +121,23 @@ const FAQ: { re: RegExp; answer: (products: CatalogueProduct[]) => string; cover
     answer: () =>
       'Prices marked "+ GST" don\'t include GST. Prices marked "MRP" are the maximum retail price, and we\'ll quote you our best price. Your quote shows the full breakdown.',
   },
+  {
+    re: /\b(sizes?|size chart|size wise|xs|xxl|xxxl|3xl|xl)\b/,
+    covered: true,
+    answer: () => 'Apparel usually comes in sizes S to XXL (some styles go up to 3XL). Add the product to your quote and mention the size split in the notes (for example "10 M, 15 L"), and our team confirms availability.',
+  },
+  {
+    re: /\b(how (do|can|to) (i |we )?(order|buy|place (an |the )?order|get a quote|request a quote)|ordering process|order process|how does (it|this|ordering) work|process to order)\b/,
+    answer: () => 'It takes three steps: 1) tap "Add to quote" on the products you like (here or in the Shop), 2) open Quote at the top right and enter your quantity, logo and delivery details, 3) send it. Our team replies with the final price, a mockup and timelines.',
+  },
+  {
+    re: /\b(add (this |these |it |them )?to (my |the )?quote|show (me )?my quote|view (my )?quote|my quote|quote list|where is (my )?quote|open quote)\b/,
+    answer: () => 'Tap "Add to quote" on any product card to add it. Your quote is under "Quote" at the top right of the page, where you can change quantities and send it to our team.',
+  },
+  {
+    re: /\b(where are you (located|based)|your (address|office|location)|which city|are you in|located in|office address|visit (your|the) office)\b/,
+    answer: () => 'We deliver across India. For our office address or a visit, tap "Talk to us on WhatsApp" at the bottom of any page and our team will help.',
+  },
   { re: /\b(payment|pay|advance|upi|credit period|cod|cash on delivery|net 30)\b/, answer: () => 'Payment terms are shared with your quote, and our team will walk you through them.' },
   {
     re: /\b(samples?|demo piece|see (it|them|the product) first|physical (look|check))\b/,
@@ -162,8 +179,8 @@ const CHEAPER = /\b(cheaper|cheap(er)? ones|less expensive|lower (price|budget|c
 const PREMIUM = /\b(more (premium|expensive|luxury|luxurious|upscale|classy|fancy)|costlier|higher (end|range|budget|price)|better (quality|ones)|fancier|too cheap|premium ones|high end|something premium|more premium)\b/;
 const MORE = /\b(show more|more (options|ideas|products|gifts|choices|please|pls)|see more|any more|anything else|something else|other (options|ones|ideas)|others|different ones|what else|next|more like (this|these)|more)\b/;
 const NO_BUDGET = /\b(no budget|any budget|budget (is )?no bar|budget doesn'?t matter|price doesn'?t matter|no limit|any price)\b/;
-const ADD_WORDS = /\b(also|too|as well|add|plus|along with|and some)\b/;
-const GIFT_INTENT = /\b(gift|gifts|gifting|swag|merch|merchandise|something|suggest|suggestion|recommend|show|need|want|looking|idea|ideas|options|kit|kits|hamper|hampers|present|presents|buy|order|get me|give me|find|send|share|requirement|requirements|enquiry|inquiry|rfq|quote|quotation|giveaways?|freebies|collaterals?|promotional|corporate|products?|items?|range)\b/;
+const ADD_WORDS = /\b(also|too|as well|add|plus|along with|and some)\b|^\s*(and|with|aur)\b/;
+const GIFT_INTENT = /\b(dikhao|dikha|batao|chahiye|kuch|gift|gifts|gifting|swag|merch|merchandise|something|suggest|suggestion|recommend|show|need|want|looking|idea|ideas|options|kit|kits|hamper|hampers|present|presents|buy|order|get me|give me|find|send|share|requirement|requirements|enquiry|inquiry|rfq|quote|quotation|giveaways?|freebies|collaterals?|promotional|corporate|products?|items?|range)\b/;
 const DETAIL = /\b(about|details?|specs?|specifications?|price of|cost of|how much|tell me|info|information|features?|colou?rs?|is it|does it|what is|show me)\b/;
 
 // --- helpers -------------------------------------------------------------------

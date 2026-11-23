@@ -590,7 +590,7 @@ const GST_INCL = /\bincl?(uding|usive)?\.?\s*(of\s*)?(gst|tax(es)?|all( taxes)?|
 /** "10000 mAh" → "10000mah", "1 litre" → "1000ml", '15.6"' → "15.6in" — so request and product text compare equal. */
 export function specKey(n: string, unit: string): string {
   const u = unit.toLowerCase();
-  if (/^(ltrs?|litres?|liters?)$/.test(u)) return `${Math.round(Number(n) * 1000)}ml`;
+  if (/^(l|ltrs?|litres?|liters?)$/.test(u)) return `${Math.round(Number(n) * 1000)}ml`;
   if (/^(inch(es)?|")$/.test(u)) return `${Number(n)}in`;
   if (/^watts?$/.test(u)) return `${Number(n)}w`;
   return `${Number(n)}${u}`;
@@ -610,7 +610,9 @@ export function normalise(text: string): string {
   t = t.replace(/\brs\.?(?=\s|\d)/g, ' rs ');
   t = t.replace(/\/-/g, ' rs ');
   t = t.replace(/\b(rupees?|bucks)\b/g, ' rs ');
-  t = t.replace(/(\d+(?:\.\d+)?)\s*(?:lakhs?|lacs?|lac|l)\b(?!\s*(?:itre|iter|tr))/g, (_m, n: string) => ` ${Math.round(Number(n) * 100000)}${MONEY} `);
+  const litreCtx = /\b(bags?|backpacks?|duffle|duffel|trolley|luggage|bottles?|flasks?|sippers?|tumblers?|jars?|capacity|litres?|liters?)\b/.test(t);
+  t = t.replace(/(\d+(?:\.\d+)?)\s*(lakhs?|lacs?|lac|l)\b(?!\s*(?:itre|iter|tr))/g, (_m, n: string, u: string) =>
+    u === 'l' && litreCtx && Number(n) <= 100 ? ` ${n} litres ` : ` ${Math.round(Number(n) * 100000)}${MONEY} `);
   t = t.replace(/(\d+(?:\.\d+)?)\s*k\b/g, (_m, n: string) => ` ${Math.round(Number(n) * 1000)}${MONEY} `);
   t = t.replace(/(\d\uE000?)\s*-\s*(\d)/g, '$1 - $2');
   return t.replace(/\s+/g, ' ');
@@ -858,13 +860,14 @@ export function parseRequest(text: string): ParsedRequest {
       : /\bdealer meet\b|\bchannel partners?\b|\bdistributors?\b|\bdealers?\b|\bretailers?\b/.test(t)
         ? 'Dealer & partner gifts'
         : null;
-  const prefer = /\b(cheap|cheaper|cheapest|affordable|low cost|low-cost|budget-friendly|budget friendly|inexpensive|economical|value for money)\b/.test(t) || (purpose === 'Events & giveaways' && maxPrice === Infinity && minPrice === 0) ? 'low' : null;
+  const prefer = /\b(most expensive|costliest|priciest|highest price|top end|high end|top of the range)\b/.test(t) ? 'high' : /\b(sasta|sasti|saste|kam daam|cheap|cheaper|cheapest|affordable|low cost|low-cost|budget-friendly|budget friendly|inexpensive|economical|value for money)\b/.test(t) || (purpose === 'Events & giveaways' && maxPrice === Infinity && minPrice === 0) ? 'low' : null;
 
   const terms = [...new Set(tpos.replace(/[^a-z0-9\s-]/g, ' ').split(/\s+/))].filter(
     (w) =>
       w.length >= 3 &&
       !/^\d/.test(w) &&
       !STOP.has(w) &&
+      !FILLER.has(w) &&
       !(w === 'sports' && /\bsports (day|meet|event|week|fest|tournament|function)\b/.test(t)) &&
       !OCCASIONS.some((o) => o.re.test(` ${w} `)) &&
       !Object.values(KINDS).some((k) => k.q.test(` ${w} `)) &&
@@ -941,7 +944,9 @@ function hay(p: CatalogueProduct): Hay {
 }
 
 /** Everyday words that are never a product feature ("do you HAVE", "MAKE it cheaper", "SHOW me"). */
-const FILLER = new Set(('but however though although rather instead have has had having make made makes do does did doing done what which whats who whom whose where when why how want wants wanted need needs needed '
+const FILLER = new Set(('most expensive costly costliest priciest highest pricey cheap cheaper cheapest sasta sasti saste low high end top year years '
+  + 'head heads per wala wali wale waala chahiye dikhao dikha batao kuch accha acha boss manager colleague colleagues friend friends client clients sir madam '
+  + 'but however though although rather instead have has had having make made makes do does did doing done what which whats who whom whose where when why how want wants wanted need needs needed '
   + 'some any all every each show shows showing give get got find found see look looking looks also please pls plz kindly can could would will should shall '
   + 'the and for our my your their them they these those this that there here with from into onto about like just only same more less much many few lot lots '
   + 'thing things item items available availability send share list catalogue catalog suggest suggestion suggestions recommend recommendation idea ideas '
@@ -1013,9 +1018,9 @@ export function brandMatches(productBrand: string | null, b: string): boolean {
 }
 
 export const prettySpec = (sp: string) =>
-  sp.replace(/^(\d+(?:\.\d+)?)(\D+)$/, (_x, n: string, u: string) => `${Number(n).toLocaleString('en-IN')} ${({ in: 'inch', mah: 'mAh', w: 'W', gb: 'GB', tb: 'TB', ml: 'ml', gsm: 'GSM' } as Record<string, string>)[u] ?? u}`);
+  /^\d+ml$/.test(sp) && parseInt(sp, 10) >= 1000 ? `${parseInt(sp, 10) / 1000} L` : sp.replace(/^(\d+(?:\.\d+)?)(\D+)$/, (_x, n: string, u: string) => `${Number(n).toLocaleString('en-IN')} ${({ in: 'inch', mah: 'mAh', w: 'W', gb: 'GB', tb: 'TB', ml: 'ml', gsm: 'GSM' } as Record<string, string>)[u] ?? u}`);
 
-const SPEC_RE = /(\d+(?:\.\d+)?)\s*(mah|ml|ltrs?|litres?|liters?|gsm|inch(?:es)?|"|w|watts?|gb|tb)\b/g;
+const SPEC_RE = /(\d+(?:\.\d+)?)\s*(mah|ml|ltrs?|litres?|liters?|l(?=\s*[),]|\s*$)|gsm|inch(?:es)?|"|w|watts?|gb|tb)\b/g;
 function productSpecs(text: string): Set<string> {
   return new Set([...text.matchAll(SPEC_RE)].map((m) => specKey(m[1]!, m[2]!)));
 }
@@ -1179,7 +1184,9 @@ export function recommend(
   }
   const mats = q.materials ?? [];
   if (mats.length && pool.length) {
-    const byMat = pool.filter((p) => mats.some((m) => MATERIALS[m]!.p.test(H(p).full)));
+    // A glass bottle with a steel infuser is not a steel bottle.
+    const matOk = (p: CatalogueProduct, m: string) => MATERIALS[m]!.p.test(H(p).full) && !(m === 'steel' && /glass|borosilicate/.test(p.name.toLowerCase()) && !/steel (body|bottle|flask)/.test(p.name.toLowerCase()));
+    const byMat = pool.filter((p) => mats.some((m) => matOk(p, m)));
     const label = mats.map((m) => MATERIALS[m]!.label.toLowerCase()).join(' / ');
     if (byMat.length) pool = byMat;
     else notes.push(`Sorry, we don't have ${label} options for this right now, so here are the closest picks.`);
