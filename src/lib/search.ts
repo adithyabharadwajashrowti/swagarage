@@ -162,12 +162,22 @@ function knownWords(products: CatalogueProduct[]): Set<string> {
   }
   return v;
 }
+const brandCache = new WeakMap<CatalogueProduct[], string[]>();
+/** One-word brand names we carry ("adidas", "reebok"), so "addidas" can be fixed. */
+function brandWords(products: CatalogueProduct[]): string[] {
+  let v = brandCache.get(products);
+  if (!v) {
+    v = [...new Set(products.map((p) => (p.brand ?? '').toLowerCase()).filter((b) => /^[a-z]{5,}$/.test(b)))];
+    brandCache.set(products, v);
+  }
+  return v;
+}
 /** Fix product-word typos in a chat message ("backpak" → "backpack", "umbrela" → "umbrella"). Null when nothing changed. */
 export function correctText(text: string, products: CatalogueProduct[] = []): { text: string; fixed: [string, string][] } | null {
   const known = knownWords(products);
   const tokens = normalise(text).replace(/\u20b9/g, ' ').split(/\s+/).filter(Boolean);
   const PROTECT = /^(kids?|men|mens|women|ladies|team|teams|lady|girls?|boys?|staff|ceo|vip|whats|thats|pls|plz|pcs|ppl)$/;
-  const ALIAS: Record<string, string> = { tshit: 't-shirt', tshits: 't-shirts', tshrt: 't-shirt', tshrts: 't-shirts', bagack: 'backpack', backpak: 'backpack', bagpack: 'backpack', bagpacks: 'backpacks', bagpak: 'backpack', bottel: 'bottle', bottels: 'bottles', botel: 'bottle', calender: 'calendar', calenders: 'calendars', momento: 'memento', momentos: 'mementos', speakr: 'speaker', umbrela: 'umbrella', umbrellas: 'umbrellas' };
+  const ALIAS: Record<string, string> = { bagpakc: 'backpack', bagpac: 'backpack', bakpack: 'backpack', backpac: 'backpack', bakpak: 'backpack', tshit: 't-shirt', tshits: 't-shirts', tshrt: 't-shirt', tshrts: 't-shirts', bagack: 'backpack', backpak: 'backpack', bagpack: 'backpack', bagpacks: 'backpacks', bagpak: 'backpack', bottel: 'bottle', bottels: 'bottles', botel: 'bottle', calender: 'calendar', calenders: 'calendars', momento: 'memento', momentos: 'mementos', speakr: 'speaker', umbrela: 'umbrella', umbrellas: 'umbrellas' };
   const fixed: [string, string][] = [];
   const out = tokens.map((tok) => {
     const w = tok.replace(/[^a-z0-9+-]/g, '');
@@ -184,11 +194,11 @@ export function correctText(text: string, products: CatalogueProduct[] = []): { 
     if (w.length < 5 || known.has(stem(w)) || known.has(w) || CHAT_WORDS.has(stem(w))) return tok;
     // One slip (a missing, extra, wrong or swapped letter) on a product word with the same first letter.
     let best: string | null = null;
-    for (const v of CHAT_WORDS) {
+    for (const v of [...CHAT_WORDS, ...brandWords(products)]) {
       const sw = stem(w);
       if (v[0] !== sw[0] || Math.abs(v.length - sw.length) > 1) continue;
       const swapped = v.length === sw.length && [...v].filter((c, i) => c !== sw[i]).length === 2 && [...v].sort().join('') === [...sw].sort().join('');
-      if (swapped || editDistance(sw, v, 1) <= 1) { best = w.endsWith('s') && !v.endsWith('s') ? v + 's' : v; break; }
+      if (swapped || editDistance(sw, v, 1) <= 1 || editDistance(sw, stem(v), 1) <= 1) { best = w.endsWith('s') && !v.endsWith('s') ? v + 's' : v; break; }
     }
     if (!best) return tok;
     fixed.push([w, best]);

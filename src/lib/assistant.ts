@@ -273,7 +273,7 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
     p: (h) => /desk|mouse ?pad|deskmat|pen ?stand|penstand|calendar|card holder|lamp|organi[sz]er|office/.test(h.core),
   },
   plant: { label: 'planters & grow kits', q: /\bplants?\b|\bplanters?\b|\bsucculents?\b|\bseeds?\b|\bgrow (kits?|craft|gifts?)\b|\bterrariums?\b|\bplantable\b/, p: (h) => /plant|grow (kit|craft)|seed|terrarium|succulent/.test(h.core) },
-  lamp: { label: 'lamps & lights', q: /\blamps?\b|\blights?\b|\blanterns?\b|\btorch(es)?\b/, p: (h) => /\blamps?\b|\blights?\b|\blanterns?\b|\btorch/.test(h.core) && h.p.category.slug !== 'gift-sets' && !/bedsheet|towel|power strip/.test(h.core) },
+  lamp: { label: 'lamps & lights', q: /\blamps?\b|\blights?\b(?! ?(colou?rs?|shades?|tones?|weight|blue|grey|gray|pink|green|brown|yellow|purple|colou?red))|\blanterns?\b|\btorch(es)?\b/, p: (h) => /\blamps?\b|\blights?\b|\blanterns?\b|\btorch/.test(h.core) && h.p.category.slug !== 'gift-sets' && !/bedsheet|towel|power strip/.test(h.core) },
   clock: { label: 'clocks', q: /\bclocks?\b/, p: (h) => /clock/.test(h.core) },
   fan: { label: 'fans', q: /\bfans?\b|\bcoolers?\b/, p: (h) => /\bfans?\b|cooler|snapcool/.test(h.core) },
   appliance: {
@@ -436,7 +436,7 @@ const BRAND_PHRASES = [
   'urban jungle', 'mi band',
 ];
 const KNOWN_BRANDS = new Set(
-  ('parker sheaffer montblanc pierre cardin lamy boat jbl sony bose apple samsung fossil fastrack ' +
+  ('hp samsonite american nykaa titan casio vip aristocrat parker sheaffer montblanc pierre cardin lamy boat jbl sony bose apple samsung fossil fastrack ' +
     'milton borosil cello wildcraft skybags nike puma adidas reebok fitbit oneplus xiaomi realme portronics ' +
     'ambrane logitech dell lenovo moleskine classmate oblique toreto wenger mokobara safari harissons stuffcool urbn ' +
     'zebronics boult mivi noise amazfit titan sonata hidesign raymond levis chumbak philips eveready mi ' +
@@ -469,7 +469,7 @@ export const ATTRS: Record<string, { label: string; q: RegExp; p: RegExp }> = {
   magsafe: { label: 'MagSafe / magnetic', q: /\bmag ?safe\b|\bmagnetic\b/, p: /mag ?safe|magnetic/ },
   antitheft: { label: 'anti-theft', q: /\banti ?-?theft\b/, p: /anti ?-?theft/ },
   usbport: { label: 'USB charging port', q: /\busb (charging )?port\b|\bwith usb\b|\busb charging\b/, p: /usb (charging )?port|usb charging|\busb\b/ },
-  waterproof: { label: 'waterproof', q: /\bwater ?(proof|resistant)\b/, p: /water ?(proof|resistant|repellent)/ },
+  waterproof: { label: 'waterproof', q: /\bwater ?(proof|resistant)\b|\bipx?\d{1,2}\b/, p: /water ?(proof|resistant|repellent)/ },
   rgb: { label: 'RGB', q: /\brgb\b/, p: /\brgb\b/ },
   led: { label: 'LED', q: /\bled\b|\blight ?up\b|\bglow/, p: /\bled\b|light ?up|\bglow|\blight\b/ },
   digital: { label: 'digital', q: /\bdigital\b/, p: /digital|\bled\b|\blcd\b/ },
@@ -484,6 +484,8 @@ export const ATTRS: Record<string, { label: string; q: RegExp; p: RegExp }> = {
   fullsleeve: { label: 'full-sleeve', q: /\bfull ?-?sleeves?\b|\blong ?-?sleeves?\b/, p: /full ?-?sleeve|long ?-?sleeve/ },
   foldable: { label: 'foldable', q: /\bfold(able|ing)\b|\bcollapsible\b/, p: /fold|collaps/ },
   scented: { label: 'scented', q: /\bscented\b|\bfragran(t|ce)\b|\baroma/, p: /scent|fragran|aroma|essential oil|lavender|jasmine|rose|sandal/ },
+  darkc: { label: 'dark-coloured', q: /\bdark (colou?rs?|shades?|tones?|colou?red)\b/, p: /black|navy|maroon|charcoal|\bdark\b|brown|olive|wine|graphite|midnight/ },
+  lightc: { label: 'light-coloured', q: /\blight (colou?rs?|shades?|tones?|colou?red)\b|\bpastels?\b/, p: /white|cream|beige|ivory|\bsky\b|\blight\b|pastel|off ?-?white|mint|lavender|peach/ },
   a4: { label: 'A4', q: /\ba4\b/, p: /\ba4\b/ },
   a5: { label: 'A5', q: /\ba5\b/, p: /\ba5\b/ },
   b5: { label: 'B5', q: /\bb5\b/, p: /\bb5\b/ },
@@ -493,7 +495,7 @@ export const ATTRS: Record<string, { label: string; q: RegExp; p: RegExp }> = {
   personalised: { label: 'name-printed', q: /\bwith (their |employee )?names?\b/, p: /./ },
 };
 const ATTR_KEYS = Object.keys(ATTRS);
-const COLOUR_ATTRS = new Set(['black', 'white', 'red', 'blue', 'navy', 'green', 'grey', 'yellow', 'pink', 'orange', 'purple', 'brown', 'maroon', 'beige', 'silver', 'gold']);
+const COLOUR_ATTRS = new Set(['black', 'white', 'red', 'blue', 'navy', 'green', 'grey', 'yellow', 'pink', 'orange', 'purple', 'brown', 'maroon', 'beige', 'silver', 'gold', 'darkc', 'lightc']);
 /** The test for one wanted feature ("nin1:3" → "3 in 1"). */
 export function attrTest(key: string): { label: string; p: RegExp } {
   const m = /^nin1:(\d)$/.exec(key);
@@ -596,8 +598,43 @@ export function specKey(n: string, unit: string): string {
   return `${Number(n)}${u}`;
 }
 
+const UNIT_N: Record<string, number> = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19 };
+const TENS_N: Record<string, number> = { twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60, seventy: 70, eighty: 80, ninety: 90 };
+const MULT_N: Record<string, number> = { hundred: 100, thousand: 1000, lakh: 100000, lakhs: 100000 };
+/** "five hundred" → 500, "two thousand" → 2000, "fifty people" → 50. A lone "one" ("this one") stays a word. */
+function wordsToNumbers(t: string): string {
+  const re = /\b((?:(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|lakhs?|and|a)[\s-]+)*(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|lakhs?))\b/g;
+  return t.replace(re, (m, _g, off: number, all: string) => {
+    if (/\d[\s.]*$/.test(all.slice(0, off))) return m; // "1 lakh", "2.5 thousand": handled with the digits
+    const words = m.split(/[\s-]+/).filter((w) => w !== 'and');
+    if (words[0] === 'a') words.shift();
+    if (!words.length || words.includes('a')) return m;
+    const hasBig = words.some((w) => MULT_N[w] || TENS_N[w]);
+    const after = all.slice(off + m.length, off + m.length + 25);
+    const countish = /^\s*(people|persons|employees|members|pcs|pieces|units|nos|rupees|rs|gifts|bottles|mugs|bags|items|kits|staff|guests|clients)\b/.test(after);
+    if (!hasBig && !(countish && words.length === 1 && words[0] !== 'one')) return m;
+    let total = 0, cur = 0;
+    for (const w of words) {
+      if (UNIT_N[w] !== undefined) cur += UNIT_N[w]!;
+      else if (TENS_N[w] !== undefined) cur += TENS_N[w]!;
+      else if (w === 'hundred') cur = (cur || 1) * 100;
+      else if (MULT_N[w]) { total += (cur || 1) * MULT_N[w]!; cur = 0; }
+    }
+    return String(total + cur);
+  });
+}
+
+/** A few common Hindi and Kannada words typed in their own script. */
+const SCRIPT_WORDS: [RegExp, string][] = [
+  [/बोतल|ಬಾಟಲ್|ಬಾಟಲಿ/g, ' bottle '], [/उपहार|गिफ्ट|तोहफ़?ा|ಉಡುಗೊರೆ|ಗಿಫ್ಟ್/g, ' gift '], [/बैग|थैला|ಬ್ಯಾಗ್/g, ' bag '], [/मग|ಮಗ್/g, ' mug '], [/पेन|ಪೆನ್/g, ' pen '],
+  [/डायरी|ಡೈರಿ/g, ' diary '], [/टी-?शर्ट|ಟಿ-?ಶರ್ಟ್/g, ' tshirt '], [/घड़ी|ಗಡಿಯಾರ/g, ' clock '], [/के अंदर|से कम|ಒಳಗೆ/g, ' ke andar '], [/रुपये|रुपए|ರೂಪಾಯಿ/g, ' rupees '], [/लोग|लोगों|ಜನ/g, ' people '],
+];
 export function normalise(text: string): string {
+  for (const [re, to] of SCRIPT_WORDS) text = text.replace(re, to);
   let t = ` ${text.toLowerCase().replace(/[\u2018\u2019]/g, "'")} `;
+  t = t.replace(/(\d+(?:\.\d+)?)\s*(thousand|hundred)\b/g, (_m, n: string, u: string) => String(Math.round(Number(n) * (u === 'thousand' ? 1000 : 100))));
+  t = wordsToNumbers(t);
+  t = t.replace(/\bx\s?(\d+)\b(?!\s*(?:ml|l|gb|mah|w)\b)/g, ' $1 pcs '); // "bottles x100"
   for (const [re, to] of SLANG) t = t.replace(re, to);
   t = t.replace(GST_EXCL, ' exgst ').replace(GST_INCL, ' ingst ');
   t = t.replace(/@/g, ' at ').replace(/[:=]/g, ' ');
@@ -702,6 +739,9 @@ export function parseRequest(text: string): ParsedRequest {
   for (const m of t.matchAll(/\d+(?:\.\d+)?/g)) {
     const i = m.index ?? 0;
     if (nin1.some(([a, b]) => i >= a && i < b)) continue;
+    // "ipx7", "v5", "bluetooth 5.0", "usb 3.0", "gen 2": a model or version, not a number of anything
+    if (/[a-z]$/.test(t.slice(Math.max(0, i - 1), i)) && !/(?:rs|inr|(?:^|\s)x|under|below|upto|above|over|max|min|budget|around|for|of|is|qty|pcs|nos)$/.test(t.slice(Math.max(0, i - 6), i)) && !/^[ab]$/.test(t[i - 1] ?? '')) continue;
+    if (/\b(bluetooth|bt|version|ver|usb|gen|generation|wifi|wi-fi|android|ios)\s*$/.test(t.slice(Math.max(0, i - 12), i)) && Number(m[0]) < 20) continue;
     // "A4 notebook", "B5 diary": a paper size. "diary 2027", "calendar for 2027": a year.
     if (/[a-z]$/.test(t.slice(Math.max(0, i - 1), i)) && /^[ab]$/.test(t[i - 1] ?? '') && /^\d$/.test(m[0]) && !/[a-z]/.test(t[i - 2] ?? '')) continue;
     if (/^20[2-3]\d$/.test(m[0]) && /\b(diar(y|ies)|calend[ae]rs?|planners?|year|new year|organi[sz]ers?|edition|batch|class|fy)\b/.test(t) && !/(₹|rs\.?|inr|budget|under|below|upto|up to|around|within|max)\s*$/.test(t.slice(Math.max(0, i - 12), i))) continue;
@@ -734,7 +774,7 @@ export function parseRequest(text: string): ParsedRequest {
     // "650 - 1k pcs": a price, then a quantity. Not a range.
     if (peopleAfter && ca.role === 'price') continue;
     used.add(i).add(i + 1);
-    if (peopleAfter && ca.role !== 'price' && !/between\s*$/.test(t.slice(0, a.start))) {
+    if (peopleAfter && ca.role !== 'price') {
       quantity = Math.max(a.value, b.value);
     } else {
       const lo = Math.min(a.value, b.value);
@@ -859,7 +899,11 @@ export function parseRequest(text: string): ParsedRequest {
   const deadline = dl && /\d|week|month|tomorrow|diwali|christmas|new year/.test(dl[1] ?? '') && (/\b(days?|weeks?|week|month|tomorrow|diwali|christmas|new year|st|nd|rd|th|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/.test(dl[1] ?? '')) ? dl[0].trim().replace(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)([a-z]*)\b/, (m) => m[0]!.toUpperCase() + m.slice(1)) : null;
   const purpose = /\brewards and recognition\b|\blong service\b|\bwork anniversar|\bservice award|\bemployee engagement\b|\bappreciation\b|\bemployee of the (month|year)\b/.test(t)
     ? 'Rewards & recognition'
-    : /\bgiveaways?\b|\bfreebies?\b|\bpromotional\b|\bpromo\b|\btrade ?show\b|\bexpo\b|\bexhibition\b|\bconference\b|\bevent kits?\b|\bdelegate kits?\b|\bcollaterals?\b/.test(t)
+    : /\bfarewell\b|\bretire(ment|ing)?\b|\bsend ?off\b|\bleaving (gift|present)\b/.test(t)
+    ? 'Farewell & retirement'
+    : /\bbirthdays?\b|\bbday\b|\banniversar(y|ies)\b|\bteachers'? day\b|\bdoctors'? day\b|\bwomen'?s day\b|\bmothers'? day\b|\bfathers'? day\b|\bcelebrations?\b|\bwedding\b|\breturn gifts?\b/.test(t)
+    ? 'Celebrations'
+    : /\bgiveaways?\b|\bfreebies?\b|\bmerch(andise)?\b|\bswag\b|\bpromotional\b|\bpromo\b|\btrade ?show\b|\bexpo\b|\bexhibition\b|\bconference\b|\bevent kits?\b|\bdelegate kits?\b|\bcollaterals?\b/.test(t)
       ? 'Events & giveaways'
       : /\bdealer meet\b|\bchannel partners?\b|\bdistributors?\b|\bdealers?\b|\bretailers?\b/.test(t)
         ? 'Dealer & partner gifts'
@@ -948,7 +992,7 @@ function hay(p: CatalogueProduct): Hay {
 }
 
 /** Everyday words that are never a product feature ("do you HAVE", "MAKE it cheaper", "SHOW me"). */
-const FILLER = new Set(('next previous prev page back less lower that this these those ondu beku beda olage tak ke andar mein ka ki ko compare comparison best top trending popular bestseller bestsellers selling famous '
+const FILLER = new Set(('build create curate put together assemble combine colour colours color colors shade shades tone tones merchandise merch next previous prev page back less lower that this these those ondu beku beda olage tak ke andar mein ka ki ko compare comparison best top trending popular bestseller bestsellers selling famous '
   + 'most expensive costly costliest priciest highest pricey cheap cheaper cheapest sasta sasti saste low high end top year years '
   + 'head heads per wala wali wale waala chahiye dikhao dikha batao kuch accha acha boss manager colleague colleagues friend friends client clients sir madam '
   + 'but however though although rather instead have has had having make made makes do does did doing done what which whats who whom whose where when why how want wants wanted need needs needed '
@@ -1013,7 +1057,7 @@ export function budgetPrice(p: Pick<CatalogueProduct, 'sell_price' | 'mrp'>, gst
 
 const brandNorm = (b: string) => ` ${b.toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, ' ').trim()} `;
 const BRAND_ALIASES: Record<string, string> = { uspa: 'u s polo', 'us polo': 'u s polo', 'j and j': 'jack and jones', 'fire boltt': 'fire-boltt' };
-const BRAND_NAMES: Record<string, string> = { boat: 'boAt', jbl: 'JBL', mi: 'Mi', 'mi band': 'Mi Band', 'us polo': 'U.S. Polo', 'u s polo': 'U.S. Polo', uspa: 'USPA', urbn: 'URBN', 'f gear': 'F Gear' };
+const BRAND_NAMES: Record<string, string> = { hp: 'HP', vip: 'VIP', boat: 'boAt', jbl: 'JBL', mi: 'Mi', 'mi band': 'Mi Band', 'us polo': 'U.S. Polo', 'u s polo': 'U.S. Polo', uspa: 'USPA', urbn: 'URBN', 'f gear': 'F Gear' };
 export const brandLabel = (b: string) => BRAND_NAMES[b] ?? b.replace(/\b[a-z]/g, (c) => c.toUpperCase());
 export function brandMatches(productBrand: string | null, b: string): boolean {
   if (!productBrand) return false;
@@ -1101,7 +1145,8 @@ export function recommend(
     const name = missingBrands.map(brandLabel).join(' / ');
     notes.push(`Sorry, ${name} ${missingBrands.length > 1 ? "aren't" : "isn't"} available with us right now.`);
     if (!haveBrand.length) {
-      const alt = recommend(products, { ...q, brands: [], terms: q.terms.filter((w) => !asked.includes(w)) }, limit, collections, opts);
+      const brandWords = new Set(asked.flatMap((b) => [b, ...b.split(/\s+/)]));
+      const alt = recommend(products, { ...q, brands: [], terms: q.terms.filter((w) => !brandWords.has(w)) }, limit, collections, opts);
       return { ...alt, notes: dedupe([...notes, ...alt.notes]), alternative: true };
     }
   }
@@ -1287,6 +1332,10 @@ export function recommend(
     else notes.push(`We don't have ${occ.map((s) => occasionLabel(s, collections)).join(' / ')} picks ${budgetText ? budgetText + ' ' : ''}for this yet, but these would make lovely gifts too.`);
   }
 
+  // A farewell or a birthday suggests keepsakes and treats, not giveaway badges.
+  const purposeRe = q.purpose === 'Farewell & retirement' ? /photo frame|plaque|memento|\bpens?\b|watch|diary|desk|clock|wallet|leather|planner|crystal|personali|engrav/
+    : q.purpose === 'Celebrations' ? /hamper|chocolate|sweet|gourmet|\bmugs?\b|photo frame|candle|plant|gift box|speaker|earbuds|perfume|cake|dry fruit/
+    : null;
   const hasMax = Number.isFinite(q.maxPrice);
   const wantSpecs = q.specs ?? [];
   const specCache = new Map<string, Set<string>>();
@@ -1294,7 +1343,7 @@ export function recommend(
 
   // Give exactly what was asked: every colour, size, feature and descriptive word must match if anything matches.
   // Hard needs (colours, sizes, features) are reported when missing; other words only narrow when something has them.
-  const needs = askedNeeds(q, asked);
+  const needs = askedNeeds(q, [...asked, ...asked.flatMap((b) => b.split(/\s+/)), ...missingBrands.flatMap((b) => b.split(/\s+/))]);
   if (needs.length && ranked.length) {
     // A colour or feature (hard) outweighs any number of descriptive words: "pink water bottle" → pink bottles first.
     const sc = new Map(ranked.map((p) => [p.id, needs.reduce((t, n) => t + (n.ok(p) ? (n.hard ? 100 : 1) : 0), 0)]));
@@ -1331,6 +1380,7 @@ export function recommend(
     const price = budgetPrice(p, q.gst ?? null);
     let s = 0;
     s += occ.filter((o) => inOccasion(p, o)).length * 2;
+    if (purposeRe && purposeRe.test(h.core)) s += 2.5;
     s += termRe.filter((re) => re.test(h.full)).length * 3;
     s += q.kinds.filter((k) => KINDS[k]!.p(h)).length * 0.5;
     if (focus.length && focusOk(p)) s += 4;

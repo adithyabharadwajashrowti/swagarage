@@ -144,7 +144,7 @@ const FAQ: { re: RegExp; answer: (products: CatalogueProduct[]) => string; cover
     answer: () => "Ask for samples in the notes when you request a quote, and our team will let you know what's possible for those products.",
   },
   {
-    re: /\b(return|returns|refund|exchange|damaged|broken|replacement)\b/,
+    re: /\b(return(?! gifts?)|returns(?! gifts?)|refund|exchange|damaged|broken|replacement)\b/,
     answer: () => "For returns or replacements, contact our team with your quote reference and they'll help you out.",
   },
   {
@@ -173,12 +173,12 @@ const OFF_TOPIC_SOFT = /\b(news|time now|what time|date today|today'?s date|how 
 const GIFTY = /\b(gift|gifts|gifting|swag|merch|merchandise|hamper|hampers|kit|kits|quote|quotation|order|catalogue|catalog|product|products|branding|logo|bulk|corporate|client|clients|employee|employees|diwali|festive|onboarding|welcome)\b/;
 const REFUSAL = "Sorry, I can only help with Swagarage's catalogue and your gifting needs 🙂 Tell me the occasion, your budget per gift and how many you need, and I'll find options.";
 
-const CATALOGUE_Q = /\b(what (all )?(do you|you) (have|sell|offer|got)|what brands|which brands|what categories|what kind of (gifts|products)|show (me )?(your|the) (catalogue|catalog|range))\b/;
+const CATALOGUE_Q = /\b(what (all )?(do you|you) (have|sell|offer|got)|what brands|which brands|brands (you|do you|u) (have|carry|sell|stock)|brands available|available brands|your brands|list (of )?brands|what categories|what kind of (gifts|products)|show (me )?(your|the) (catalogue|catalog|range))\b/;
 
 const CHEAPER = /\b(less than (that|this|these)|lower than (that|this|these)|below (that|this)|under (that|this)|cheaper|cheap(er)? ones|less expensive|lower (price|budget|cost|range)|more affordable|budget friendly|too (expensive|costly|pricey|much)|reduce (the )?(price|budget)|economical|something cheaper|low budget)\b/;
 const PREMIUM = /\b(more (premium|expensive|luxury|luxurious|upscale|classy|fancy)|costlier|higher (end|range|budget|price)|better (quality|ones)|fancier|too cheap|premium ones|high end|something premium|more premium)\b/;
 const MORE = /\b(show more|more (options|ideas|products|gifts|choices|please|pls)|see more|any more|anything else|something else|other (options|ones|ideas)|others|different ones|what else|next|more like (this|these)|more)\b|^\s*(show|give)( me)? \d{1,2}\s*$/;
-const NO_BUDGET = /\b(no budget|any budget|budget (is )?no bar|budget doesn'?t matter|price doesn'?t matter|no limit|any price)\b/;
+const NO_BUDGET = /\b(remove (the )?(budget|price limit|price filter)|clear (the )?budget|without (a |any )?budget|no budget limit|no price limit|budget no limit|no budget|any budget|budget (is )?no bar|budget doesn'?t matter|price doesn'?t matter|no limit|any price)\b/;
 const ADD_WORDS = /\b(also|too|as well|add|plus|along with|and some)\b|^\s*(and|with|aur)\b/;
 const GIFT_INTENT = /\b(bestsellers?|best ?selling|popular|trending|top (picks|gifts|products)|dikhao|dikha|batao|chahiye|kuch|gift|gifts|gifting|swag|merch|merchandise|something|suggest|suggestion|recommend|show|need|want|looking|idea|ideas|options|kit|kits|hamper|hampers|present|presents|buy|order|get me|give me|find|send|share|requirement|requirements|enquiry|inquiry|rfq|quote|quotation|giveaways?|freebies|collaterals?|promotional|corporate|products?|items?|range)\b/;
 const DETAIL = /\b(about|details?|specs?|specifications?|price of|cost of|how much|tell me|info|information|features?|colou?rs?|is it|does it|what is|show me)\b/;
@@ -222,7 +222,7 @@ function mergeRequest(prev: ParsedRequest, cur: ParsedRequest, t: string): Parse
   // Product words carry over when the follow-up only adds a colour, feature or budget ("grow kit" → "under 500").
   m.terms = cur.terms.length || cur.kinds.length ? cur.terms : prev.terms;
   // Features follow the conversation: a new colour replaces the old one; a new kind starts afresh.
-  const COLOURISH = /^(black|white|red|blue|navy|green|grey|yellow|pink|orange|purple|brown|maroon|beige|silver|gold)$/;
+  const COLOURISH = /^(black|white|red|blue|navy|green|grey|yellow|pink|orange|purple|brown|maroon|beige|silver|gold|darkc|lightc)$/;
   const curA = cur.attrs ?? [];
   if (cur.kinds.length) m.attrs = curA;
   else if (curA.length) m.attrs = [...new Set([...(prev.attrs ?? []).filter((a) => !(curA.some((c) => COLOURISH.test(c)) && COLOURISH.test(a))), ...curA])];
@@ -323,7 +323,10 @@ export function respond(message: string, ctx: ChatContext, products: CataloguePr
 }
 
 function respondTo(message: string, ctx: ChatContext, products: CatalogueProduct[], collections?: Cols): { reply: BotReply; ctx: ChatContext } {
-  const raw = message.trim().slice(0, 300);
+  let raw = message.trim().slice(0, 300);
+  // A lone emoji: 👍 means ok, ❤️/🙏 means thanks.
+  if (/^[\s\u{1F44D}\u{1F44C}\u2705\u2714\uFE0F]+$/u.test(raw)) raw = 'ok';
+  else if (/^[\s\u2764\u{1F64F}\u{1F60A}\u{1F496}\u{1F49B}\u{1F499}\uFE0F]+$/u.test(raw)) raw = 'thanks';
   const t = normalise(raw).replace(//g, '').replace(/[!?.,;:]+/g, ' ').replace(/\s+/g, ' ').trim();
   const keep = (reply: BotReply, next: ChatContext = ctx) => ({ reply, ctx: next });
 
@@ -433,6 +436,27 @@ function respondTo(message: string, ctx: ChatContext, products: CatalogueProduct
     const what = prev.kinds.length ? prev.kinds.map((k) => KINDS[k]!.label).join(' / ') : 'these products';
     return keep(text([top.length ? `Our ${what} come in ${top.join(', ')} and more. Tell me a colour (for example "${top[0]!.toLowerCase()}") and I'll show only those.` : `Colours vary by product. Tell me the colour you want and I'll check.`], AFTER_PICKS));
   }
+  // About the picks just shown: "which one is best", "compare them", "add the 2nd one".
+  if (prev && ctx.shown.length) {
+    const shownPs = ctx.shown.map((id) => products.find((p) => p.id === id)).filter((p): p is CatalogueProduct => !!p);
+    const ord = /\b(1st|first|2nd|second|3rd|third|4th|fourth|5th|fifth|last)\b/.exec(t)?.[1];
+    const idx = ord ? ({ '1st': 0, first: 0, '2nd': 1, second: 1, '3rd': 2, third: 2, '4th': 3, fourth: 3, '5th': 4, fifth: 4, last: shownPs.length - 1 } as Record<string, number>)[ord]! : -1;
+    if (/\b(add|put|include)\b.*\b(quote|cart|it|this|that|one|1st|2nd|3rd|first|second|third|last)\b/.test(t) && !hasContent(q0)) {
+      const p = idx >= 0 ? shownPs[idx] : undefined;
+      return keep(text([p ? `To add ${p.name}, tap "Add to quote" on its card (or open it and choose a quantity). Your quote is under "Quote" at the top right.` : 'Tap "Add to quote" on the card of the product you like. Your quote is under "Quote" at the top right.'], AFTER_PICKS));
+    }
+    if (/\b(which|what)( one)? (is|would be|will be)( the)? (best|better|good|nicest|top)\b|\bwhich (do you|would you) (recommend|suggest)\b|\byour (top )?pick\b|\bbest (one|among|of these|option)\b/.test(t) && shownPs.length) {
+      const p = shownPs[0]!;
+      return keep(text([`My top pick from these is ${p.name}: it's the closest match to what you asked. ${productLine(p)}`, 'Tell me what matters most (price, colour, capacity, material) and I can narrow it down further.'], AFTER_PICKS));
+    }
+    if (/\b(compare|comparison|difference between|vs|versus)\b/.test(t) && !hasContent(q0)) {
+      const two = (idx >= 0 ? shownPs.slice(idx, idx + 2) : shownPs.slice(0, 2));
+      if (two.length === 2) return keep(text(['Here is how they compare:', ...two.map(productLine), 'Tap either one for full details and photos.'], AFTER_PICKS));
+    }
+    if (/^\s*(why|how come|reason)\b/.test(t) && !hasContent(q0)) {
+      return keep(text(['I picked these because they match the kind of product, budget and features you asked for, and can carry your logo. Tell me what to change (cheaper, a colour, a different kind) and I\'ll update them.'], AFTER_PICKS));
+    }
+  }
   if (prev) {
     const cheaper = CHEAPER.test(t);
     const premium = !cheaper && PREMIUM.test(t);
@@ -476,6 +500,10 @@ function respondTo(message: string, ctx: ChatContext, products: CatalogueProduct
     return keep(text([REFUSAL], EXAMPLES));
   }
   if (!hasContent(q0) && !knownTerm && !GIFT_INTENT.test(t) && !q0.ambiguous.length && !negCount(q0)) {
+    // One or two words we don't stock ("samsonite", "fidget"): say it plainly.
+    if (q0.terms.length && q0.terms.length <= 2 && t.split(' ').length <= 3 && q0.terms.every((w) => /^[a-z]{4,}$/.test(w))) {
+      return keep(text([`Sorry, I couldn't find "${q0.terms.join(' ')}" in our catalogue right now. Tell me the kind of gift you're after (for example bottles, bags or tech), your budget and how many you need, and I'll suggest the closest options.`], EXAMPLES));
+    }
     return keep(
       text(
         [
