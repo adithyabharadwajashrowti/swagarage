@@ -35,5 +35,7 @@ export default defineConfig({
   test: {
     environment: 'node',
     include: ['src/**/*.test.ts'],
+    // The fuzz suites run 20,000 generated messages each; on a slower PC that takes longer than the 5 s default.
+    testTimeout: 60000,
   },
 });
