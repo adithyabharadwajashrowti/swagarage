@@ -148,7 +148,7 @@ const FAQ: { re: RegExp; answer: (products: CatalogueProduct[]) => string; cover
     answer: () => "For returns or replacements, contact our team with your quote reference and they'll help you out.",
   },
   {
-    re: /\b(talk to|speak (to|with)|call (me|us|you)|contact( (you|someone|team|number|no|details|info|us))?|human|real person|agent|someone from|phone( number| no)?|mobile (number|no)|your number|whatsapp|email( id)?|reach (you|someone))\b/,
+    re: /\b(talk to|speak (to|with)|call (me|us|you)|contact( (you|someone|team|number|no|details|info|us))?|human|real person|agent|someone from|phone (number|no)|your phone|mobile (number|no)|your number|whatsapp|email( id)?|reach (you|someone))\b/,
     answer: () => 'Our team is happy to help personally. Tap "Talk to us on WhatsApp" at the bottom of any page to chat with them, or add the products you like to a quote and send it, and they\'ll contact you directly.',
   },
 ];
@@ -173,7 +173,7 @@ const OFF_TOPIC_SOFT = /\b(news|time now|what time|date today|today'?s date|how 
 const GIFTY = /\b(gift|gifts|gifting|swag|merch|merchandise|hamper|hampers|kit|kits|quote|quotation|order|catalogue|catalog|product|products|branding|logo|bulk|corporate|client|clients|employee|employees|diwali|festive|onboarding|welcome)\b/;
 const REFUSAL = "Sorry, I can only help with Swagarage's catalogue and your gifting needs 🙂 Tell me the occasion, your budget per gift and how many you need, and I'll find options.";
 
-const CATALOGUE_Q = /\b(what (all )?(do you|you) (have|sell|offer|got)|what brands|which brands|brands (you|do you|u) (have|carry|sell|stock)|brands available|available brands|your brands|list (of )?brands|what categories|what kind of (gifts|products)|show (me )?(your|the) (catalogue|catalog|range))\b/;
+const CATALOGUE_Q = /\b(what (all )?(do you|you) (have|sell|offer|got)|what brands|which brands|brands (you|do you|u) (have|carry|sell|stock)|brands available|available brands|your brands|list (of )?brands|(show|list|see)( me)?( all| the| your)* brands|all (the )?brands|what categories|what kind of (gifts|products)|show (me )?(your|the) (catalogue|catalog|range))\b/;
 
 const CHEAPER = /\b(less than (that|this|these)|lower than (that|this|these)|below (that|this)|under (that|this)|cheaper|cheap(er)? ones|less expensive|lower (price|budget|cost|range)|more affordable|budget friendly|too (expensive|costly|pricey|much)|reduce (the )?(price|budget)|economical|something cheaper|low budget)\b/;
 const PREMIUM = /\b(more (premium|expensive|luxury|luxurious|upscale|classy|fancy)|costlier|higher (end|range|budget|price)|better (quality|ones)|fancier|too cheap|premium ones|high end|something premium|more premium)\b/;
@@ -297,7 +297,7 @@ function leadLine(q: ParsedRequest, rec: Recommendation, collections: Cols | und
   else if (q.minPrice > 0 && Number.isFinite(q.maxPrice)) parts.push(`between ${inr(q.minPrice)} and ${inr(q.maxPrice)}`);
   else if (Number.isFinite(q.maxPrice)) parts.push(`under ${inr(q.maxPrice)}`);
   else if (q.minPrice > 0) parts.push(`from ${inr(q.minPrice)}`);
-  if (q.quantity) parts.push(`for ${q.quantity.toLocaleString('en-IN')} people`);
+  if (q.quantity) parts.push(`for ${q.quantity.toLocaleString('en-IN')} ${q.quantity === 1 ? 'person' : 'people'}`);
   const n = rec.picks.length;
   const more = rec.matched > n ? ` ${rec.matched} fit in total, so tap "Show more" to see others.` : '';
   return `${prefix}Here ${n === 1 ? (narrow ? `is 1 of our ${narrow}` : 'is 1 pick') : `are ${n} ${what}`}${parts.length ? ' ' + parts.join(' ') : ''}.${more} Tap any you don't want to drop it.`;
@@ -312,8 +312,20 @@ function text(lines: string[], quick: QuickReply[] = [], parsed: ParsedRequest |
 /** How many "no …" parts the message has (kinds, products, features, materials). */
 const negCount = (q: ParsedRequest) => (q.notKinds ?? []).length + (q.notNouns ?? []).length + (q.notAttrs ?? []).length + (q.notMaterials ?? []).length;
 
+/** Makers we don't name on the site: if the catalogue doesn't show them, they're never echoed back or treated as a brand. */
+const UNNAMED = /\b(toreto|toburo|alcis|glasafe|ooge|vantora|igear|just ?corseca|designnest|iora|eco ?gift)\b/gi;
+const shownMakers = new WeakMap<CatalogueProduct[], string>();
+function stripUnnamed(message: string, products: CatalogueProduct[]): string {
+  if (!UNNAMED.test(message)) return message;
+  UNNAMED.lastIndex = 0;
+  let seen = shownMakers.get(products);
+  if (seen === undefined) { seen = products.map((p) => `${p.brand ?? ''} ${p.name}`).join(' ').toLowerCase(); shownMakers.set(products, seen); }
+  return message.replace(UNNAMED, (m) => (seen!.includes(m.toLowerCase()) ? m : ' ')).replace(/\s+/g, ' ');
+}
+
 export function respond(message: string, ctx: ChatContext, products: CatalogueProduct[], collections?: Cols): { reply: BotReply; ctx: ChatContext } {
   // Fix product-word typos first ("backpak" → "backpack") and say so.
+  message = stripUnnamed(message, products);
   const fix = correctText(message.trim().slice(0, 300), products);
   const out = respondTo(fix ? fix.text : message, ctx, products, collections);
   // A brand we don't carry ("JBL speakers"): the note says sorry; the line says what we're showing instead.
@@ -334,9 +346,16 @@ function respondTo(message: string, ctx: ChatContext, products: CatalogueProduct
 
   // Answer to "is 500 the budget or the number of gifts?"
   if (ctx.pending) {
+    // "actually 50 people": a fresh head count for the pending request (the unclear number was the budget question we can drop).
+    const pr = parseRequest(raw);
+    if (pr.quantity !== null && !hasBudget(pr) && !pr.kinds.length && !pr.collections.length) {
+      const q: ParsedRequest = { ...ctx.pending, quantity: pr.quantity, ambiguous: [] };
+      return runRequest(products, collections, q, { ...ctx, pending: null }, 'Got it! ');
+    }
     const asPrice = /\b(budget|price|per gift|per person|each|rs|rupees|₹|cost|amount|money|first)\b/.test(t);
     const asQty = /\b(people|employees|qty|quantity|pieces|units|gifts|count|number of|persons|staff|team|second)\b/.test(t);
-    if (asPrice !== asQty && parseRequest(raw).ambiguous.length === 0 && !hasBudget(parseRequest(raw))) {
+    // "actually 50 people" gives a new number: use it instead of the pending one.
+    if (asPrice !== asQty && parseRequest(raw).ambiguous.length === 0 && !hasBudget(parseRequest(raw)) && parseRequest(raw).quantity === null) {
       const q = resolveAmbiguity(ctx.pending, asPrice ? 'price' : 'qty');
       return runRequest(products, collections, q, { ...ctx, pending: null }, 'Got it! ');
     }
@@ -501,7 +520,7 @@ function respondTo(message: string, ctx: ChatContext, products: CatalogueProduct
   }
   if (!hasContent(q0) && !knownTerm && !GIFT_INTENT.test(t) && !q0.ambiguous.length && !negCount(q0)) {
     // One or two words we don't stock ("samsonite", "fidget"): say it plainly.
-    if (q0.terms.length && q0.terms.length <= 2 && t.split(' ').length <= 3 && q0.terms.every((w) => /^[a-z]{4,}$/.test(w))) {
+    if (q0.terms.length && q0.terms.length <= 2 && t.split(' ').length <= 3 && q0.terms.every((w) => /^[a-z]{3,}$/.test(w))) {
       return keep(text([`Sorry, I couldn't find "${q0.terms.join(' ')}" in our catalogue right now. Tell me the kind of gift you're after (for example bottles, bags or tech), your budget and how many you need, and I'll suggest the closest options.`], EXAMPLES));
     }
     return keep(

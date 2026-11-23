@@ -62,7 +62,7 @@ export interface ParsedRequest {
 
 /** Focus words that describe the same product family (a "Polo T-Shirt" is not a combo of a polo and a t-shirt). */
 const JACKET_STYLES = ['bomber', 'puffer', 'windcheater', 'fleeceJacket', 'trackJacket', 'hoodedJacket', 'sleeveless', 'blazer', 'biker'];
-const FAMILY: Record<string, string> = { ...Object.fromEntries(JACKET_STYLES.map((k) => [k, 'jacket'])), jacket: 'jacket', lamp: 'lamp', deskLamp: 'lamp', tshirt: 'tshirt', polo: 'tshirt', clock: 'clock', wallClock: 'clock', deskClock: 'clock', bottle: 'drink', mug: 'drink', tumbler: 'drink', sipper: 'drink', flask: 'drink', penStand: 'desk', luggageTag: 'bag', powerbank: 'power', charger: 'power', backpack: 'bag', duffle: 'bag', trolley: 'bag' };
+const FAMILY: Record<string, string> = { ...Object.fromEntries(JACKET_STYLES.map((k) => [k, 'jacket'])), jacket: 'jacket', lamp: 'lamp', deskLamp: 'lamp', tshirt: 'tshirt', polo: 'tshirt', clock: 'clock', wallClock: 'clock', deskClock: 'clock', bottle: 'drink', mug: 'drink', tumbler: 'drink', sipper: 'drink', flask: 'drink', penStand: 'desk', deskOrg: 'desk', luggageTag: 'bag', powerbank: 'power', charger: 'power', backpack: 'bag', duffle: 'bag', trolley: 'bag' };
 /** When both are asked, the narrower one wins ("polo t-shirts" → polos; "wall clock" → wall clocks). */
 /** Where each focus word's products live: "bottle" means drinkware, not a bottle bag or a pen shaped like one. */
 const FOCUS_CAT: Record<string, string[]> = { ...Object.fromEntries(JACKET_STYLES.map((k) => [k, ['apparel']])), bottle: ['drinkware'], mug: ['drinkware'], sipper: ['drinkware'], flask: ['drinkware'], tumbler: ['drinkware'], tshirt: ['apparel'], polo: ['apparel'], hoodie: ['apparel'], jacket: ['apparel'], hamper: ['gift-sets', 'gift-boxes'] };
@@ -70,7 +70,7 @@ const NARROWER: Record<string, string[]> = { luggageTag: ['trolley', 'duffle'], 
 
 /** How to name the picks when one narrow word was asked for ("Here are 2 bomber jackets"). */
 const NOUN_LABEL: Record<string, string> = {
-  sipper: 'sippers', chocolate: 'chocolates', dryFruit: 'dry fruits', luggageTag: 'luggage tags', flask: 'flasks', penStand: 'pen stands', deskLamp: 'desk lamps', bomber: 'bomber jackets', puffer: 'puffer jackets', windcheater: 'windcheaters', fleeceJacket: 'fleece jackets', trackJacket: 'track jackets & suits',
+  mousePad: 'mouse pads', deskOrg: 'desk organisers', photoFrame: 'photo frames', sipper: 'sippers', chocolate: 'chocolates', dryFruit: 'dry fruits', luggageTag: 'luggage tags', flask: 'flasks', penStand: 'pen stands', deskLamp: 'desk lamps', bomber: 'bomber jackets', puffer: 'puffer jackets', windcheater: 'windcheaters', fleeceJacket: 'fleece jackets', trackJacket: 'track jackets & suits',
   hoodedJacket: 'hooded jackets', sleeveless: 'sleeveless jackets', blazer: 'blazers', biker: 'leather & biker jackets', polo: 'polo t-shirts',
   wallClock: 'wall clocks', deskClock: 'desk clocks', bottle: 'bottles', mug: 'mugs', tumbler: 'tumblers', mouse: 'mice', keyboard: 'keyboards',
   massager: 'massagers', yogaMat: 'yoga mats', medal: 'medals', kettle: 'kettles', fryer: 'air fryers', trimmer: 'trimmers', fan: 'fans', calendar: 'calendars',
@@ -120,6 +120,9 @@ export const FOCUS: Record<string, { q: RegExp; name: RegExp }> = {
   tshirt: { q: /\b(t-?shirts?|tees?|polos?)\b/, name: /t-?shirt|polo|\btee/ },
   polo: { q: /\bpolos?\b/, name: /\bpolo\b/ },
   sipper: { q: /\bsippers?\b/, name: /sipper/ },
+  mousePad: { q: /\bmouse ?(pads?|mats?)\b/, name: /mouse ?(pad|mat)/ },
+  deskOrg: { q: /\bdesk organi[sz]ers?\b|\bdesk caddy\b/, name: /desk organi[sz]er|table ?top organi[sz]er|pen stand|desk caddy|stationery holder|desk set|desk kit/ },
+  photoFrame: { q: /\b(photo|picture) ?frames?\b/, name: /photo ?frame|picture frame|\bframe (\d|with|–|-)|\bframe$|\d+"? ?x ?\d+"? frame|forest frame/ },
   chocolate: { q: /\bchocolates?\b|\bchocos?\b/, name: /chocolate|choco/ },
   dryFruit: { q: /\bdry ?fruits?\b|\bnuts\b|\balmonds?\b|\bcashews?\b/, name: /dry ?fruit|almond|cashew|\bnuts?\b|pista|raisin/ },
   luggageTag: { q: /\b(luggage|bag) tags?\b/, name: /luggage tag|bag tag/ },
@@ -332,7 +335,7 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
   },
   candle: { label: 'candles & diyas', q: /\bcandles?\b|\bdiyas?\b|\bdiyaas?\b|\blanterns?\b/, p: (h) => /candle|diya|lantern|tea ?light/.test(h.core) },
   incense: { label: 'incense & aroma', q: /\bagarbatti|\bincense\b|\bdhoop\b|\baroma (diffusers?|oils?)\b/, p: (h) => /incense|agarbatti|dhoop|aroma/.test(h.core) },
-  fragrance: { label: 'perfumes & fragrances', q: /\bperfumes?\b|\bfragrances?\b|\bdeos?\b|\bdeodorants?\b|\battar\b/, p: (h) => /perfume|fragrance|deo/.test(h.core) },
+  fragrance: { label: 'perfumes & fragrances', q: /\bperfumes?\b|\bfragrances?\b|\bdeos?\b|\bdeodorants?\b|\battar\b/, p: (h) => /perfume|fragrance|\bdeo(dorant)?s?\b|eau de|attar/.test(h.core) },
   usb: { label: 'pen drives', q: /\bpen ?drives?\b|\busb drives?\b|\bflash drives?\b/, p: (h) => /pen ?drive|usb drive|flash drive/.test(h.core) },
   computer: {
     label: 'keyboards, mice & laptop accessories',
@@ -706,6 +709,8 @@ function classify(t: string, n: Num): Cls {
   if (money && !peopleFollow(right, HEADS)) return res('price', RIGHT_MIN.test(right) || /^\s*\+/.test(right) ? 'min' : dir);
   if (!money && !leftCur && !rightCur && (new RegExp(String.raw`^\s*${UNITS}(?![a-z])`).test(right) || /^(?:w|v|g|l|kg)(?![a-z])/.test(right))) return res('ignore');
   if (!leftCur && !rightCur && n.value >= 1e9) return res('ignore'); // phone numbers
+  // "per piece 300", "each 450": a price per gift
+  if (/\bper (piece|gift|head|person|unit|pc|kit|item)\s*(?:₹|\brs|\binr)?\s*$/.test(left) && !/\d\s*(?:\S+\s*)?per (piece|gift|head|person|unit|pc|kit|item)\s*$/.test(left)) return res('price');
   // "top 5 gifts", "show 3": how many to show, not a budget or a head count
   if (!money && !leftCur && !rightCur && n.value <= 20 && /\b(top|best|show|first|show me|give me|only)\s*$/.test(l)) return res('ignore');
   if (leftCur || rightCur || PER_WORDS.test(right) || /^\s*(?:budget|price|range)\b(?!\s*(?:is|of|:|=)?\s*(?:₹|\brs|\binr)?\s*\d)/.test(right)) {
@@ -1005,7 +1010,7 @@ const FILLER = new Set(('build create curate put together assemble combine colou
   + 'make it okay alright sure yes yeah yep hmm then now today soon urgent asap required requirement requirements bulk').split(' '));
 
 /** Words that only say what the product is for, already covered by its kind ("COFFEE mug", "PHOTO frame", "WALL clock"). */
-const KIND_WORDS = /^(coffee|tea|water|photo|picture|wall|desk|table|travel|office|laptop|phone|mobile|formal|casual|daily|everyday|regular|normal|standard|simple|basic|plain|usual|corporate|executive|men|mens|women|womens|unisex)$/;
+const KIND_WORDS = /^(organiser|organisers|organizer|organizers|frame|frames|pad|pads|stand|stands|coffee|tea|water|photo|picture|wall|desk|table|travel|office|laptop|phone|mobile|formal|casual|daily|everyday|regular|normal|standard|simple|basic|plain|usual|corporate|executive|men|mens|women|womens|unisex)$/;
 
 /** One thing the customer asked for exactly (a colour, size, feature or descriptive word). */
 export type Need = { label: string; hard: boolean; ok: (p: CatalogueProduct) => boolean };
@@ -1244,7 +1249,13 @@ export function recommend(
   if (mats.length && pool.length) {
     // A glass bottle with a steel infuser is not a steel bottle.
     const matOk = (p: CatalogueProduct, m: string) => MATERIALS[m]!.p.test(H(p).full) && !(m === 'steel' && /glass|borosilicate/.test(p.name.toLowerCase()) && !/steel (body|bottle|flask)/.test(p.name.toLowerCase()));
-    const byMat = pool.filter((p) => mats.some((m) => matOk(p, m)));
+    const byAll = mats.length > 1 ? pool.filter((p) => mats.every((m) => matOk(p, m))) : [];
+    const byMat = byAll.length ? byAll : pool.filter((p) => mats.some((m) => matOk(p, m)));
+    if (mats.length > 1 && !byAll.length && byMat.length) {
+      const have = mats.filter((m) => byMat.some((p) => matOk(p, m)));
+      const lack = mats.filter((m) => !have.includes(m));
+      notes.push(`Sorry, we don't have ${mats.map((m) => MATERIALS[m]!.label.toLowerCase()).join(' + ')} together${lack.length ? `, or anything ${lack.map((m) => MATERIALS[m]!.label.toLowerCase()).join(' / ')} here` : ''}. Here are the ${have.map((m) => MATERIALS[m]!.label.toLowerCase()).join(' / ')} options.`);
+    }
     const label = mats.map((m) => MATERIALS[m]!.label.toLowerCase()).join(' / ');
     if (byMat.length) pool = byMat;
     else notes.push(`Sorry, we don't have ${label} options for this right now, so here are the closest picks.`);
