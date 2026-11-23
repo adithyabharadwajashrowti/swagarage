@@ -87,10 +87,10 @@ describe('GST is applied correctly to the budget', () => {
 describe('product jargon', () => {
   const cases: [string, string][] = [
     ['TWS', 'Earbuds & headphones'], ['neckband', 'Earbuds & headphones'], ['BT speaker', 'Speakers'], ['bluetooth speakers', 'Speakers'],
-    ['PB 10000mah', 'Power banks & chargers'], ['powerbank', 'Power banks & chargers'], ['magsafe charger', 'Power banks & chargers'],
+    ['PB 10000mah', 'Power banks'], ['powerbank', 'Power banks'], ['magsafe charger', 'Chargers & adapters'],
     ['sipper', 'Mugs & bottles'], ['temperature bottle', 'Mugs & bottles'], ['thermos', 'Mugs & bottles'], ['bottel', 'Mugs & bottles'],
-    ['bagpack', 'Backpacks'], ['laptop bag', 'Laptop bags'], ['messenger', 'Laptop bags'], ['duffel', 'Duffle & travel bags'],
-    ['trolley bag', 'Duffle & travel bags'], ['jute bag', 'Tote bags'], ['conference bag', 'Tote bags'], ['amenity kit', 'Pouches & organisers'],
+    ['bagpack', 'Backpacks'], ['laptop bag', 'Laptop bags'], ['messenger', 'Laptop bags'], ['duffel', 'Duffle bags'],
+    ['trolley bag', 'Trolley bags & luggage'], ['jute bag', 'Tote bags'], ['conference bag', 'Tote bags'], ['amenity kit', 'Pouches & organisers'],
     ['card holder', 'Wallets & card holders'], ['passport holder', 'Wallets & card holders'], ['cheque book holder', 'Wallets & card holders'],
     ['A5 diary', 'Notebooks & diaries'], ['dairy', 'Notebooks & diaries'], ['metal pen', 'Pens'], ['desk organiser', 'Desk & office items'],
     ['table calendar', 'Calendars'], ['polo t-shirts', 'T-shirts & polos'], ['round neck tees', 'T-shirts & polos'],

@@ -64,7 +64,7 @@ const NARROWER: Record<string, string[]> = { deskLamp: ['lamp'], ...Object.fromE
 
 /** How to name the picks when one narrow word was asked for ("Here are 2 bomber jackets"). */
 const NOUN_LABEL: Record<string, string> = {
-  deskLamp: 'desk lamps', bomber: 'bomber jackets', puffer: 'puffer jackets', windcheater: 'windcheaters', fleeceJacket: 'fleece jackets', trackJacket: 'track jackets & suits',
+  penStand: 'pen stands', deskLamp: 'desk lamps', bomber: 'bomber jackets', puffer: 'puffer jackets', windcheater: 'windcheaters', fleeceJacket: 'fleece jackets', trackJacket: 'track jackets & suits',
   hoodedJacket: 'hooded jackets', sleeveless: 'sleeveless jackets', blazer: 'blazers', biker: 'leather & biker jackets', polo: 'polo t-shirts',
   wallClock: 'wall clocks', deskClock: 'desk clocks', bottle: 'bottles', mug: 'mugs', tumbler: 'tumblers', mouse: 'mice', keyboard: 'keyboards',
   massager: 'massagers', yogaMat: 'yoga mats', medal: 'medals', kettle: 'kettles', fryer: 'air fryers', trimmer: 'trimmers', fan: 'fans', calendar: 'calendars',
@@ -82,7 +82,7 @@ export const FOCUS: Record<string, { q: RegExp; name: RegExp }> = {
   bottle: { q: /\b(bottles?|flasks?|sippers?)\b/, name: /bottle|flask|^(?!.*\bmug\b).*sipper/ },
   mug: { q: /\b(mugs?|coffee cups?|cups?)\b/, name: /\bmug|\bcup\b/ },
   tumbler: { q: /\btumblers?\b/, name: /tumbler/ },
-  pen: { q: /\bpens?\b/, name: /\bpens?\b/ },
+  pen: { q: /\bpens?\b(?! ?(stands?|holders?|drives?))/, name: /\bpens?\b(?! ?(stand|holder|drive))/ },
   notebook: { q: /\b(diar(y|ies)|note ?books?|journals?|planners?)\b/, name: /diary|notebook|note book|journal|planner/ },
   speaker: { q: /\b(speakers?|soundbars?)\b/, name: /speaker|soundbar/ },
   earbuds: { q: /\b(ear ?buds|tws|earphones?|neckbands?|head ?phones?)\b/, name: /buds|earphone|neckband|headphone/ },
@@ -113,6 +113,7 @@ export const FOCUS: Record<string, { q: RegExp; name: RegExp }> = {
   hamper: { q: /\b(hampers?|gift ?sets?|combos?|gift ?kits?)\b/, name: /gift set|hamper|combo|gift kit|gift box|welcome kit|\btrunk\b|\d-piece/ },
   tshirt: { q: /\b(t-?shirts?|tees?|polos?)\b/, name: /t-?shirt|polo|\btee/ },
   polo: { q: /\bpolos?\b/, name: /\bpolo\b/ },
+  penStand: { q: /\bpen ?(stands?|holders?)\b|\bpencil (stands?|holders?)\b/, name: /pen ?(stand|holder)|pencil (stand|holder)|desk organi[sz]er|stationery holder/ },
   deskLamp: { q: /\b(desk|table|study|reading) lamps?\b/, name: /desk lamp|table lamp|study lamp|reading lamp|table top with led lamp/ },
   bomber: { q: /\bbombers?\b/, name: /bomber/ },
   puffer: { q: /\bpuffers?\b|\bpadded\b|\bquilted\b/, name: /puffer|padded|quilted/ },
@@ -155,6 +156,7 @@ export const OCCASIONS: { slug: string; re: RegExp; label: string }[] = [
     label: 'Premium client gifts',
     re: /\b(clients?|customers?|premium|luxury|luxurious|vip|vips|leadership|executives?|ceo|cxo|cxos|directors?|board members?|partners?|investors?|high[- ]end|dealers?|distributors?|channel partners?|stakeholders?|key accounts?)\b/,
   },
+  { slug: 'new-arrivals', label: 'New arrivals', re: /\b(new arrivals?|newly (added|arrived|launched)|latest (products|arrivals|items|gifts|launches|collection)|what'?s new|whats new|new (products|items|launches|collection|stuff))\b/ },
   { slug: 'travel', label: 'Travel', re: /\b(travel|travelling|traveling|offsite|off-site|trips?|journey|commute|vacation|holiday trip)\b/ },
 ];
 
@@ -168,12 +170,22 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
     q: /\blaptop (bags?|cases?|sleeves?|carriers?)\b|\bmessengers?\b|\boffice bags?\b/,
     p: (h) => /messenger|laptop|sleeve|office bag/.test(h.core) && h.p.category.slug === 'bags-backpacks',
   },
-  sleeve: { label: 'laptop sleeves', q: /\bsleeves?\b/, p: (h) => /sleeve/.test(h.core) },
+  sleeve: { label: 'laptop sleeves', q: /\b(laptop |tablet |ipad |macbook )?sleeves?\b(?! (shirts?|t-?shirts?|tees?))/, p: (h) => /sleeve/.test(h.core) && h.p.category.slug !== 'drinkware' && h.p.category.slug !== 'apparel' && !/bottle|mug|tumbler|flask|jar|glass/.test(h.p.name.toLowerCase()) },
   sling: { label: 'sling bags', q: /\bslings?\b|\bcross ?body\b/, p: (h) => /sling|cross ?body/.test(h.core) },
   duffle: {
-    label: 'duffle & travel bags',
-    q: /\bduffle|\bduffel|\bgym bags?\b|\bweekenders?\b|\btravel bags?\b|\bluggage\b|\btrolley|\bsuitcases?\b|\bcabin bags?\b|\boverniters?\b/,
-    p: (h) => /duffle|duffel|weekender|luggage|trolley|suitcase|travel bag/.test(h.core),
+    label: 'duffle bags',
+    q: /\bduffle|\bduffel|\bgym bags?\b|\bweekenders?\b|\btravel bags?\b|\bovernight(er)? bags?\b/,
+    p: (h) => h.p.category.slug === 'bags-backpacks' && /duffle|duffel|weekender|gym bag|travel bag|overnighter/.test(h.core) && !/\b(tag|belt|scale|lock|pillow)s?\b|trolley|spinner|hard ?shell|cabin/.test(h.p.name.toLowerCase()),
+  },
+  trolley: {
+    label: 'trolley bags & luggage',
+    q: /\btrolleys?\b(?! (tags?|belts?))|\bluggage\b(?! (tags?|scales?|belts?|locks?|weigh\w*))|\bsuitcases?\b|\bcabin (bags?|luggage)\b|\bstrolleys?\b|\bhard ?shell\b/,
+    p: (h) => h.p.category.slug === 'bags-backpacks' && /trolley|suitcase|cabin|spinner|hard ?shell|luggage/.test(h.core) && !/\b(tag|belt|scale|lock|pillow)s?\b/.test(h.core),
+  },
+  luggageAcc: {
+    label: 'luggage tags & travel accessories',
+    q: /\bluggage (tags?|scales?|belts?|locks?|weigh\w*)\b|\bbag tags?\b|\btravel (pillows?|locks?|adapters?|accessories|essentials|kits?)\b|\bneck pillows?\b/,
+    p: (h) => /luggage tag|luggage belt|luggage (weighing )?scale|bag tag|travel pillow|neck pillow|travel lock|luggage lock|travel adapter|travel kit/.test(h.core) || h.p.subcategory === 'Travel Essentials' || h.p.subcategory === 'Luggage Tags',
   },
   pouch: { label: 'pouches & organisers', q: /\bpouch(es)?\b|\b(tech|cable|travel) organi[sz]ers?\b|\btoiletry\b|\bkit bags?\b|\bamenity kits?\b|\bdopp kits?\b|\btravel kits?\b/, p: (h) => /pouch|organi[sz]er|toiletry/.test(h.core) },
   lunch: { label: 'lunch bags', q: /\blunch|\btiffin/, p: (h) => /lunch|tiffin/.test(h.core) },
@@ -185,9 +197,10 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
   },
   wallet: {
     label: 'wallets & card holders',
-    q: /\bwallets?\b|\bcard ?holders?\b|\bvisiting card|\bpassport|\bfolios?\b|\bpurses?\b|\bcheque ?book|\bdocument (holders?|folders?)\b|\bportfolios?\b/,
-    p: (h) => /wallet|card ?holder|passport|folio|purse/.test(h.core),
+    q: /\bwallets?\b|\bcard ?holders?\b|\bvisiting card|\bpassport|\bfolios?\b|\bcheque ?book|\bdocument (holders?|folders?)\b|\bportfolios?\b/,
+    p: (h) => /wallet|card ?holder|passport|folio/.test(h.core) && h.p.category.slug !== 'gift-sets' && h.p.subcategory !== 'Handbags & Purses' && !/notebook|calendar|\d ?pc\b|\d-piece|set of/.test(h.core),
   },
+  purse: { label: 'purses & handbags', q: /\bpurses?\b|\bhandbags?\b|\bclutch(es)?\b|\bvanity (bags?|cases?)\b|\bladies bags?\b/, p: (h) => /purse|handbag|clutch|vanity/.test(h.core) || h.p.subcategory === 'Handbags & Purses' },
   speaker: { label: 'speakers', q: /\bspeakers?\b|\bsound ?bars?\b|\bmusic\b|\baudio\b|\bbt speakers?\b|\bbluetooth speakers?\b|\bpartybox\b/, p: (h) => /speaker|sound ?bar|audio ?dock/.test(h.core) || h.p.subcategory === 'Speakers' },
   earbuds: {
     label: 'earbuds & headphones',
@@ -195,9 +208,14 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
     p: (h) => /earbud|headphone|earphone|headset|\btws\b|neckband/.test(h.core),
   },
   power: {
-    label: 'power banks & chargers',
-    q: /\bpower ?banks?\b|\bpb\b|\bchargers?\b|\bcharging\b|\bwireless charg|\bmag ?safe\b|\bmagnetic power|\badapters?\b/,
-    p: (h) => /power ?bank|charg|power link|magflex|power glide/.test(h.core) || h.p.subcategory === 'Power & Charging',
+    label: 'power banks',
+    q: /\bpower ?banks?\b|\bpb\b|\bmagnetic power ?banks?\b/,
+    p: (h) => /power ?bank|powerbank|\d+ ?mah\b/.test(h.core) && h.p.category.slug !== 'desk-office',
+  },
+  charger: {
+    label: 'chargers & adapters',
+    q: /\bchargers?\b|\bcharging (pads?|stations?|docks?|stands?)\b|\bwireless charg\w*|\bmag ?safe\b|\badapters?\b|\bcharging\b(?! cables?)/,
+    p: (h) => /charger|charging (pad|station|dock|stand)|adapter|magsafe|wireless charg/.test(h.core) && !/power ?bank/.test(h.p.name.toLowerCase()),
   },
   cable: { label: 'cables', q: /\bcables?\b|\bcords?\b|\btype-?c (to|cable)|\b3[- ]in[- ]1 cable|\blightning cable|\bc to c\b/, p: (h) => /cable|cord\b|dura trio/.test(h.core) || h.p.subcategory === 'Cables' },
   wearable: {
@@ -226,7 +244,7 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
     q: /\bapparel\b|\bclothing\b|\bclothes\b|\bgarments?\b|\buniforms?\b|\bwear\b/,
     p: (h) => h.p.category.slug === 'apparel',
   },
-  pen: { label: 'pens', q: /\bpens?\b(?! ?stands?| ?holders?| ?drives?)|\bpen sets?\b|\bball ?pens?\b|\bfountain pens?\b|\broller ?pens?\b|\bmetal pens?\b|\bstylus\b/, p: (h) => /\bpens?\b(?! ?stand)|\bpen set/.test(h.core) },
+  pen: { label: 'pens', q: /\bpens?\b(?! ?stands?| ?holders?| ?drives?)|\bpen sets?\b|\bball ?pens?\b|\bfountain pens?\b|\broller ?pens?\b|\bmetal pens?\b|\bstylus\b/, p: (h) => /\bpens?\b(?! ?(stand|holder|drive))|\bpen set/.test(h.core) && !/power ?bank|notebook|diary|table ?top|clock|organi[sz]er|lamp/.test(h.p.name.toLowerCase()) },
   notebook: {
     label: 'notebooks & diaries',
     q: /\bnote ?books?\b|\bnote ?pads?\b|\bdiar(y|ies)\b|\bjournals?\b|\bplanners?\b|\borgani[sz]er diar|\ba5\b|\bb5\b|\bexecutive diar/,
@@ -243,7 +261,7 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
     q: /\bdesk\b|\boffice\b|\bwork ?station\b|\bwfh\b|\bwork from home\b|\bmouse ?pads?\b|\bdesk ?mats?\b|\bdesk organi[sz]ers?\b|\btable top\b/,
     p: (h) => /desk|mouse ?pad|deskmat|pen ?stand|penstand|calendar|card holder|lamp|organi[sz]er|office/.test(h.core),
   },
-  plant: { label: 'planters', q: /\bplants?\b|\bplanters?\b|\bsucculents?\b|\bseeds?\b/, p: (h) => /plant/.test(h.core) },
+  plant: { label: 'planters & grow kits', q: /\bplants?\b|\bplanters?\b|\bsucculents?\b|\bseeds?\b|\bgrow (kits?|craft|gifts?)\b|\bterrariums?\b|\bplantable\b/, p: (h) => /plant|grow (kit|craft)|seed|terrarium|succulent/.test(h.core) },
   lamp: { label: 'lamps & lights', q: /\blamps?\b|\blights?\b|\blanterns?\b|\btorch(es)?\b/, p: (h) => /\blamps?\b|\blights?\b|\blanterns?\b|\btorch/.test(h.core) && h.p.category.slug !== 'gift-sets' && !/bedsheet|towel|power strip/.test(h.core) },
   clock: { label: 'clocks', q: /\bclocks?\b/, p: (h) => /clock/.test(h.core) },
   fan: { label: 'fans', q: /\bfans?\b|\bcoolers?\b/, p: (h) => /\bfans?\b|cooler|snapcool/.test(h.core) },
@@ -293,7 +311,7 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
   frame: { label: 'photo frames', q: /\bphoto ?frames?\b|\bframes?\b/, p: (h) => /frame/.test(h.core) },
   trophy: {
     label: 'trophies, awards & mementos',
-    q: /\btroph(y|ies)\b|\bmementos?\b|\bmomentos?\b|\bplaques?\b|\bshields?\b|\bmedals?\b|\baward (trophies|trophy|plaques?|mementos?)\b/,
+    q: /\btroph(y|ies)\b|\bmementos?\b|\bmomentos?\b|\bplaques?\b|\bshields?\b|\bmedals?\b|(?<!service |for )\bawards?\b(?! (night|function|ceremony|show|event|gifts?))/,
     p: (h) => /troph|award|memento|plaque|medal/.test(h.core),
   },
   food: {
@@ -301,7 +319,8 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
     q: /\bsweets?\b|\bmithai\b|\bdry ?fruits?\b|\bchocolates?\b|\bcookies\b|\bgourmet\b|\bsnacks?\b|\bnuts\b|\bteas?\b(?! ?shirt)|\bcoffee (hamper|gift|beans|powder)\b|\bfood\b/,
     p: (h) => /sweet|dry ?fruit|chocolate|cookie|gourmet|snack|\btea\b|coffee/.test(h.core),
   },
-  candle: { label: 'candles & diyas', q: /\bcandles?\b|\bdiyas?\b|\bdiyaas?\b|\blanterns?\b|\bagarbatti|\bincense\b/, p: (h) => /candle|diya|lantern|incense/.test(h.core) },
+  candle: { label: 'candles & diyas', q: /\bcandles?\b|\bdiyas?\b|\bdiyaas?\b|\blanterns?\b/, p: (h) => /candle|diya|lantern|tea ?light/.test(h.core) },
+  incense: { label: 'incense & aroma', q: /\bagarbatti|\bincense\b|\bdhoop\b|\baroma (diffusers?|oils?)\b/, p: (h) => /incense|agarbatti|dhoop|aroma/.test(h.core) },
   fragrance: { label: 'perfumes & fragrances', q: /\bperfumes?\b|\bfragrances?\b|\bdeos?\b|\bdeodorants?\b|\battar\b/, p: (h) => /perfume|fragrance|deo/.test(h.core) },
   usb: { label: 'pen drives', q: /\bpen ?drives?\b|\busb drives?\b|\bflash drives?\b/, p: (h) => /pen ?drive|usb drive|flash drive/.test(h.core) },
   computer: {
@@ -320,12 +339,12 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
 // Closest substitutes when a kind isn't available.
 export const RELATED: Record<string, string[]> = {
   pen: ['stationery', 'desk'], notebook: ['stationery', 'desk'], stationery: ['desk'], desk: ['stationery', 'home'],
-  speaker: ['earbuds', 'tech'], earbuds: ['speaker', 'tech'], wearable: ['tech'], power: ['cable', 'tech'], cable: ['power', 'tech'],
+  speaker: ['earbuds', 'tech'], earbuds: ['speaker', 'tech'], wearable: ['tech'], power: ['charger', 'cable', 'tech'], cable: ['power', 'charger', 'tech'],
   home: ['desk', 'tech'], tech: ['power', 'desk'], drinkware: ['home', 'desk'], plant: ['desk'],
   hoodie: ['jacket', 'apparel'], jacket: ['hoodie', 'apparel'], socks: ['apparel'], footwear: ['apparel'], bottoms: ['apparel'], calendar: ['stationery', 'desk'],
   lamp: ['home', 'desk'], clock: ['desk', 'home'], fan: ['home', 'tech'], appliance: ['kitchen', 'home'], kitchen: ['appliance', 'home'], grooming: ['tech', 'fitness'], fitness: ['home', 'wearable'], badge: ['lanyard'], shirt: ['apparel'], apparel: ['hoodie', 'jacket', 'shirt'],
   backpack: ['laptopBag', 'bag'], laptopBag: ['backpack', 'sleeve'], sleeve: ['laptopBag', 'pouch'], sling: ['bag'],
-  duffle: ['bag'], pouch: ['wallet', 'sleeve'], lunch: ['bag'], tote: ['bag'], bag: ['pouch', 'wallet'], wallet: ['pouch'],
+  duffle: ['trolley', 'bag'], trolley: ['duffle', 'bag'], luggageAcc: ['wallet', 'pouch'], charger: ['power', 'cable', 'tech'], pouch: ['wallet', 'sleeve'], lunch: ['bag'], tote: ['bag'], bag: ['pouch', 'wallet'], wallet: ['pouch'],
   tshirt: ['shirt', 'hoodie'], cap: ['apparel'], keychain: ['wallet', 'pouch'], lanyard: ['wallet', 'desk'], umbrella: ['bag'],
   coaster: ['drinkware', 'desk'], frame: ['desk', 'home'], trophy: ['desk', 'home'], food: ['drinkware', 'plant'], candle: ['home', 'plant'],
   fragrance: ['pouch', 'wallet'], usb: ['cable', 'power'], computer: ['desk', 'tech'], phoneStand: ['desk'],
@@ -333,12 +352,12 @@ export const RELATED: Record<string, string[]> = {
 
 // Kinds that are a broader version of another; when both are asked we keep the specific one.
 const BROADER: Record<string, string[]> = {
-  bag: ['backpack', 'laptopBag', 'sleeve', 'sling', 'duffle', 'pouch', 'lunch', 'tote'],
+  bag: ['backpack', 'laptopBag', 'sleeve', 'sling', 'duffle', 'trolley', 'pouch', 'lunch', 'tote'],
   apparel: ['hoodie', 'jacket', 'shirt', 'tshirt', 'cap', 'socks', 'footwear', 'bottoms'],
   laptopBag: ['sleeve'],
   home: ['lamp', 'clock', 'fan', 'appliance', 'kitchen'],
   kitchen: ['appliance'],
-  tech: ['speaker', 'earbuds', 'power', 'cable', 'wearable', 'usb', 'computer'],
+  tech: ['speaker', 'earbuds', 'power', 'charger', 'cable', 'wearable', 'usb', 'computer'],
   desk: ['stationery', 'pen', 'notebook', 'phoneStand', 'computer'],
   shirt: ['tshirt'],
   frame: ['phoneStand'],
@@ -444,7 +463,7 @@ export const ATTRS: Record<string, { label: string; q: RegExp; p: RegExp }> = {
   digital: { label: 'digital', q: /\bdigital\b/, p: /digital|\bled\b|\blcd\b/ },
   smart: { label: 'smart', q: /\bsmart\b/, p: /\bsmart\b|temperature|\bled\b|reminder/ },
   magic: { label: 'magic (colour-changing)', q: /\bmagic\b|\bcolou?r ?changing\b|\bheat ?sensitive\b/, p: /magic|colou?r ?chang|heat ?sensitive/ },
-  insulated: { label: 'insulated', q: /\binsulated\b|\bvacuum\b|\bhot (and|&) cold\b|\bthermo/, p: /insulat|vacuum|hot (and|&) cold|thermo|double ?wall/ },
+  insulated: { label: 'insulated', q: /\binsulated\b|\bvacuum\b|\bhot (and|&) cold\b|\bthermo/, p: /insulat|vacuum|hot (and|&) cold|\bthermos?\b|thermo ?steel|double ?wall/ },
   lid: { label: 'with lid', q: /\bwith (a )?lid\b|\blidded\b/, p: /\blid\b|lidded/ },
   zip: { label: 'zip', q: /\bzip(per|ped)?\b/, p: /\bzip/ },
   hooded: { label: 'hooded', q: /\bhooded\b|\bwith hood\b/, p: /hood/ },
@@ -459,6 +478,7 @@ export const ATTRS: Record<string, { label: string; q: RegExp; p: RegExp }> = {
   personalised: { label: 'name-printed', q: /\bwith (their |employee )?names?\b/, p: /./ },
 };
 const ATTR_KEYS = Object.keys(ATTRS);
+const COLOUR_ATTRS = new Set(['black', 'white', 'red', 'blue', 'navy', 'green', 'grey', 'yellow', 'pink', 'orange', 'purple', 'brown', 'maroon', 'beige', 'silver', 'gold']);
 /** The test for one wanted feature ("nin1:3" → "3 in 1"). */
 function attrTest(key: string): { label: string; p: RegExp } {
   const m = /^nin1:(\d)$/.exec(key);
@@ -760,7 +780,7 @@ export function parseRequest(text: string): ParsedRequest {
   const collections = OCCASIONS.filter((o) => o.re.test(t)).map((o) => o.slug);
   // "no bags", "except mugs", "without apparel", "not speakers"
   const negated = new Set<string>();
-  for (const m of t.matchAll(/\b(?:no|not|without|except|excluding|other than|apart from|dont want|don't want|do not want|skip|avoid|nahi|beda)\s+((?:[a-z-]+\s*){1,3})/g)) {
+  for (const m of t.matchAll(/\b(?:no|not|without|except|excluding|exclude|other than|apart from|dont want|don't want|do not want|skip|avoid|remove|drop|minus|hide|take out|get rid of|no more|leave out|nahi|beda)\s+(?:the\s+|all\s+|any\s+)?((?:[a-z-]+\s*){1,3})/g)) {
     const seg = ` ${m[1]} `;
     for (const [key, k] of Object.entries(KINDS)) if (k.q.test(seg)) negated.add(key);
   }
@@ -768,8 +788,10 @@ export function parseRequest(text: string): ParsedRequest {
   for (const m of t.matchAll(/((?:[a-z-]+\s+){1,2})(?:nahi|nai|beda|not needed|no need)\b/g)) {
     for (const [key, k] of Object.entries(KINDS)) if (k.q.test(` ${m[1]} `)) negated.add(key);
   }
+  // A brand name isn't a product word: "US Polo shirts" asks for shirts, not polos.
+  const tk = BRAND_PHRASES.reduce((acc, b) => acc.replace(` ${b} `, ' '), t);
   let kinds = Object.entries(KINDS)
-    .filter(([key, k]) => k.q.test(t) && !negated.has(key))
+    .filter(([key, k]) => k.q.test(tk) && !negated.has(key))
     .map(([key]) => key);
   for (const [broad, narrow] of Object.entries(BROADER)) {
     if (kinds.includes(broad) && narrow.some((n) => kinds.includes(n))) kinds = kinds.filter((k) => k !== broad);
@@ -810,6 +832,8 @@ export function parseRequest(text: string): ParsedRequest {
       !BRANDING.some(([re]) => re.test(` ${w} `)),
   );
 
+  // "office bag", "office backpack": a bag for the office, not desk items.
+  if (kinds.includes('desk') && kinds.length > 1 && /\boffice (bags?|backpacks?|laptop bags?|sling)\b/.test(t)) kinds.splice(kinds.indexOf('desk'), 1);
   // "desk lamp", "desk clock": the desk word describes the product, it isn't a second kind.
   if (kinds.includes('desk') && kinds.length > 1 && /\b(desk|table) (lamps?|lights?|clocks?|organi[sz]ers?|fans?|calendars?|mats?|pads?|chargers?|speakers?)\b/.test(t)) kinds.splice(kinds.indexOf('desk'), 1);
   const attrs = ATTR_KEYS.filter((k) => k !== 'personalised' && ATTRS[k]!.q.test(t));
@@ -817,7 +841,7 @@ export function parseRequest(text: string): ParsedRequest {
   // "navy" is a kind of blue: keep the narrower one.
   if (attrs.includes('navy')) attrs.splice(attrs.indexOf('blue'), attrs.includes('blue') ? 1 : 0);
 
-  let nouns = Object.entries(FOCUS).filter(([, f]) => f.q.test(t)).map(([k]) => k);
+  let nouns = Object.entries(FOCUS).filter(([, f]) => f.q.test(tk)).map(([k]) => k);
   for (const [narrow, broad] of Object.entries(NARROWER)) if (nouns.includes(narrow)) nouns = nouns.filter((n) => !broad.includes(n));
 
   return {
@@ -874,6 +898,19 @@ function hay(p: CatalogueProduct): Hay {
   return { core, full, p };
 }
 
+/** Everyday words that are never a product feature ("do you HAVE", "MAKE it cheaper", "SHOW me"). */
+const FILLER = new Set(('have has had having make made makes do does did doing done what which whats who whom whose where when why how want wants wanted need needs needed '
+  + 'some any all every each show shows showing give get got find found see look looking looks also please pls plz kindly can could would will should shall '
+  + 'the and for our my your their them they these those this that there here with from into onto about like just only same more less much many few lot lots '
+  + 'thing things item items available availability send share list catalogue catalog suggest suggestion suggestions recommend recommendation idea ideas '
+  + 'okay fine good nice best great cool awesome lovely amazing beautiful better new latest ones one two three us me you we team teams people employees staff '
+  + 'corporate gifting gift gifts present presents buy order ordering price prices budget cost costs rate rates around approx approximately per each piece pieces pcs qty units '
+  + 'something anything stuff instead too also again still even maybe perhaps really very quite bit little big small large medium size sizes '
+  + 'make it okay alright sure yes yeah yep hmm then now today soon urgent asap required requirement requirements bulk').split(' '));
+
+/** Words that only say what the product is for, already covered by its kind ("COFFEE mug", "PHOTO frame", "WALL clock"). */
+const KIND_WORDS = /^(coffee|tea|water|photo|picture|wall|desk|table|travel|office|laptop|phone|mobile|formal|casual|daily|everyday|regular|normal|standard|simple|basic|plain|usual|corporate|executive|men|mens|women|womens|unisex)$/;
+
 /** One thing the customer asked for exactly (a colour, size, feature or descriptive word). */
 export type Need = { label: string; hard: boolean; ok: (p: CatalogueProduct) => boolean };
 const hayCache = new WeakMap<CatalogueProduct, Hay>();
@@ -882,12 +919,18 @@ const specHayCache = new WeakMap<CatalogueProduct, Set<string>>();
 export function askedNeeds(q: ParsedRequest, skip: string[] = []): Need[] {
   const Hc = (p: CatalogueProduct) => hayCache.get(p) ?? (hayCache.set(p, hay(p)), hayCache.get(p)!);
   const specsOf = (p: CatalogueProduct) => specHayCache.get(p) ?? (specHayCache.set(p, productSpecs(Hc(p).full)), specHayCache.get(p)!);
+  const hardWords = new Set((q.attrs ?? []).flatMap((k) => [k, ...attrTest(k).label.toLowerCase().split(/[\s-]+/)]));
   const UNIT_WORDS = /^(mah|ml|ltrs?|litres?|liters?|gsm|inch|inches|watts?|gb|tb|size|sized|colou?rs?|shade|type|one|piece)$/;
   return [
-    ...(q.attrs ?? []).map((k) => { const a = attrTest(k); return { label: a.label, hard: true, ok: (p: CatalogueProduct) => a.p.test(Hc(p).full) }; }),
+    ...(q.attrs ?? []).map((k) => {
+      const a = attrTest(k);
+      const colour = COLOUR_ATTRS.has(k);
+      return { label: a.label, hard: true, ok: (p: CatalogueProduct) => a.p.test(colour ? `${Hc(p).core} ${(p.colours ?? []).join(' ').toLowerCase()}` : Hc(p).full) };
+    }),
     ...(q.specs ?? []).map((sp) => ({ label: prettySpec(sp), hard: true, ok: (p: CatalogueProduct) => specsOf(p).has(sp) || Hc(p).full.replace(/,/g, '').includes(sp.replace(/[a-z"]+$/, '')) })),
     ...q.terms
-      .filter((w) => !skip.includes(w) && !UNIT_WORDS.test(w) && !/^(sets?|combos?|hampers?|kits?|options?|range|friendly|related|type|types|style|styles|design|designs|quality|stuff|product|products)$/.test(w))
+      .filter((w) => !hardWords.has(w) && !KIND_WORDS.test(w))
+      .filter((w) => !skip.includes(w) && !UNIT_WORDS.test(w) && !FILLER.has(w) && !/^(sets?|combos?|hampers?|kits?|options?|range|friendly|related|type|types|style|styles|design|designs|quality|stuff|product|products)$/.test(w))
       .map((w) => { const re = new RegExp(`\\b${w.replace(/s$/, '')}`); return { label: w, hard: false, ok: (p: CatalogueProduct) => re.test(Hc(p).full) }; }),
   ];
 }
@@ -1017,6 +1060,14 @@ export function recommend(
     notes.push('Showing only products with ready stock.');
   }
   if (haveBrand.length) base = base.filter((p) => haveBrand.some((b) => brandMatches(p.brand, b)));
+  // The brand exists, but not in this kind ("Lifelong desk organiser"): say so, then show that kind from other brands.
+  const nounsAsked = (q.nouns ?? []).filter((n) => FOCUS[n]);
+  const kindHit = (p: CatalogueProduct) => (q.kinds.length ? q.kinds.some((k) => KINDS[k]!.p(H(p))) : nounsAsked.some((n) => FOCUS[n]!.name.test(H(p).core)));
+  if (haveBrand.length && (q.kinds.length || nounsAsked.length) && !base.some(kindHit)) {
+    const what = nounsAsked.length ? nounsAsked.map((n) => NOUN_LABEL[n] ?? `${n}s`).join(' / ') : q.kinds.map((k) => KINDS[k]!.label).join(' / ');
+    const alt = recommend(products, { ...q, brands: [], terms: q.terms.filter((w) => !asked.includes(w)) }, limit, collections, opts);
+    return { ...alt, notes: dedupe([`Sorry, ${haveBrand.map(brandLabel).join(' / ')} ${what} are currently not available. Here are some close options from other brands.`, ...notes, ...alt.notes]), alternative: true };
+  }
   if (q.branding) {
     const brandable = base.filter((p) => p.branding_possible);
     base = brandable;
@@ -1135,7 +1186,8 @@ export function recommend(
       const prices = base.map(unitPrice).filter((x): x is number => x !== null);
       if (prices.length && Number.isFinite(q.maxPrice) && Math.min(...prices) > q.maxPrice) {
         const cheapest = Math.min(...prices);
-        notes.push(`Sorry, we don't have anything ${budgetText} right now. Our gifts start at ${inrN(cheapest)}.`);
+        const who = asked.length ? asked.map((b) => b.replace(/\b\w/g, (c) => c.toUpperCase())).join(' / ') + ' products' : q.kinds.length ? q.kinds.map((k) => KINDS[k]!.label).join(' / ') : 'gifts';
+        notes.push(asked.length || q.kinds.length ? `Sorry, ${who} are currently not available ${budgetText}. They start at ${inrN(cheapest)}.` : `Sorry, we don't have anything ${budgetText} right now. Our gifts start at ${inrN(cheapest)}.`);
         suggestion = { label: 'Show our most affordable gifts', query: { ...q, maxPrice: Math.round(cheapest * 1.5), approx: null, totalBudget: null } };
       } else if (prices.length && q.minPrice > Math.max(...prices)) {
         if (!notes.some((n) => n.startsWith('Sorry'))) notes.push(`Sorry, we don't have anything above ${inrN(q.minPrice)} right now. Our most premium gifts go up to ${inrN(Math.max(...prices))}.`);
@@ -1168,7 +1220,8 @@ export function recommend(
   // Hard needs (colours, sizes, features) are reported when missing; other words only narrow when something has them.
   const needs = askedNeeds(q, asked);
   if (needs.length && ranked.length) {
-    const sc = new Map(ranked.map((p) => [p.id, needs.filter((n) => n.ok(p)).length]));
+    // A colour or feature (hard) outweighs any number of descriptive words: "pink water bottle" → pink bottles first.
+    const sc = new Map(ranked.map((p) => [p.id, needs.reduce((t, n) => t + (n.ok(p) ? (n.hard ? 100 : 1) : 0), 0)]));
     const best = Math.max(...sc.values());
     // Several kinds asked ("backpack, power bank and earbuds"): narrow each kind on its own so none drops out.
     const kindOf = (p: CatalogueProduct) => (q.kinds.length > 1 ? q.kinds.find((k) => KINDS[k]!.p(H(p))) ?? 'other' : 'all');
@@ -1179,14 +1232,18 @@ export function recommend(
     if (best > 0) {
       ranked = ranked.filter((p) => sc.get(p.id) === bestBy.get(kindOf(p)));
       const missing = hard.filter((n) => !ranked.some(n.ok));
-      if (missing.length) notes.push(`We don't have ${what} that match "${missing.map((n) => n.label).join('", "')}", so these are the closest matches.`);
+      if (missing.length) notes.push(`Sorry, ${missing.map((n) => n.label).join(', ')} ${what} are currently not available. Here are the closest matches.`);
     } else if (hard.length) {
       // Nothing in this budget has it: say so, and offer it at any price if we have it.
       const anyPrice = base.filter((p) => kindOk(p) && hard.every((n) => n.ok(p)));
-      notes.push(`Sorry, we don't have ${hard.map((n) => n.label).join(', ')} ${what}${anyPrice.length && budgetText ? ` ${budgetText}` : ''}. Here are other ${what}.`);
+      notes.push(`Sorry, ${hard.map((n) => n.label).join(', ')} ${what}${anyPrice.length && budgetText ? ` ${budgetText}` : ''} are currently not available. Here are some close options.`);
       if (anyPrice.length && !suggestion) {
         suggestion = { label: `Show ${hard.map((n) => n.label).join(' ')} ${what} at any price (${anyPrice.length})`, query: { ...q, minPrice: 0, maxPrice: Infinity, approx: null, totalBudget: null } };
       }
+    } else if (q.kinds.length || (q.nouns ?? []).length) {
+      // A product word we don't stock ("sipper" bottle, "airpods" case): say so, then show the closest.
+      const words = needs.map((n) => n.label);
+      notes.push(`Sorry, ${words.map((w) => `"${w}"`).join(' ')} ${what} are currently not available. Here are some close options.`);
     }
   }
   const allPrices = live.map(unitPrice).filter((x): x is number => x !== null);

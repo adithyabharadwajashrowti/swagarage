@@ -8,6 +8,7 @@
 import type { CatalogueProduct, Collection } from './types';
 import { describe, KINDS, matchesKind, MOQ, nounLabel, normalise, occasionLabel, parseRequest, recommend, resolveAmbiguity, type ParsedRequest, type Recommendation } from './assistant';
 import { inr, unitPrice } from './format';
+import { correctText } from './search';
 
 export interface ChatContext {
   /** The request the conversation is currently about. */
@@ -110,7 +111,8 @@ const FAQ: { re: RegExp; answer: (products: CatalogueProduct[]) => string; cover
     re: /\b(logo|branding|brand it|brand them|printing|print (our|my|the|a)|engrav(e|ed|ing)|emboss(ed|ing)?|deboss(ed|ing)?|embroider\w*|customi[sz](e|ed|ation)|personali[sz](e|ed|ation)|our name on)\b/,
     answer: (ps) => {
       const n = ps.filter((p) => p.branding_possible).length;
-      return `Yes! ${n} of our ${ps.length} products can carry your logo (printing, engraving or embossing, depending on the item). Tell us what you need when you request a quote and we'll confirm the options and cost.`;
+      const fmt = (x: number) => new Intl.NumberFormat('en-IN').format(x);
+      return `Yes! ${n === ps.length ? `All ${fmt(n)}` : `${fmt(n)} of our ${fmt(ps.length)}`} products can carry your logo (printing, engraving or embossing, depending on the item). Tell us what you need when you request a quote and we'll confirm the options and cost.`;
     },
   },
   {
@@ -129,8 +131,8 @@ const FAQ: { re: RegExp; answer: (products: CatalogueProduct[]) => string; cover
     answer: () => "For returns or replacements, contact our team with your quote reference and they'll help you out.",
   },
   {
-    re: /\b(talk to|speak (to|with)|call (me|us)|contact (you|someone|team)|human|real person|agent|someone from|phone number|whatsapp|email id|reach (you|someone))\b/,
-    answer: () => 'Our team is happy to help personally. Add the products you like to a quote and send it, and they\'ll contact you directly.',
+    re: /\b(talk to|speak (to|with)|call (me|us|you)|contact( (you|someone|team|number|no|details|info|us))?|human|real person|agent|someone from|phone( number| no)?|mobile (number|no)|your number|whatsapp|email( id)?|reach (you|someone))\b/,
+    answer: () => 'Our team is happy to help personally. Tap "Talk to us on WhatsApp" at the bottom of any page to chat with them, or add the products you like to a quote and send it, and they\'ll contact you directly.',
   },
 ];
 
@@ -172,7 +174,7 @@ const hasCore = (q: ParsedRequest) =>
   hasBudget(q) || q.quantity !== null || q.kinds.length > 0 || q.collections.length > 0 || (q.brands ?? []).length > 0 || (q.materials ?? []).length > 0;
 const hasContent = (q: ParsedRequest) =>
   hasBudget(q) || q.quantity !== null || q.kinds.length > 0 || q.collections.length > 0 || q.stockOnly || q.prefer !== null ||
-  (q.brands ?? []).length > 0 || (q.materials ?? []).length > 0 || (q.specs ?? []).length > 0 || q.purpose != null;
+  (q.brands ?? []).length > 0 || (q.materials ?? []).length > 0 || (q.specs ?? []).length > 0 || (q.attrs ?? []).length > 0 || q.purpose != null;
 
 function mergeRequest(prev: ParsedRequest, cur: ParsedRequest, t: string): ParsedRequest {
   const m: ParsedRequest = { ...prev, ambiguous: cur.ambiguous, prefer: cur.prefer };
@@ -197,7 +199,13 @@ function mergeRequest(prev: ParsedRequest, cur: ParsedRequest, t: string): Parse
   else if (cur.kinds.length) m.nouns = [];
   m.notKinds = [...new Set([...(prev.notKinds ?? []).filter((k) => !cur.kinds.includes(k)), ...(cur.notKinds ?? [])])];
   m.kinds = m.kinds.filter((k) => !m.notKinds!.includes(k));
-  m.terms = cur.terms;
+  // Product words carry over when the follow-up only adds a colour, feature or budget ("grow kit" → "under 500").
+  m.terms = cur.terms.length || cur.kinds.length ? cur.terms : prev.terms;
+  // Features follow the conversation: a new colour replaces the old one; a new kind starts afresh.
+  const COLOURISH = /^(black|white|red|blue|navy|green|grey|yellow|pink|orange|purple|brown|maroon|beige|silver|gold)$/;
+  const curA = cur.attrs ?? [];
+  if (cur.kinds.length) m.attrs = curA;
+  else if (curA.length) m.attrs = [...new Set([...(prev.attrs ?? []).filter((a) => !(curA.some((c) => COLOURISH.test(c)) && COLOURISH.test(a))), ...curA])];
   // These carry over unless the new message says something about them.
   m.gst = cur.gst ?? prev.gst ?? null;
   m.materials = cur.materials?.length ? cur.materials : prev.materials;
@@ -232,7 +240,9 @@ function findProducts(products: CatalogueProduct[], t: string): CatalogueProduct
     byModel.get(model)!.push(p);
   }
   const hits: CatalogueProduct[] = [];
-  for (const [model, ps] of byModel) if (ps.length === 1 && padded.includes(` ${model} `)) hits.push(ps[0]!);
+  // A model name that is just a colour or a common word ("Dd Silver", "Forest Award") is not enough.
+  const COMMON = /^(silver|gold|golden|black|white|blue|red|green|grey|pink|award|awards|plus|pro|max|mini|lite|classic|premium|deluxe|set|kit|box|bag|bottle|mug|pen|diary|notebook|window|stand|holder|organiser|organizer|lamp|clock)$/;
+  for (const [model, ps] of byModel) if (ps.length === 1 && !COMMON.test(model) && padded.includes(` ${model} `)) hits.push(ps[0]!);
   return hits.slice(0, 4);
 }
 
@@ -272,6 +282,14 @@ function text(lines: string[], quick: QuickReply[] = [], parsed: ParsedRequest |
 // --- main ----------------------------------------------------------------------
 
 export function respond(message: string, ctx: ChatContext, products: CatalogueProduct[], collections?: Cols): { reply: BotReply; ctx: ChatContext } {
+  // Fix product-word typos first ("backpak" → "backpack") and say so.
+  const fix = correctText(message.trim().slice(0, 300), products);
+  const out = respondTo(fix ? fix.text : message, ctx, products, collections);
+  if (fix && out.reply.rec?.picks.length) out.reply.text = [`(Showing results for ${fix.fixed.map(([, b]) => `"${b}"`).join(', ')}.)`, ...out.reply.text];
+  return out;
+}
+
+function respondTo(message: string, ctx: ChatContext, products: CatalogueProduct[], collections?: Cols): { reply: BotReply; ctx: ChatContext } {
   const raw = message.trim().slice(0, 300);
   const t = normalise(raw).replace(//g, '').replace(/[!?.,;:]+/g, ' ').replace(/\s+/g, ' ').trim();
   const keep = (reply: BotReply, next: ChatContext = ctx) => ({ reply, ctx: next });
@@ -350,7 +368,7 @@ export function respond(message: string, ctx: ChatContext, products: CataloguePr
 
   // A product asked about by name.
   const named = findProducts(products, t);
-  if (named.length && !hasBudget(q0) && !q0.kinds.length) {
+  if (named.length && !hasBudget(q0) && !q0.kinds.length && !(q0.attrs ?? []).length) {
     const rec: Recommendation = { picks: named, notes: [], suggestion: null, matched: named.length, alternative: false };
     return keep({ text: [...faq, ...named.map(productLine)], chips: [], rec, ask: null, parsed: null, quick: [] }, ctx);
   }
@@ -380,7 +398,14 @@ export function respond(message: string, ctx: ChatContext, products: CataloguePr
       return runRequest(products, collections, q, ctx, 'Sure! ', undefined, 'more premium ');
     }
     const fresh = q0.collections.length > 0 && (hasBudget(q0) || q0.kinds.length > 0);
-    if (!fresh && (contentful || q0.terms.length || NO_BUDGET.test(t) || (q0.notKinds ?? []).length)) {
+    const termsKnown = q0.terms.some((w) => {
+      const re = new RegExp(`\\b${w.replace(/s$/, '')}`);
+      return products.some((p) => re.test(`${p.name} ${p.subcategory} ${p.category.name} ${p.brand ?? ''} ${(p.colours ?? []).join(' ')}`.toLowerCase()));
+    });
+    if (!fresh && !contentful && q0.terms.length && !termsKnown && !NO_BUDGET.test(t) && !(q0.notKinds ?? []).length && !(q0.attrs ?? []).length) {
+      return keep(text([`Sorry, "${q0.terms.join(' ')}" is currently not available in our catalogue. Try another product, or say "show more" for more of the current picks.`], AFTER_PICKS));
+    }
+    if (!fresh && (contentful || q0.terms.length || (q0.attrs ?? []).length || NO_BUDGET.test(t) || (q0.notKinds ?? []).length)) {
       q0 = mergeRequest(prev, q0, t);
       return runRequest(products, collections, q0, ctx, faq.length ? faq.join(' ') + ' ' : '');
     }

@@ -144,6 +144,51 @@ function fieldScoreOf(t: string, ix: Indexed, knownKind: boolean): number {
   return best;
 }
 
+/** Words the chat fixes typos towards: product types, colours and materials only, so Hinglish or names are left alone. */
+const CHAT_WORDS = new Set<string>([
+  ...'bottle mug flask sipper tumbler backpack laptop sleeve sling duffle duffel tote pouch wallet speaker earbuds headphones neckband charger cable smartwatch hoodie jacket shirt tshirt apparel diary notebook pen calendar planner planter lamp clock kettle mousepad organiser organizer gadget hamper bluetooth wireless magnetic portable waterproof insulated'.split(' '),
+  ...'umbrella umbrellas trophy trophies memento medal medals keychain keychains calendar calendars candle candles diya planter succulent coaster coasters frame frames purse purses trolley trolleys suitcase luggage cushion towel blanket shawl perfume trimmer massager kettle tumbler tumblers sipper sippers thermos lunchbox lunch tiffin container stationery notebook notebooks diaries pouch pouches organiser hoodie sweatshirt tshirt polo polos socks shoes sneakers cap caps hat shirt blazer windcheater bomber puffer fleece speaker speakers earphones headphone headphones earbuds charger chargers adapter powerbank cable cables mouse keyboard webcam lamp lamps lantern torch clock clocks watch watches smartwatch tracker backpack backpacks rucksack duffle duffel sling tote wallet wallets hamper hampers chocolate chocolates dryfruits gift gifts combo handbag handbags umbrella medal formal casual'.split(' '),
+  ...COLOURS,
+].map(stem));
+/** Fix typos in a chat message against the catalogue's words ("backpak" → "backpack"). Null when nothing changed. */
+const knownCache = new WeakMap<CatalogueProduct[], Set<string>>();
+/** Every word in the catalogue (names, types, colours): these are never "fixed". */
+function knownWords(products: CatalogueProduct[]): Set<string> {
+  let v = knownCache.get(products);
+  if (!v) {
+    v = new Set<string>([...SEARCH_WORDS.split(' ').map(stem), ...STOP]);
+    for (const p of products) for (const w of words(`${p.name} ${p.subcategory ?? ''} ${p.category.name} ${p.brand ?? ''} ${(p.colours ?? []).join(' ')}`)) v.add(stem(w));
+    knownCache.set(products, v);
+  }
+  return v;
+}
+/** Fix product-word typos in a chat message ("backpak" → "backpack", "umbrela" → "umbrella"). Null when nothing changed. */
+export function correctText(text: string, products: CatalogueProduct[] = []): { text: string; fixed: [string, string][] } | null {
+  const known = knownWords(products);
+  const tokens = normalise(text).replace(/\u20b9/g, ' ').split(/\s+/).filter(Boolean);
+  const PROTECT = /^(kids?|men|mens|women|ladies|team|teams|lady|girls?|boys?|staff|ceo|vip|whats|thats|pls|plz|pcs|ppl)$/;
+  const ALIAS: Record<string, string> = { bagack: 'backpack', backpak: 'backpack', bagpack: 'backpack', bagpacks: 'backpacks', bagpak: 'backpack', bottel: 'bottle', bottels: 'bottles', botel: 'bottle', calender: 'calendar', calenders: 'calendars', momento: 'memento', momentos: 'mementos', speakr: 'speaker', umbrela: 'umbrella', umbrellas: 'umbrellas' };
+  const fixed: [string, string][] = [];
+  const out = tokens.map((tok) => {
+    const w = tok.replace(/[^a-z0-9+-]/g, '');
+    if (!w || /\d/.test(w) || PROTECT.test(w)) return tok;
+    if (ALIAS[w]) { fixed.push([w, ALIAS[w]!]); return ALIAS[w]!; }
+    if (w.length < 5 || known.has(stem(w)) || known.has(w) || CHAT_WORDS.has(stem(w))) return tok;
+    // One slip (a missing, extra, wrong or swapped letter) on a product word with the same first letter.
+    let best: string | null = null;
+    for (const v of CHAT_WORDS) {
+      const sw = stem(w);
+      if (v[0] !== sw[0] || Math.abs(v.length - sw.length) > 1) continue;
+      const swapped = v.length === sw.length && [...v].filter((c, i) => c !== sw[i]).length === 2 && [...v].sort().join('') === [...sw].sort().join('');
+      if (swapped || editDistance(sw, v, 1) <= 1) { best = w.endsWith('s') && !v.endsWith('s') ? v + 's' : v; break; }
+    }
+    if (!best) return tok;
+    fixed.push([w, best]);
+    return best;
+  });
+  return fixed.length ? { text: out.join(' '), fixed } : null;
+}
+
 export function smartSearch(products: CatalogueProduct[], text: string): SearchResult {
   const raw = text.trim().slice(0, 120);
   if (!raw) return { exact: products, related: [], understood: [], corrected: null };
