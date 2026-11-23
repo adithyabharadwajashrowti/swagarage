@@ -237,7 +237,7 @@ export const KINDS: Record<string, { label: string; q: RegExp; p: (h: Hay) => bo
   drinkware: {
     label: 'mugs & bottles',
     q: /\bmugs?\b|\bbottles?\b(?! ?openers?)|\bflasks?\b|\btumblers?\b|\bsippers?\b|\bcups?\b|\bdrinkware\b|\bthermos\b|\btemp(erature)? bottles?\b|\bsmart bottles?\b|\bcopper bottles?\b/,
-    p: (h) => /mug|bottle|flask|tumbler|sipper|\bcups?\b|drinkware/.test(h.core),
+    p: (h) => /mug|bottle|flask|tumbler|sipper|\bcups?\b|drinkware/.test(h.core) && !/\b(medals?|troph(y|ies)|awards?|mementos?|plaques?|opener|holder)\b/.test(h.p.name.toLowerCase()),
   },
   hoodie: {
     label: 'hoodies & sweatshirts',
@@ -495,7 +495,7 @@ export const ATTRS: Record<string, { label: string; q: RegExp; p: RegExp }> = {
 const ATTR_KEYS = Object.keys(ATTRS);
 const COLOUR_ATTRS = new Set(['black', 'white', 'red', 'blue', 'navy', 'green', 'grey', 'yellow', 'pink', 'orange', 'purple', 'brown', 'maroon', 'beige', 'silver', 'gold']);
 /** The test for one wanted feature ("nin1:3" → "3 in 1"). */
-function attrTest(key: string): { label: string; p: RegExp } {
+export function attrTest(key: string): { label: string; p: RegExp } {
   const m = /^nin1:(\d)$/.exec(key);
   if (m) return { label: `${m[1]}-in-1`, p: new RegExp(`\\b${m[1]} ?-?in ?-?(1|one)\\b`) };
   return ATTRS[key]!;
@@ -669,6 +669,8 @@ function classify(t: string, n: Num): Cls {
   if (money && !peopleFollow(right, HEADS)) return res('price', RIGHT_MIN.test(right) || /^\s*\+/.test(right) ? 'min' : dir);
   if (!money && !leftCur && !rightCur && (new RegExp(String.raw`^\s*${UNITS}(?![a-z])`).test(right) || /^(?:w|v|g|l|kg)(?![a-z])/.test(right))) return res('ignore');
   if (!leftCur && !rightCur && n.value >= 1e9) return res('ignore'); // phone numbers
+  // "top 5 gifts", "show 3": how many to show, not a budget or a head count
+  if (!money && !leftCur && !rightCur && n.value <= 20 && /\b(top|best|show|first|show me|give me|only)\s*$/.test(l)) return res('ignore');
   if (leftCur || rightCur || PER_WORDS.test(right) || /^\s*(?:budget|price|range)\b(?!\s*(?:is|of|:|=)?\s*(?:₹|\brs|\binr)?\s*\d)/.test(right)) {
     // "₹500+" means "from ₹500"
     const plus = /^\s*(?:\brs|\binr)?\s*\+/.test(right);
@@ -682,6 +684,8 @@ function classify(t: string, n: Num): Cls {
   if (/(?:^|[^a-z])(?:budget(?: is| of)?|price(?: of)?|priced at|costing|costs?|spend|spending|worth)\s*:?\s*$/.test(l)) return res('price');
   // "under 500 client gifts" is a price; "over 100 employees" / "around 100 people" are head counts.
   if (priceWord) return { ...res('price'), qtyAlt: peopleFollow(right) };
+  // "50 hoodies and 50 caps": a number right before a product word is how many
+  if (!leftCur && !rightCur && Object.values(KINDS).some((k) => { const m = right.slice(0, 30).match(k.q); return !!m && (m.index ?? 9) <= 1; })) return res('qty');
   if (peopleFollow(right)) return res('qty');
   if (priceWord) return res('price');
   if (new RegExp(String.raw`^\s*\+?\s*${FILL}${COUNTABLE}\b`).test(right)) return res('qty');
@@ -749,7 +753,7 @@ export function parseRequest(text: string): ParsedRequest {
       if (quantity === null) quantity = n.value;
       else if (c.priceAlt && n !== firmQty && quantity !== n.value) {
         const ctx = t.slice(Math.max(0, n.start - 30), n.end + 15);
-        prices.push({ value: n.value, dir: c.dir, total: TOTAL_WORDS.test(ctx), budgetish: c.budgetish });
+        prices.push({ value: n.value, dir: c.dir, total: TOTAL_WORDS.test(ctx) && !/\bper (kit|gift|person|head|employee|hamper|box|set|piece|pack)\b/.test(ctx), budgetish: c.budgetish });
       }
       return;
     }
@@ -759,7 +763,7 @@ export function parseRequest(text: string): ParsedRequest {
     }
     if (c.role === 'price') {
       const ctx = t.slice(Math.max(0, n.start - 30), n.end + 15);
-      prices.push({ value: n.value, dir: c.dir, total: TOTAL_WORDS.test(ctx), budgetish: c.budgetish });
+      prices.push({ value: n.value, dir: c.dir, total: TOTAL_WORDS.test(ctx) && !/\bper (kit|gift|person|head|employee|hamper|box|set|piece|pack)\b/.test(ctx), budgetish: c.budgetish });
       return;
     }
     bare.push(n.value);
@@ -851,7 +855,7 @@ export function parseRequest(text: string): ParsedRequest {
     ...[...KNOWN_BRANDS].filter((b) => new RegExp(`\\b${b}\\b`).test(t) && !BRAND_PHRASES.some((p) => p.split(' ').includes(b) && t.includes(` ${p} `))),
   ];
   const specs = [...t.matchAll(/(\d+(?:\.\d+)?)\s*(mah|ml|ltrs?|litres?|liters?|gsm|inch(?:es)?|"|w|watts?|gb|tb)\b/g)].map((m) => specKey(m[1]!, m[2]!));
-  const dl = t.match(/\b(?:by|before|within|in|latest by|deadline|delivery by|delivered by|needed by|need (?:it|them) by|required by|dispatch by)\s+((?:the\s+)?\d{1,2}(?:st|nd|rd|th)?(?:\s*(?:of\s*)?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*)?|\d+\s*(?:working\s+)?(?:days?|weeks?)|next week|this week|month[- ]end|end of (?:the )?month|tomorrow|diwali|christmas|new year)\b/);
+  const dl = t.match(/\b(?:by|before|within|in|latest by|deadline|delivery by|delivered by|needed by|need (?:it|them) by|required by|dispatch by)\s+(\d+\s*(?:working\s+)?(?:days?|weeks?)|(?:the\s+)?\d{1,2}(?:st|nd|rd|th)?(?:\s*(?:of\s*)?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*)?|next week|this week|month[- ]end|end of (?:the )?month|tomorrow|diwali|christmas|new year)\b/);
   const deadline = dl && /\d|week|month|tomorrow|diwali|christmas|new year/.test(dl[1] ?? '') && (/\b(days?|weeks?|week|month|tomorrow|diwali|christmas|new year|st|nd|rd|th|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/.test(dl[1] ?? '')) ? dl[0].trim().replace(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)([a-z]*)\b/, (m) => m[0]!.toUpperCase() + m.slice(1)) : null;
   const purpose = /\brewards and recognition\b|\blong service\b|\bwork anniversar|\bservice award|\bemployee engagement\b|\bappreciation\b|\bemployee of the (month|year)\b/.test(t)
     ? 'Rewards & recognition'
@@ -944,7 +948,8 @@ function hay(p: CatalogueProduct): Hay {
 }
 
 /** Everyday words that are never a product feature ("do you HAVE", "MAKE it cheaper", "SHOW me"). */
-const FILLER = new Set(('most expensive costly costliest priciest highest pricey cheap cheaper cheapest sasta sasti saste low high end top year years '
+const FILLER = new Set(('next previous prev page back less lower that this these those ondu beku beda olage tak ke andar mein ka ki ko compare comparison best top trending popular bestseller bestsellers selling famous '
+  + 'most expensive costly costliest priciest highest pricey cheap cheaper cheapest sasta sasti saste low high end top year years '
   + 'head heads per wala wali wale waala chahiye dikhao dikha batao kuch accha acha boss manager colleague colleagues friend friends client clients sir madam '
   + 'but however though although rather instead have has had having make made makes do does did doing done what which whats who whom whose where when why how want wants wanted need needs needed '
   + 'some any all every each show shows showing give get got find found see look looking looks also please pls plz kindly can could would will should shall '
@@ -1109,8 +1114,16 @@ export function recommend(
   if (q.notMaterials?.length) base = base.filter((p) => !q.notMaterials!.some((m) => MATERIALS[m]!.p.test(H(p).full)));
   if (q.notAttrs?.length) base = base.filter((p) => !q.notAttrs!.some((k) => attrTest(k).p.test(H(p).full)));
   if (q.stockOnly) {
-    base = base.filter((p) => (p.ready_stock ?? 0) > 0);
-    notes.push('Showing only products with ready stock.');
+    const inStock = base.filter((p) => (p.ready_stock ?? 0) > 0);
+    const wanted = (p: CatalogueProduct) => (!q.kinds.length || q.kinds.some((k) => KINDS[k]!.p(H(p)))) && (!(q.nouns ?? []).length || (q.nouns ?? []).some((n) => !FOCUS[n] || FOCUS[n]!.name.test(p.name.toLowerCase())));
+    if ((q.kinds.length || (q.nouns ?? []).length) && !inStock.some(wanted) && base.some(wanted)) {
+      // Nothing of this kind is in stock: show it made to order rather than unrelated stock items.
+      const what = nounLabel(q, base.filter(wanted)) ?? q.kinds.map((k) => KINDS[k]!.label).join(' / ');
+      notes.push(`Sorry, none of our ${what} are in ready stock right now. Here are made-to-order options; our team will confirm delivery dates in your quote.`);
+    } else {
+      base = inStock;
+      notes.push('Showing only products with ready stock.');
+    }
   }
   if (haveBrand.length) base = base.filter((p) => haveBrand.some((b) => brandMatches(p.brand, b)));
   // The brand exists, but not in this kind ("Lifelong desk organiser"): say so, then show that kind from other brands.

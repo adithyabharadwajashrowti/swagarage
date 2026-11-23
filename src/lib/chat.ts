@@ -6,7 +6,7 @@
 // follow-ups ("cheaper", "show more", "what about speakers", "for 50 ppl")
 // adjust the previous request instead of starting over.
 import type { CatalogueProduct, Collection } from './types';
-import { describe, KINDS, matchesKind, MOQ, nounLabel, normalise, occasionLabel, parseRequest, recommend, resolveAmbiguity, type ParsedRequest, type Recommendation } from './assistant';
+import { attrTest, describe, KINDS, matchesKind, MOQ, nounLabel, normalise, occasionLabel, parseRequest, recommend, resolveAmbiguity, type ParsedRequest, type Recommendation } from './assistant';
 import { inr, unitPrice } from './format';
 import { correctText } from './search';
 
@@ -175,12 +175,12 @@ const REFUSAL = "Sorry, I can only help with Swagarage's catalogue and your gift
 
 const CATALOGUE_Q = /\b(what (all )?(do you|you) (have|sell|offer|got)|what brands|which brands|what categories|what kind of (gifts|products)|show (me )?(your|the) (catalogue|catalog|range))\b/;
 
-const CHEAPER = /\b(cheaper|cheap(er)? ones|less expensive|lower (price|budget|cost|range)|more affordable|budget friendly|too (expensive|costly|pricey|much)|reduce (the )?(price|budget)|economical|something cheaper|low budget)\b/;
+const CHEAPER = /\b(less than (that|this|these)|lower than (that|this|these)|below (that|this)|under (that|this)|cheaper|cheap(er)? ones|less expensive|lower (price|budget|cost|range)|more affordable|budget friendly|too (expensive|costly|pricey|much)|reduce (the )?(price|budget)|economical|something cheaper|low budget)\b/;
 const PREMIUM = /\b(more (premium|expensive|luxury|luxurious|upscale|classy|fancy)|costlier|higher (end|range|budget|price)|better (quality|ones)|fancier|too cheap|premium ones|high end|something premium|more premium)\b/;
-const MORE = /\b(show more|more (options|ideas|products|gifts|choices|please|pls)|see more|any more|anything else|something else|other (options|ones|ideas)|others|different ones|what else|next|more like (this|these)|more)\b/;
+const MORE = /\b(show more|more (options|ideas|products|gifts|choices|please|pls)|see more|any more|anything else|something else|other (options|ones|ideas)|others|different ones|what else|next|more like (this|these)|more)\b|^\s*(show|give)( me)? \d{1,2}\s*$/;
 const NO_BUDGET = /\b(no budget|any budget|budget (is )?no bar|budget doesn'?t matter|price doesn'?t matter|no limit|any price)\b/;
 const ADD_WORDS = /\b(also|too|as well|add|plus|along with|and some)\b|^\s*(and|with|aur)\b/;
-const GIFT_INTENT = /\b(dikhao|dikha|batao|chahiye|kuch|gift|gifts|gifting|swag|merch|merchandise|something|suggest|suggestion|recommend|show|need|want|looking|idea|ideas|options|kit|kits|hamper|hampers|present|presents|buy|order|get me|give me|find|send|share|requirement|requirements|enquiry|inquiry|rfq|quote|quotation|giveaways?|freebies|collaterals?|promotional|corporate|products?|items?|range)\b/;
+const GIFT_INTENT = /\b(bestsellers?|best ?selling|popular|trending|top (picks|gifts|products)|dikhao|dikha|batao|chahiye|kuch|gift|gifts|gifting|swag|merch|merchandise|something|suggest|suggestion|recommend|show|need|want|looking|idea|ideas|options|kit|kits|hamper|hampers|present|presents|buy|order|get me|give me|find|send|share|requirement|requirements|enquiry|inquiry|rfq|quote|quotation|giveaways?|freebies|collaterals?|promotional|corporate|products?|items?|range)\b/;
 const DETAIL = /\b(about|details?|specs?|specifications?|price of|cost of|how much|tell me|info|information|features?|colou?rs?|is it|does it|what is|show me)\b/;
 
 // --- helpers -------------------------------------------------------------------
@@ -245,7 +245,8 @@ function findProducts(products: CatalogueProduct[], t: string): CatalogueProduct
   const full = products.filter((p) => padded.includes(` ${p.name.toLowerCase()} `) || padded.includes(` ${p.name.toLowerCase().replace(/\+/g, ' plus')} `));
   if (full.length) {
     // "Toreto Jolly" should not also return "Toreto Jolly+" unless asked.
-    const exact = full.filter((p) => !full.some((o) => o !== p && o.name.toLowerCase().startsWith(p.name.toLowerCase()) && padded.includes(` ${o.name.toLowerCase()} `)));
+    // "Zurich Backpack" should not also return the product simply called "Backpack".
+    const exact = full.filter((p) => !full.some((o) => o !== p && ` ${o.name.toLowerCase()} `.includes(` ${p.name.toLowerCase()} `) && padded.includes(` ${o.name.toLowerCase()} `)));
     return exact.slice(0, 4);
   }
   // Model name alone ("flyt", "soundbolt"), only when it is unique and the message is about a product.
@@ -263,8 +264,14 @@ function findProducts(products: CatalogueProduct[], t: string): CatalogueProduct
   const hits: CatalogueProduct[] = [];
   // A model name that is just a colour or a common word ("Dd Silver", "Forest Award") is not enough.
   const COMMON = /^(silver|gold|golden|black|white|blue|red|green|grey|pink|award|awards|plus|pro|max|mini|lite|classic|premium|deluxe|set|kit|box|bag|bottle|mug|pen|diary|notebook|window|stand|holder|organiser|organizer|lamp|clock)$/;
-  for (const [model, ps] of byModel) if (ps.length === 1 && !COMMON.test(model) && padded.includes(` ${model} `)) hits.push(ps[0]!);
+  for (const [model, ps] of byModel) if (ps.length === 1 && !COMMON.test(model) && !isGenericName(model) && padded.includes(` ${model} `)) hits.push(ps[0]!);
   return hits.slice(0, 4);
+}
+
+/** A name made only of everyday product words ("Gym Bag", "Metal pen", "Bottle") doesn't single out one product. */
+const GENERIC_WORDS = /^(formal|casual|polo|round|neck|collar|full|half|sleeve|zip|hooded|oxford|dri-?fit|metal|steel|stainless|wooden|wood|bamboo|cork|jute|cotton|leather|pu|glass|plastic|gym|sports?|travel|laptop|office|desk|table|women'?s?|men'?s?|kids?|ladies|unisex|premium|classic|basic|plain|simple|standard|deluxe|executive|eco|friendly|mini|small|large|big|new|smart|wireless|bluetooth|digital|portable|insulated|of|with|and|the|a|for|in|set|style|type|pack|combo|\d+|[a-z]|black|white|blue|red|green|grey|gray|pink|navy|silver|gold|golden|brown|yellow|orange|maroon|beige|tan)$/;
+function isGenericName(name: string): boolean {
+  return name.toLowerCase().replace(/[^a-z0-9\s'-]/g, ' ').split(/\s+/).filter(Boolean).every((w) => GENERIC_WORDS.test(w) || Object.values(KINDS).some((k) => k.q.test(` ${w} `)));
 }
 
 function productLine(p: CatalogueProduct): string {
@@ -394,15 +401,38 @@ function respondTo(message: string, ctx: ChatContext, products: CatalogueProduct
 
   // A product asked about by name.
   const named = findProducts(products, t);
-  if (named.length && !hasBudget(q0) && !q0.kinds.length && !(q0.attrs ?? []).length) {
+  // "is the Zurich Backpack waterproof?": answer about that product.
+  if (named.length === 1 && (q0.attrs ?? []).length && !hasBudget(q0) && !isGenericName(named[0]!.name) && /^\s*(is|does|do|has|have|can|will|are|was)\b/.test(t)) {
+    const p = named[0]!;
+    const hay = `${p.name} ${p.subcategory ?? ''} ${p.description ?? ''} ${(p.features ?? []).join(' ')} ${Object.values(p.specs ?? {}).join(' ')} ${(p.colours ?? []).join(' ')}`.toLowerCase();
+    const lines = (q0.attrs ?? []).map((k) => {
+      const a = attrTest(k);
+      return a.p.test(hay) ? `Yes, the ${p.name} is listed as ${a.label}.` : `The ${p.name} isn't listed as ${a.label}. Ask our team in your quote and they'll confirm, or I can show you ${a.label} options instead.`;
+    });
+    const rec: Recommendation = { picks: named, notes: [], suggestion: null, matched: 1, alternative: false };
+    return keep({ text: [...lines, productLine(p)], chips: [], rec, ask: null, parsed: null, quick: [] }, ctx);
+  }
+  // The full product name was typed ("price of Latitude Backpack"): talk about that product, even though it names a kind.
+  const byFullName = named.length > 0 && named.every((p) => ` ${t} `.includes(` ${p.name.toLowerCase()} `) && !isGenericName(p.name));
+  if (named.length && !hasBudget(q0) && (byFullName || !q0.kinds.length) && !(q0.attrs ?? []).length && !(byFullName && q0.quantity === null && q0.kinds.length && /^\s*(show|need|want|looking)\b/.test(t) && named.length > 1)) {
     const rec: Recommendation = { picks: named, notes: [], suggestion: null, matched: named.length, alternative: false };
-    return keep({ text: [...faq, ...named.map(productLine)], chips: [], rec, ask: null, parsed: null, quick: [] }, ctx);
+    // Keep the kind in mind, so "under 700" or "in black" next works on it.
+    const next = hasContent(q0) ? { ...ctx, q: q0, shown: named.map((p) => p.id) } : ctx;
+    return keep({ text: [...faq, ...named.map(productLine)], chips: [], rec, ask: null, parsed: null, quick: [] }, next);
   }
 
   if (faq.length && !contentful) return keep(text(faq, ctx.q ? AFTER_PICKS : EXAMPLES));
 
   // Follow-ups on the current request.
   const prev = ctx.q;
+  if (prev && /\b((any )?(other|different|more) colou?rs?|colou?r options|which colou?rs|what colou?rs|available colou?rs|colou?rs available)\b/.test(t) && !(q0.attrs ?? []).length) {
+    const pool = products.filter((p) => p.status === 'live' && (!prev.kinds.length || prev.kinds.some((k) => matchesKind(p, k))));
+    const count = new Map<string, number>();
+    for (const p of pool) for (const c of p.colours ?? []) { const k = c.trim().toLowerCase(); if (k && k.length < 20) count.set(k, (count.get(k) ?? 0) + 1); }
+    const top = [...count.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10).map(([c]) => c.replace(/\b\w/g, (x) => x.toUpperCase()));
+    const what = prev.kinds.length ? prev.kinds.map((k) => KINDS[k]!.label).join(' / ') : 'these products';
+    return keep(text([top.length ? `Our ${what} come in ${top.join(', ')} and more. Tell me a colour (for example "${top[0]!.toLowerCase()}") and I'll show only those.` : `Colours vary by product. Tell me the colour you want and I'll check.`], AFTER_PICKS));
+  }
   if (prev) {
     const cheaper = CHEAPER.test(t);
     const premium = !cheaper && PREMIUM.test(t);
