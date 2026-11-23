@@ -198,6 +198,9 @@ function mergeRequest(prev: ParsedRequest, cur: ParsedRequest, t: string): Parse
   if (cur.nouns?.length) m.nouns = ADD_WORDS.test(t) ? [...new Set([...(prev.nouns ?? []), ...cur.nouns])] : cur.nouns;
   else if (cur.kinds.length) m.nouns = [];
   m.notKinds = [...new Set([...(prev.notKinds ?? []).filter((k) => !cur.kinds.includes(k)), ...(cur.notKinds ?? [])])];
+  m.notNouns = [...new Set([...(prev.notNouns ?? []).filter((n) => !(cur.nouns ?? []).includes(n)), ...(cur.notNouns ?? [])])];
+  m.notAttrs = [...new Set([...(prev.notAttrs ?? []).filter((a) => !(cur.attrs ?? []).includes(a)), ...(cur.notAttrs ?? [])])];
+  m.notMaterials = [...new Set([...(prev.notMaterials ?? []).filter((x) => !(cur.materials ?? []).includes(x)), ...(cur.notMaterials ?? [])])];
   m.kinds = m.kinds.filter((k) => !m.notKinds!.includes(k));
   // Product words carry over when the follow-up only adds a colour, feature or budget ("grow kit" → "under 500").
   m.terms = cur.terms.length || cur.kinds.length ? cur.terms : prev.terms;
@@ -206,9 +209,10 @@ function mergeRequest(prev: ParsedRequest, cur: ParsedRequest, t: string): Parse
   const curA = cur.attrs ?? [];
   if (cur.kinds.length) m.attrs = curA;
   else if (curA.length) m.attrs = [...new Set([...(prev.attrs ?? []).filter((a) => !(curA.some((c) => COLOURISH.test(c)) && COLOURISH.test(a))), ...curA])];
+  m.attrs = (m.attrs ?? []).filter((a) => !m.notAttrs!.includes(a));
   // These carry over unless the new message says something about them.
   m.gst = cur.gst ?? prev.gst ?? null;
-  m.materials = cur.materials?.length ? cur.materials : prev.materials;
+  m.materials = (cur.materials?.length ? cur.materials : prev.materials ?? []).filter((x) => !m.notMaterials!.includes(x));
   m.branding = cur.branding ?? prev.branding ?? null;
   m.brands = cur.brands?.length ? cur.brands : prev.brands;
   m.specs = cur.specs?.length ? cur.specs : cur.kinds.length ? [] : prev.specs;
@@ -281,10 +285,15 @@ function text(lines: string[], quick: QuickReply[] = [], parsed: ParsedRequest |
 
 // --- main ----------------------------------------------------------------------
 
+/** How many "no …" parts the message has (kinds, products, features, materials). */
+const negCount = (q: ParsedRequest) => (q.notKinds ?? []).length + (q.notNouns ?? []).length + (q.notAttrs ?? []).length + (q.notMaterials ?? []).length;
+
 export function respond(message: string, ctx: ChatContext, products: CatalogueProduct[], collections?: Cols): { reply: BotReply; ctx: ChatContext } {
   // Fix product-word typos first ("backpak" → "backpack") and say so.
   const fix = correctText(message.trim().slice(0, 300), products);
   const out = respondTo(fix ? fix.text : message, ctx, products, collections);
+  // A brand we don't carry ("JBL speakers"): the note says sorry; the line says what we're showing instead.
+  if (!out.reply.text.length && out.reply.rec?.picks.length) out.reply.text = [`Here ${out.reply.rec.picks.length === 1 ? 'is 1 close option' : `are ${out.reply.rec.picks.length} close options`} from other brands.`];
   if (fix && out.reply.rec?.picks.length) out.reply.text = [`(Showing results for ${fix.fixed.map(([, b]) => `"${b}"`).join(', ')}.)`, ...out.reply.text];
   return out;
 }
@@ -402,10 +411,10 @@ function respondTo(message: string, ctx: ChatContext, products: CatalogueProduct
       const re = new RegExp(`\\b${w.replace(/s$/, '')}`);
       return products.some((p) => re.test(`${p.name} ${p.subcategory} ${p.category.name} ${p.brand ?? ''} ${(p.colours ?? []).join(' ')}`.toLowerCase()));
     });
-    if (!fresh && !contentful && q0.terms.length && !termsKnown && !NO_BUDGET.test(t) && !(q0.notKinds ?? []).length && !(q0.attrs ?? []).length) {
+    if (!fresh && !contentful && q0.terms.length && !termsKnown && !NO_BUDGET.test(t) && !negCount(q0) && !(q0.attrs ?? []).length) {
       return keep(text([`Sorry, "${q0.terms.join(' ')}" is currently not available in our catalogue. Try another product, or say "show more" for more of the current picks.`], AFTER_PICKS));
     }
-    if (!fresh && (contentful || q0.terms.length || (q0.attrs ?? []).length || NO_BUDGET.test(t) || (q0.notKinds ?? []).length)) {
+    if (!fresh && (contentful || q0.terms.length || (q0.attrs ?? []).length || NO_BUDGET.test(t) || negCount(q0))) {
       q0 = mergeRequest(prev, q0, t);
       return runRequest(products, collections, q0, ctx, faq.length ? faq.join(' ') + ' ' : '');
     }
@@ -419,7 +428,7 @@ function respondTo(message: string, ctx: ChatContext, products: CatalogueProduct
   if (OFF_TOPIC_SOFT.test(t) && !hasCore(q0) && !knownTerm && !GIFTY.test(t) && !q0.ambiguous.length) {
     return keep(text([REFUSAL], EXAMPLES));
   }
-  if (!hasContent(q0) && !knownTerm && !GIFT_INTENT.test(t) && !q0.ambiguous.length && !(q0.notKinds ?? []).length) {
+  if (!hasContent(q0) && !knownTerm && !GIFT_INTENT.test(t) && !q0.ambiguous.length && !negCount(q0)) {
     return keep(
       text(
         [
