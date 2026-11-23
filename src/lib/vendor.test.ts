@@ -274,3 +274,23 @@ describe('one kind per request (19 Nov)', () => {
   });
   it('polo narrows t-shirts', () => expect(parseRequest('polo t-shirts').nouns).toEqual(['polo']));
 });
+
+describe('exactly what was asked (20 Nov)', () => {
+  it('reads colours, sizes and features', () => {
+    expect(parseRequest('black backpack').attrs).toEqual(['black']);
+    expect(parseRequest('anti theft backpack with usb port').attrs).toEqual(['antitheft', 'usbport']);
+    expect(parseRequest('type c cable').attrs).toEqual(['typec']);
+    expect(parseRequest('women polo').attrs).toEqual(['women']);
+  });
+  it('"3 in 1" is a feature, not a price or quantity', () => {
+    const q = parseRequest('3 in 1 cable');
+    expect(q.attrs).toEqual(['nin1:3']);
+    expect(q.quantity).toBe(null);
+    expect(Number.isFinite(q.maxPrice)).toBe(false);
+  });
+  it('jacket styles are strict', () => {
+    expect(parseRequest('bomber jacket?').nouns).toEqual(['bomber']);
+    expect(parseRequest('only puffer jackets').nouns).toEqual(['puffer']);
+    expect(parseRequest('desk lamp').kinds).toEqual(['lamp']);
+  });
+});

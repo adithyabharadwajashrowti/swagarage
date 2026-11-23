@@ -10,7 +10,7 @@ import {
   inBudget,
   KINDS,
   MATERIALS,
-  matchesKind,
+  matchesKind, askedNeeds, isNarrowNoun,
   normalise,
   parseRequest,
   RELATED,
@@ -223,7 +223,15 @@ export function smartSearch(products: CatalogueProduct[], text: string): SearchR
   if (!exact.length) exact = scored.filter((s) => s.allMatched);
   if (!exact.length && q.collections.length) exact = scored.filter((s) => s.inOcc);
   // Asked for bottles and we have plenty: other drinkware moves to "related".
-  if (focus.length && !wantSets && exact.filter((s) => s.focusHit && !s.isSet).length >= 3) exact = exact.filter((s) => s.focusHit && !s.isSet);
+  const narrow = (q.nouns ?? []).some(isNarrowNoun);
+  if (focus.length && !wantSets && exact.filter((s) => s.focusHit && !s.isSet).length >= (narrow ? 1 : 3)) exact = exact.filter((s) => s.focusHit && !s.isSet);
+  // Exactly what was typed: colours, sizes, features and descriptive words ("black", "3 in 1", "anti theft").
+  const needs = askedNeeds(q, brandHits);
+  if (needs.length && exact.length) {
+    const sc = new Map(exact.map((s) => [s.i.p.id, needs.filter((n) => n.ok(s.i.p)).length]));
+    const best = Math.max(...sc.values());
+    if (best > 0) exact = exact.filter((s) => sc.get(s.i.p.id) === best);
+  }
   exact.sort((a, b) => b.score - a.score || Number(!!b.i.p.image_path) - Number(!!a.i.p.image_path) || priceOf(a.i.p) - priceOf(b.i.p) || a.i.p.name.localeCompare(b.i.p.name));
   const exactIds = new Set(exact.map((s) => s.i.p.id));
 

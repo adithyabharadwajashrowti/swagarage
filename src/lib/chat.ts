@@ -6,7 +6,7 @@
 // follow-ups ("cheaper", "show more", "what about speakers", "for 50 ppl")
 // adjust the previous request instead of starting over.
 import type { CatalogueProduct, Collection } from './types';
-import { describe, KINDS, matchesKind, MOQ, normalise, occasionLabel, parseRequest, recommend, resolveAmbiguity, type ParsedRequest, type Recommendation } from './assistant';
+import { describe, KINDS, matchesKind, MOQ, nounLabel, normalise, occasionLabel, parseRequest, recommend, resolveAmbiguity, type ParsedRequest, type Recommendation } from './assistant';
 import { inr, unitPrice } from './format';
 
 export interface ChatContext {
@@ -192,6 +192,9 @@ function mergeRequest(prev: ParsedRequest, cur: ParsedRequest, t: string): Parse
   if (m.totalBudget !== null && m.quantity) m.maxPrice = Math.min(m.maxPrice, Math.floor(m.totalBudget / m.quantity));
   if (cur.collections.length) m.collections = cur.collections;
   if (cur.kinds.length) m.kinds = ADD_WORDS.test(t) ? [...new Set([...prev.kinds, ...cur.kinds])] : cur.kinds;
+  // Narrow words ("bomber", "puffer", "polo") follow the newest message; a new kind clears the old ones.
+  if (cur.nouns?.length) m.nouns = ADD_WORDS.test(t) ? [...new Set([...(prev.nouns ?? []), ...cur.nouns])] : cur.nouns;
+  else if (cur.kinds.length) m.nouns = [];
   m.notKinds = [...new Set([...(prev.notKinds ?? []).filter((k) => !cur.kinds.includes(k)), ...(cur.notKinds ?? [])])];
   m.kinds = m.kinds.filter((k) => !m.notKinds!.includes(k));
   m.terms = cur.terms;
@@ -247,7 +250,8 @@ function leadLine(q: ParsedRequest, rec: Recommendation, collections: Cols | und
   // Only name the kinds we actually found; anything else is "similar items".
   const found = q.kinds.filter((k) => rec.picks.some((p) => matchesKind(p, k)));
   const others = rec.picks.some((p) => !found.some((k) => matchesKind(p, k)));
-  const what =
+  const narrow = nounLabel(q, rec.picks);
+  const what = narrow ? adj + narrow :
     adj + (found.length ? found.map((k) => KINDS[k]!.label).join(', ').replace(/, ([^,]*)$/, ' and $1') + (others ? ' and similar items' : '') : 'gift ideas');
   const parts: string[] = [];
   if (q.collections.length) parts.push(`for ${q.collections.map((c) => occasionLabel(c, collections)).join(' / ')}`);
@@ -258,7 +262,7 @@ function leadLine(q: ParsedRequest, rec: Recommendation, collections: Cols | und
   if (q.quantity) parts.push(`for ${q.quantity.toLocaleString('en-IN')} people`);
   const n = rec.picks.length;
   const more = rec.matched > n ? ` ${rec.matched} fit in total, so tap "Show more" to see others.` : '';
-  return `${prefix}Here ${n === 1 ? 'is 1 pick' : `are ${n} ${what}`}${parts.length ? ' ' + parts.join(' ') : ''}.${more} Tap any you don't want to drop it.`;
+  return `${prefix}Here ${n === 1 ? (narrow ? `is 1 of our ${narrow}` : 'is 1 pick') : `are ${n} ${what}`}${parts.length ? ' ' + parts.join(' ') : ''}.${more} Tap any you don't want to drop it.`;
 }
 
 function text(lines: string[], quick: QuickReply[] = [], parsed: ParsedRequest | null = null): BotReply {
