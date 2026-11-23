@@ -177,7 +177,7 @@ const CATALOGUE_Q = /\b(what (all )?(do you|you) (have|sell|offer|got)|what bran
 
 const CHEAPER = /\b(less than (that|this|these)|lower than (that|this|these)|below (that|this)|under (that|this)|cheaper|cheap(er)? ones|less expensive|lower (price|budget|cost|range)|more affordable|budget friendly|too (expensive|costly|pricey|much)|reduce (the )?(price|budget)|economical|something cheaper|low budget)\b/;
 const PREMIUM = /\b(more (premium|expensive|luxury|luxurious|upscale|classy|fancy)|costlier|higher (end|range|budget|price)|better (quality|ones)|fancier|too cheap|premium ones|high end|something premium|more premium)\b/;
-const MORE = /\b(show more|more (options|ideas|products|gifts|choices|please|pls)|see more|any more|anything else|something else|other (options|ones|ideas)|others|different ones|what else|next|more like (this|these)|more)\b|^\s*(show|give)( me)? \d{1,2}\s*$/;
+const MORE = /\b(show more|more (options|ideas|products|gifts|choices|please|pls)|see more|any more|anything else|something else|other (options|ones|ideas)|others|different ones|what else|^next( page| ones?| please)?$|more like (this|these)|more)\b|^\s*(show|give)( me)? \d{1,2}\s*$/;
 const NO_BUDGET = /\b(remove (the )?(budget|price limit|price filter)|clear (the )?budget|without (a |any )?budget|no budget limit|no price limit|budget no limit|no budget|any budget|budget (is )?no bar|budget doesn'?t matter|price doesn'?t matter|no limit|any price)\b/;
 const ADD_WORDS = /\b(also|too|as well|add|plus|along with|and some)\b|^\s*(and|with|aur)\b/;
 const GIFT_INTENT = /\b(bestsellers?|best ?selling|popular|trending|top (picks|gifts|products)|dikhao|dikha|batao|chahiye|kuch|gift|gifts|gifting|swag|merch|merchandise|something|suggest|suggestion|recommend|show|need|want|looking|idea|ideas|options|kit|kits|hamper|hampers|present|presents|buy|order|get me|give me|find|send|share|requirement|requirements|enquiry|inquiry|rfq|quote|quotation|giveaways?|freebies|collaterals?|promotional|corporate|products?|items?|range)\b/;
@@ -421,6 +421,23 @@ function respondTo(message: string, ctx: ChatContext, products: CatalogueProduct
     );
   }
 
+  // Different budgets for different products: "bottle under 500 and bag under 1500".
+  const parts = raw.split(/\s*(?:,|;|\band\b|\bplus\b|&|\balso\b)\s*/i).map((x) => x.trim()).filter(Boolean);
+  if (parts.length >= 2) {
+    const pq = parts.map((x) => parseRequest(x));
+    const each = pq.filter((x) => x.kinds.length >= 1 && hasBudget(x));
+    if (each.length >= 2 && each.length === pq.filter((x) => x.kinds.length).length) {
+      const qty = q0.quantity;
+      const recs = each.map((x) => recommend(products, { ...x, quantity: qty ?? x.quantity, collections: q0.collections }, 4, collections));
+      const picks = [...new Map(recs.flatMap((r) => r.picks).map((p) => [p.id, p])).values()];
+      const desc = each.map((x, i) => `${recs[i]!.picks.length} ${nounLabel(x, recs[i]!.picks) ?? x.kinds.map((k) => KINDS[k]!.label).join(' / ')} ${x.approx !== null ? `around ${inr(x.approx)}` : Number.isFinite(x.maxPrice) ? `under ${inr(x.maxPrice)}` : x.minPrice > 0 ? `from ${inr(x.minPrice)}` : ''}`.trim());
+      const rec: Recommendation = { picks, notes: [...new Set(recs.flatMap((r) => r.notes))], suggestion: null, matched: picks.length, alternative: false };
+      const merged: ParsedRequest = { ...q0, kinds: [...new Set(each.flatMap((x) => x.kinds))], minPrice: 0, maxPrice: Math.max(...each.map((x) => x.maxPrice)), approx: null, totalBudget: null };
+      const chips = [...desc.map((d) => d.replace(/^\d+ /, '').replace(/^./, (c) => c.toUpperCase())), ...(qty ? [`${qty.toLocaleString('en-IN')} units`] : [])];
+      return keep({ text: [`Here are ${desc.join(' and ')}. Tap any you don't want to drop it.`], chips, rec, ask: null, parsed: merged, quick: AFTER_PICKS }, { q: merged, shown: picks.map((p) => p.id), pending: null });
+    }
+  }
+
   // A product asked about by name.
   const named = findProducts(products, t);
   // "is the Zurich Backpack waterproof?": answer about that product.
@@ -440,10 +457,17 @@ function respondTo(message: string, ctx: ChatContext, products: CatalogueProduct
     const rec: Recommendation = { picks: named, notes: [], suggestion: null, matched: named.length, alternative: false };
     // Keep the kind in mind, so "under 700" or "in black" next works on it.
     const next = hasContent(q0) ? { ...ctx, q: q0, shown: named.map((p) => p.id) } : ctx;
-    return keep({ text: [...faq, ...named.map(productLine)], chips: [], rec, ask: null, parsed: null, quick: [] }, next);
+    const extra: string[] = [];
+    if (named.length === 1) {
+      const p = named[0]!;
+      if (/\b(stock|available|availability|ready)\b/.test(t)) extra.push((p.ready_stock ?? 0) > 0 ? `${p.name} is in ready stock.` : `${p.name} isn't in ready stock right now; it's made to order, and our team confirms delivery dates in your quote.`);
+      const price = unitPrice(p);
+      if (q0.quantity && price !== null) extra.push(`For ${q0.quantity.toLocaleString('en-IN')} units that's about ${inr(price * Math.max(q0.quantity, p.moq ?? 25))} before GST, branding and shipping.`);
+    }
+    return keep({ text: [...faq, ...named.map(productLine), ...extra], chips: [], rec, ask: null, parsed: null, quick: [] }, next);
   }
 
-  if (faq.length && !contentful) return keep(text(faq, ctx.q ? AFTER_PICKS : EXAMPLES));
+  if (faq.length && !contentful && !(ctx.q && (q0.gst || q0.deadline))) return keep(text(faq, ctx.q ? AFTER_PICKS : EXAMPLES));
 
   // Follow-ups on the current request.
   const prev = ctx.q;
@@ -463,6 +487,9 @@ function respondTo(message: string, ctx: ChatContext, products: CatalogueProduct
     if (/\b(add|put|include)\b.*\b(quote|cart|it|this|that|one|1st|2nd|3rd|first|second|third|last)\b/.test(t) && !hasContent(q0)) {
       const p = idx >= 0 ? shownPs[idx] : undefined;
       return keep(text([p ? `To add ${p.name}, tap "Add to quote" on its card (or open it and choose a quantity). Your quote is under "Quote" at the top right.` : 'Tap "Add to quote" on the card of the product you like. Your quote is under "Quote" at the top right.'], AFTER_PICKS));
+    }
+    if (/\b(remove|drop|delete|hide)\b.*\b(1st|2nd|3rd|first|second|third|last|this|that|it|one)\b/.test(t) && !hasContent(q0) && !negCount(q0)) {
+      return keep(text(['To drop a pick, tap it in the list above (tapping a product you don\'t want removes it). Say "show more" for others.'], AFTER_PICKS));
     }
     if (/\b(which|what)( one)? (is|would be|will be)( the)? (best|better|good|nicest|top)\b|\bwhich (do you|would you) (recommend|suggest)\b|\byour (top )?pick\b|\bbest (one|among|of these|option)\b/.test(t) && shownPs.length) {
       const p = shownPs[0]!;
@@ -504,7 +531,7 @@ function respondTo(message: string, ctx: ChatContext, products: CatalogueProduct
     if (!fresh && !contentful && q0.terms.length && !termsKnown && !NO_BUDGET.test(t) && !negCount(q0) && !(q0.attrs ?? []).length) {
       return keep(text([`Sorry, "${q0.terms.join(' ')}" is currently not available in our catalogue. Try another product, or say "show more" for more of the current picks.`], AFTER_PICKS));
     }
-    if (!fresh && (contentful || q0.terms.length || (q0.attrs ?? []).length || NO_BUDGET.test(t) || negCount(q0))) {
+    if (!fresh && (contentful || q0.terms.length || (q0.attrs ?? []).length || NO_BUDGET.test(t) || negCount(q0) || q0.gst || q0.deadline)) {
       q0 = mergeRequest(prev, q0, t);
       return runRequest(products, collections, q0, ctx, faq.length ? faq.join(' ') + ' ' : '');
     }

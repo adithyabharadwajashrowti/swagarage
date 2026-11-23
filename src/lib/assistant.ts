@@ -851,7 +851,7 @@ export function parseRequest(text: string): ParsedRequest {
   const negated = new Set<string>();
   const negSegs: string[] = [];
   let tpos = t; // the request with the "no …" parts taken out: what is actually wanted
-  for (const m of t.matchAll(/\b(?:no|not|without|except|excluding|exclude|other than|apart from|dont want|don't want|do not want|skip|avoid|remove|drop|minus|hide|take out|get rid of|no more|leave out|nahi|beda)\s+(?:the\s+|all\s+|any\s+)?((?:[a-z-]+\s*){1,3})/g)) {
+  for (const m of t.matchAll(/\b(?:anything but|everything but|all but|but not|dont need|don'?t need|do not need|dont show|don'?t show|do not show|dont like|don'?t like|no need (?:of|for)|not interested in|no|not|without|except|excluding|exclude|other than|apart from|dont want|don't want|do not want|skip|avoid|remove|drop|minus|hide|take out|get rid of|no more|leave out|nahi|beda)\s+(?:the\s+|all\s+|any\s+)?((?:[a-z-]+\s*){1,3})/g)) {
     // Stop at the next clause: "no mugs, show bottles" negates mugs only.
     const words = m[1]!.trim().split(/\s+/);
     const stop = words.findIndex((w) => /^(show|but|and|instead|only|give|need|want|please|pls|under|below|above|upto|for|in|with|rather|just|then|send|suggest)$/.test(w));
@@ -872,6 +872,8 @@ export function parseRequest(text: string): ParsedRequest {
   const notNouns = new Set<string>();
   for (const seg of negSegs) for (const [n, f] of Object.entries(FOCUS)) if (f.q.test(seg)) notNouns.add(n);
   for (const key of [...negated]) if (KINDS[key]!.q.test(tpos)) negated.delete(key);
+  // "anything but mugs": leave out mugs, not every kind of drinkware.
+  for (const key of [...negated]) if (/&/.test(KINDS[key]!.label) && [...notNouns].some((n) => FOCUS_CAT[n]?.length)) negated.delete(key);
   // "not bluetooth", "without lid": features to leave out
   const notMaterials = Object.entries(MATERIALS).filter(([, mm]) => negSegs.some((seg) => mm.q.test(seg))).map(([k]) => k);
   const notAttrs = ATTR_KEYS.filter((k) => k !== 'personalised' && negSegs.some((seg) => ATTRS[k]!.q.test(seg.replace(/\bbluetooth\b/, 'wireless')) || ATTRS[k]!.q.test(` with${seg}`)));
@@ -997,7 +999,7 @@ function hay(p: CatalogueProduct): Hay {
 }
 
 /** Everyday words that are never a product feature ("do you HAVE", "MAKE it cheaper", "SHOW me"). */
-const FILLER = new Set(('build create curate put together assemble combine colour colours color colors shade shades tone tones merchandise merch next previous prev page back less lower that this these those ondu beku beda olage tak ke andar mein ka ki ko compare comparison best top trending popular bestseller bestsellers selling famous '
+const FILLER = new Set(('practical useful daily everyday unique quality love loved like liked will would special different interesting thoughtful meaningful dont don build create curate put together assemble combine colour colours color colors shade shades tone tones merchandise merch next previous prev page back less lower that this these those ondu beku beda olage tak ke andar mein ka ki ko compare comparison best top trending popular bestseller bestsellers selling famous '
   + 'most expensive costly costliest priciest highest pricey cheap cheaper cheapest sasta sasti saste low high end top year years '
   + 'head heads per wala wali wale waala chahiye dikhao dikha batao kuch accha acha boss manager colleague colleagues friend friends client clients sir madam '
   + 'but however though although rather instead have has had having make made makes do does did doing done what which whats who whom whose where when why how want wants wanted need needs needed '
