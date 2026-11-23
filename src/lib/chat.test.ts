@@ -31,7 +31,7 @@ describe('texting language', () => {
   const cases: [string, string[]][] = [
     ['smthng for 3k', ['Up to ₹3,000 per gift']],
     ['need gifts for 20 ppl under 2k pls', ['Up to ₹2,000 per gift', '20 units']],
-    ['bday gifts for my team of 15 undr 1500', ['Up to ₹1,500 per gift', '15 units']],
+    ['bday gifts for my team of 15 undr 1500', ['Up to ₹1,500 per gift', '15 units', 'Celebrations']],
     ['500 tak ka gift 100 log ke liye', ['Up to ₹500 per gift', '100 units']],
     ['1000 ke andar bags chahiye', ['Up to ₹1,000 per gift', 'Bags']],
     ['b/w 500 n 1000', ['₹500–₹1,000 per gift']],
